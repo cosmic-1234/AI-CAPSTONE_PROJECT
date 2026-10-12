@@ -7,7 +7,7 @@ services:
     runtime: node
     plan: free
     region: oregon
-    buildCommand: npm install && npm run build --workspace=api
+    buildCommand: npm install --include=dev && npm run build --workspace=api
     startCommand: npm run start --workspace=api
     healthCheckPath: /health
     envVars:
@@ -24,7 +24,7 @@ services:
     runtime: node
     plan: free
     region: oregon
-    buildCommand: npm install && npm run build --workspace=web
+    buildCommand: npm install --include=dev && npm run build --workspace=web
     startCommand: npm run start --workspace=web
     envVars:
       - key: NODE_ENV
