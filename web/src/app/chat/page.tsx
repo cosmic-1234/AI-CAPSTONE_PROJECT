@@ -52,97 +52,140 @@ export default async function ChatPage({
 
   return (
     <div>
-      <a href="/" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to Home
-      </a>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Launchpad
+        </a>
+      </div>
 
-      <h1 className="govuk-heading-xl">Ask Sahayata Assistant</h1>
-      <p className="govuk-body-lead">
-        Enquire about IIM Bodh Gaya financial aid policies, criteria, deadlines, and documentation.
-        You may ask in English or Hinglish (e.g., <em>&quot;fees maaf hoti hai kya?&quot;</em>).
-      </p>
-
-      {/* Query Form (Pure HTML form - works without client JS) */}
-      <form method="GET" action="/chat" style={{ marginBottom: '2rem' }}>
-        <div className="govuk-form-group">
-          <label className="govuk-label" htmlFor="q">
-            What is your question?
-          </label>
-          <div className="govuk-hint">
-            Every answer is verified against official policy documents and cites specific sections.
-          </div>
-          <textarea
-            id="q"
-            name="q"
-            className="govuk-textarea"
-            defaultValue={query}
-            placeholder="Type your question here (e.g. What are the income limits for tuition waiver?)"
-            required
-          />
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+          <h1 className="govuk-heading-xl" style={{ margin: 0, fontSize: '1.65rem' }}>
+            Sahayata Enterprise CoPilot
+          </h1>
+          <span className="govuk-tag govuk-tag--blue">
+            Session Role: {user.role.toUpperCase()}
+          </span>
         </div>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Authoritative intelligence assistant for IIM Bodh Gaya financial aid policies, criteria, deadlines, and documentation audits.
+          Supports queries in English and colloquial Hinglish (e.g., <em>&quot;fees maaf hoti hai kya?&quot;</em>).
+        </p>
+      </div>
 
-        <button type="submit" className="govuk-button">
-          Submit Enquiry
-        </button>
-      </form>
+      {/* Query Form (Pure HTML form - zero client JS required) */}
+      <div className="sap-card" style={{ marginBottom: '2rem' }}>
+        <form method="GET" action="/chat">
+          <div className="govuk-form-group">
+            <label className="govuk-label" htmlFor="q">
+              Enter Policy Query or Verification Prompt
+            </label>
+            <div className="govuk-hint">
+              All responses are deterministically verified against approved IIM Bodh Gaya regulatory statutes with exact section citations.
+            </div>
+            <textarea
+              id="q"
+              name="q"
+              className="govuk-textarea"
+              defaultValue={query}
+              placeholder="e.g. What are the income limits and eligibility thresholds for Tuition Fee Waiver?"
+              required
+            />
+          </div>
 
-      {/* Suggested Enquiries */}
+          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <button type="submit" className="sap-btn sap-btn--emphasized">
+              Submit CoPilot Enquiry
+            </button>
+            {query && (
+              <a href="/chat" className="sap-btn sap-btn--default">
+                Clear
+              </a>
+            )}
+          </div>
+        </form>
+      </div>
+
+      {/* Suggested Quick Prompts */}
       {!response && (
-        <div style={{ backgroundColor: '#f3f2f1', padding: '1.25rem', marginBottom: '2rem' }}>
-          <h2 className="govuk-heading-m" style={{ marginTop: 0 }}>Sample Enquiries to Try</h2>
-          <ul style={{ paddingLeft: '1.25rem', lineHeight: '1.8' }}>
-            <li>
-              <a href="/chat?q=What+are+the+eligibility+criteria+and+income+limits+for+Need+Based+Financial+Assistance?">
-                What are the eligibility criteria and income limits for Need Based Financial Assistance?
+        <div className="sap-card" style={{ marginBottom: '2rem', backgroundColor: '#f8fafd' }}>
+          <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.1rem', color: 'var(--sap-text-primary)' }}>
+            Recommended Enterprise Prompts
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            {[
+              {
+                label: 'What are the eligibility criteria and income limits for Need Based Financial Assistance?',
+                type: 'Policy Inquiry',
+              },
+              {
+                label: 'fees maaf hoti hai kya? What is the procedure in Hindi/Hinglish?',
+                type: 'Hinglish NLP',
+              },
+              {
+                label: 'When is the last date and deadline to submit documents?',
+                type: 'Zero-Token FAQ',
+              },
+              {
+                label: 'My Aadhaar is 9876 5432 1098. Am I eligible for Director Merit Scholarship with CGPA 8.8?',
+                type: 'PII Redaction Guard',
+              },
+              {
+                label: 'I am in extreme distress and cannot survive the financial burden',
+                type: 'Psychological Triage',
+              },
+            ].map((item, idx) => (
+              <a
+                key={idx}
+                href={`/chat?q=${encodeURIComponent(item.label)}`}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid var(--sap-border-hairline)',
+                  borderRadius: 'var(--sap-radius-sm)',
+                  textDecoration: 'none',
+                  color: 'var(--sap-text-primary)',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                  transition: 'background-color 0.15s ease-in-out',
+                }}
+              >
+                <span>{item.label}</span>
+                <span className="govuk-tag govuk-tag--grey" style={{ fontSize: '11px' }}>
+                  {item.type}
+                </span>
               </a>
-            </li>
-            <li>
-              <a href="/chat?q=fees+maaf+hoti+hai+kya%3F+What+is+the+procedure+in+Hindi%2FHinglish%3F">
-                fees maaf hoti hai kya? What is the procedure? (Hinglish FAQ)
-              </a>
-            </li>
-            <li>
-              <a href="/chat?q=When+is+the+last+date+and+deadline+to+submit+documents%3F">
-                When is the last date and deadline to submit documents? (Zero-Token FAQ)
-              </a>
-            </li>
-            <li>
-              <a href="/chat?q=My+Aadhaar+is+9876+5432+1098.+Am+I+eligible+for+Director+Merit+Scholarship+with+CGPA+8.8%3F">
-                My Aadhaar is 9876 5432 1098. Am I eligible with CGPA 8.8? (PII Masking Test)
-              </a>
-            </li>
-            <li>
-              <a href="/chat?q=I+am+in+extreme+distress+and+cannot+survive+the+financial+burden">
-                I am in extreme distress and cannot survive... (Counselling Triage Test)
-              </a>
-            </li>
-          </ul>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Response Box */}
+      {/* Response Display */}
       {response && (
         <div
+          className="sap-card"
           style={{
-            border: '2px solid #00703c',
-            backgroundColor: '#ffffff',
-            padding: '1.5rem',
+            borderLeft: '4px solid #107e3e',
             marginBottom: '2rem',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-            <span className="govuk-tag govuk-tag--green">Verified Response</span>
-            <span className="govuk-body-s" style={{ margin: 0 }}>
-              Route: <strong>{response.route}</strong> | Cost: <strong>INR {response.inrCost.toFixed(4)}</strong>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--sap-border-hairline)' }}>
+            <span className="govuk-tag govuk-tag--green">
+              Verified Policy Synthesis
             </span>
+            <div className="govuk-body-s" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+              Execution Route: <strong>{response.route}</strong> &nbsp;|&nbsp; Latency: <strong>{Object.values(response.latencyBreakdown || {}).reduce((a, b) => a + b, 0)}ms</strong> &nbsp;|&nbsp; Cost: <strong>₹{response.inrCost.toFixed(4)}</strong>
+            </div>
           </div>
 
           {/* Guard Warnings if any */}
           {response.guardsFired.length > 0 && (
-            <div className="govuk-warning-text" style={{ marginBottom: '1rem' }}>
+            <div className="govuk-warning-text" style={{ marginBottom: '1.25rem' }}>
               <span className="govuk-warning-text__icon">!</span>
               <div>
-                <strong>Guardrails Active for this interaction:</strong>
+                <strong>Active Constitutional Guardrails Intercepted:</strong>
                 <div className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
                   {response.guardsFired.join(', ')}
                 </div>
@@ -151,24 +194,24 @@ export default async function ChatPage({
           )}
 
           {/* Answer Text */}
-          <div className="govuk-body" style={{ whiteSpace: 'pre-line', fontSize: '20px', lineHeight: '1.6' }}>
+          <div className="govuk-body" style={{ whiteSpace: 'pre-line', fontSize: '15px', lineHeight: '1.65', color: 'var(--sap-text-primary)' }}>
             {response.finalOutput}
           </div>
 
-          {/* Where this comes from Details Expander */}
+          {/* Official Citations Expander */}
           {response.retrievedChunks && response.retrievedChunks.length > 0 && (
-            <details className="govuk-details" style={{ marginTop: '1.5rem' }}>
+            <details className="govuk-details" style={{ marginTop: '1.5rem', backgroundColor: '#f8fafd' }}>
               <summary className="govuk-details__summary">
-                <span>Where this comes from ({response.retrievedChunks.length} official citations)</span>
+                <span>View Authoritative Policy Citations ({response.retrievedChunks.length} sources)</span>
               </summary>
               <div className="govuk-details__text">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   {response.retrievedChunks.map((chunk, i) => (
-                    <div key={chunk.id || i} style={{ borderBottom: '1px solid #b1b4b6', paddingBottom: '0.75rem' }}>
-                      <p className="govuk-body-s" style={{ fontWeight: 'bold', color: '#005a30', margin: 0 }}>
+                    <div key={chunk.id || i} style={{ borderBottom: '1px solid var(--sap-border-hairline)', paddingBottom: '0.75rem' }}>
+                      <p className="govuk-body-s" style={{ fontWeight: 600, color: 'var(--sap-positive-text)', margin: 0 }}>
                         {chunk.citation}
                       </p>
-                      <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0', whiteSpace: 'pre-line' }}>
+                      <p className="govuk-body-s" style={{ margin: '0.35rem 0 0 0', whiteSpace: 'pre-line', color: 'var(--sap-text-secondary)' }}>
                         {chunk.content}
                       </p>
                     </div>
@@ -179,10 +222,10 @@ export default async function ChatPage({
           )}
 
           <div className="govuk-button-group" style={{ marginTop: '1.5rem', marginBottom: 0 }}>
-            <a href="/chat" className="govuk-button govuk-button--secondary">
-              Ask Another Question
+            <a href="/chat" className="sap-btn sap-btn--default">
+              Ask Another Enquiry
             </a>
-            <a href="/check-eligibility" className="govuk-button">
+            <a href="/check-eligibility" className="sap-btn sap-btn--emphasized">
               Evaluate Scheme Eligibility
             </a>
           </div>

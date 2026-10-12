@@ -145,54 +145,62 @@ const MANIFEST_DOCS: ManifestDoc[] = [
 export default function KnowledgeBaseManagerPage() {
   return (
     <div>
-      <a href="/admin" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to Admin Hub
-      </a>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
-        <h1 className="govuk-heading-xl" style={{ margin: 0 }}>
-          Knowledge Base Manifest Manager
-        </h1>
-        <form method="POST" action="http://localhost:4000/api/rag/ingest">
-          <button type="submit" className="govuk-button" style={{ margin: 0 }}>
-            Re-Run Ingestion Pipeline
-          </button>
-        </form>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/admin" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Admin Hub
+        </a>
       </div>
 
-      <p className="govuk-body-lead">
-        Audit indexed policy manifests, access levels (public vs staff vs committee), versions, and status.
-      </p>
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+          <div>
+            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+              Knowledge Management Engine
+            </span>
+            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+              Policy Manifest Registry
+            </h1>
+          </div>
+          <form method="POST" action="http://localhost:4000/api/rag/ingest">
+            <button type="submit" className="sap-btn sap-btn--emphasized" style={{ margin: 0 }}>
+              ↻ Trigger Embedding Pipeline
+            </button>
+          </form>
+        </div>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Audit indexed policy manifests, access levels (public vs staff vs committee), regulatory versions, and active vs superseded statuses.
+        </p>
+      </div>
 
-      {/* Manifest Table */}
-      <table className="govuk-summary-list" style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
+      {/* SAP Responsive Data Table */}
+      <table className="sap-table" style={{ marginTop: '1.25rem', marginBottom: '2rem' }}>
         <thead>
-          <tr style={{ borderBottom: '2px solid #0b0c0c', textAlign: 'left' }}>
-            <th style={{ padding: '0.75rem 0.5rem' }}>Doc ID & Title</th>
-            <th style={{ padding: '0.75rem 0.5rem' }}>Owner</th>
-            <th style={{ padding: '0.75rem 0.5rem' }}>Version</th>
-            <th style={{ padding: '0.75rem 0.5rem' }}>Access Level</th>
-            <th style={{ padding: '0.75rem 0.5rem' }}>Status</th>
+          <tr>
+            <th style={{ width: '45%' }}>Document Identifier & Title</th>
+            <th style={{ width: '18%' }}>Institutional Owner</th>
+            <th style={{ width: '12%' }}>Version</th>
+            <th style={{ width: '13%' }}>Access Level</th>
+            <th style={{ width: '12%' }}>Status</th>
           </tr>
         </thead>
         <tbody>
           {MANIFEST_DOCS.map((doc) => (
-            <tr key={doc.doc_id} className="govuk-summary-list__row">
-              <td style={{ padding: '0.85rem 0.5rem' }}>
-                <strong>[{doc.doc_id}] {doc.title}</strong>
-                <div className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
+            <tr key={doc.doc_id}>
+              <td>
+                <strong style={{ color: 'var(--sap-text-primary)' }}>[{doc.doc_id}] {doc.title}</strong>
+                <div className="govuk-body-s" style={{ margin: '0.2rem 0 0 0', color: 'var(--sap-text-secondary)' }}>
                   {doc.description}
                 </div>
               </td>
-              <td style={{ padding: '0.85rem 0.5rem' }}>{doc.owner}</td>
-              <td style={{ padding: '0.85rem 0.5rem' }}>{doc.version_date}</td>
-              <td style={{ padding: '0.85rem 0.5rem' }}>
-                <span className={`govuk-tag ${doc.access_level === 'public' ? 'govuk-tag--green' : doc.access_level === 'staff' ? 'govuk-tag--yellow' : 'govuk-tag--grey'}`}>
+              <td style={{ color: 'var(--sap-text-secondary)' }}>{doc.owner}</td>
+              <td style={{ fontVariantNumeric: 'tabular-nums' }}>{doc.version_date}</td>
+              <td>
+                <span className={`sap-badge ${doc.access_level === 'public' ? 'sap-badge--success' : doc.access_level === 'staff' ? 'sap-badge--warning' : 'sap-badge--neutral'}`}>
                   {doc.access_level.toUpperCase()}
                 </span>
               </td>
-              <td style={{ padding: '0.85rem 0.5rem' }}>
-                <span className={`govuk-tag ${doc.status === 'current' ? 'govuk-tag--green' : 'govuk-tag--red'}`}>
+              <td>
+                <span className={`sap-badge ${doc.status === 'current' ? 'sap-badge--success' : 'sap-badge--error'}`}>
                   {doc.status.toUpperCase()}
                 </span>
               </td>
@@ -201,10 +209,10 @@ export default function KnowledgeBaseManagerPage() {
         </tbody>
       </table>
 
-      <div className="govuk-warning-text">
+      <div className="govuk-warning-text" style={{ marginBottom: '2rem' }}>
         <span className="govuk-warning-text__icon">!</span>
         <div>
-          <strong>Document Supersession Note (Guard F1):</strong>
+          <strong>Document Supersession Guard (Guard F1 Enforced):</strong>
           <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
             Document <code>01a (Scholarship Policy 2025-26)</code> is deliberately kept in the repository to evaluate failure reproduction F1. When <code>enforce_current_policy_only</code> is enabled, chunks from 01a are excluded from retrieval results.
           </p>

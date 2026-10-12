@@ -59,35 +59,45 @@ export default async function CommitteeReviewPage({
 
   return (
     <div>
-      <a href="/" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to Home
-      </a>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
-        <h1 className="govuk-heading-xl" style={{ margin: 0 }}>
-          Financial Aid Committee Review Docket
-        </h1>
-        <span className="govuk-tag govuk-tag--grey">
-          Member: {user.name} ({user.role.toUpperCase()})
-        </span>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Launchpad
+        </a>
       </div>
 
-      <p className="govuk-body-lead">
-        Review synthesized recommendation notes, policy citations, and vote to grant or refuse financial awards.
-      </p>
+      {/* SAP Dynamic Header / Object Page Block */}
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+          <div>
+            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+              Institutional Governance
+            </span>
+            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+              Financial Aid Committee Review Docket
+            </h1>
+          </div>
+          <span className="sap-badge sap-badge--info">
+            Committee Member: {user.name} ({user.role.toUpperCase()})
+          </span>
+        </div>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Review synthesized recommendation notes, policy citations, and cast formal votes to grant or refuse financial awards.
+        </p>
+      </div>
 
       {/* Decision confirmation message */}
       {actionTaken && (
-        <div style={{ backgroundColor: '#cce2d8', borderLeft: '4px solid #00703c', padding: '1rem', marginBottom: '2rem' }}>
-          <strong>Decision Recorded:</strong> Application action has been signed and logged to official audit register.
+        <div className="sap-card" style={{ backgroundColor: 'var(--sap-positive-bg)', borderLeft: '4px solid var(--sap-positive-text)', border: '1px solid var(--sap-positive-border)', padding: '1rem 1.25rem', marginBottom: '1.75rem' }}>
+          <strong style={{ color: 'var(--sap-positive-text)' }}>✓ Decision Recorded:</strong>{' '}
+          <span style={{ color: 'var(--sap-positive-text)' }}>Application action has been signed with digital cryptographic audit hash and logged to the official ledger.</span>
         </div>
       )}
 
       {/* Authority Notice */}
-      <div className="govuk-warning-text">
+      <div className="govuk-warning-text" style={{ marginBottom: '1.75rem' }}>
         <span className="govuk-warning-text__icon">!</span>
         <div>
-          <strong>Constitutional Authority Guard (Guard F6):</strong>
+          <strong>Constitutional Authority Guard (Guard F6 Enforced):</strong>
           <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
             The AI agent is constitutionally restricted to advisory recommendations only. Binding legal commitments and disbursement mandates require the quorum approval of this Committee under Aid Committee Charter §3.2.
           </p>
@@ -95,49 +105,53 @@ export default async function CommitteeReviewPage({
       </div>
 
       {/* Pending Dockets */}
-      <h2 className="govuk-heading-l">Pending Committee Dockets ({DOCKETS.length})</h2>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '2rem' }}>
+      <h2 className="govuk-heading-l" style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
+        Pending Committee Dockets ({DOCKETS.length})
+      </h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2.5rem' }}>
         {DOCKETS.map((docket) => (
           <div
             key={docket.id}
+            className="sap-card"
             style={{
-              border: '2px solid #0b0c0c',
-              padding: '1.75rem',
-              backgroundColor: '#ffffff',
+              padding: '1.5rem',
+              borderLeft: '4px solid #b78103',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
               <div>
-                <span className="govuk-body-s" style={{ textTransform: 'uppercase', color: '#505a5f' }}>
-                  Docket ID: <strong>{docket.id}</strong> | Student: <strong>{docket.applicant}</strong> ({docket.programme} {docket.batch})
+                <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+                  Docket ID: <strong>{docket.id}</strong> &nbsp;|&nbsp; Student: <strong>{docket.applicant}</strong> ({docket.programme} {docket.batch})
                 </span>
-                <h3 className="govuk-heading-m" style={{ margin: '0.25rem 0' }}>{docket.scheme}</h3>
+                <h3 className="govuk-heading-m" style={{ margin: '0.25rem 0', fontSize: '1.2rem' }}>{docket.scheme}</h3>
               </div>
-              <span className="govuk-tag govuk-tag--yellow">PENDING COMMITTEE VOTE</span>
+              <span className="sap-badge sap-badge--warning">
+                PENDING COMMITTEE VOTE
+              </span>
             </div>
 
             <table className="govuk-summary-list" style={{ marginBottom: '1.25rem' }}>
               <tbody>
                 <tr className="govuk-summary-list__row">
-                  <th className="govuk-summary-list__key">Family Income & Standing</th>
+                  <th className="govuk-summary-list__key">Family Income & Academic Standing</th>
                   <td className="govuk-summary-list__value">
-                    INR {docket.family_income.toLocaleString('en-IN')} / yr | CGPA: {docket.cgpa}
+                    INR {docket.family_income.toLocaleString('en-IN')} / yr &nbsp;|&nbsp; <strong>CGPA: {docket.cgpa}</strong>
                   </td>
                   <td className="govuk-summary-list__actions"></td>
                 </tr>
                 <tr className="govuk-summary-list__row">
-                  <th className="govuk-summary-list__key">Accounts Audit</th>
+                  <th className="govuk-summary-list__key">Accounts Audit Finding</th>
                   <td className="govuk-summary-list__value">
-                    <span className="govuk-tag govuk-tag--green">{docket.accounts_verification}</span>
+                    <span className="sap-badge sap-badge--success">{docket.accounts_verification}</span>
                   </td>
                   <td className="govuk-summary-list__actions"></td>
                 </tr>
                 <tr className="govuk-summary-list__row">
-                  <th className="govuk-summary-list__key">Agent Recommendation</th>
+                  <th className="govuk-summary-list__key">Agent Recommendation Synthesis</th>
                   <td className="govuk-summary-list__value">
                     {docket.recommendation_note}
-                    <div style={{ marginTop: '0.5rem', color: '#005a30', fontWeight: 'bold' }}>
-                      Citation: &ldquo;{docket.citation}&rdquo;
+                    <div style={{ marginTop: '0.5rem', color: 'var(--sap-positive-text)', fontWeight: 600, fontSize: '13px' }}>
+                      Official Citation: &ldquo;{docket.citation}&rdquo;
                     </div>
                   </td>
                   <td className="govuk-summary-list__actions"></td>
@@ -145,30 +159,35 @@ export default async function CommitteeReviewPage({
                 <tr className="govuk-summary-list__row">
                   <th className="govuk-summary-list__key">Proposed Waiver Value</th>
                   <td className="govuk-summary-list__value">
-                    <strong>INR {docket.proposed_amount.toLocaleString('en-IN')}</strong> ({docket.proposed_waiver})
+                    <strong style={{ fontSize: '16px', color: 'var(--sap-brand-blue)' }}>
+                      INR {docket.proposed_amount.toLocaleString('en-IN')}
+                    </strong>{' '}
+                    ({docket.proposed_waiver})
                   </td>
                   <td className="govuk-summary-list__actions"></td>
                 </tr>
               </tbody>
             </table>
 
-            {/* Decision Action Form with Warning Text */}
-            <div style={{ backgroundColor: '#f3f2f1', padding: '1.25rem', borderTop: '1px solid #b1b4b6' }}>
-              <h4 className="govuk-heading-s" style={{ margin: 0 }}>Record Committee Decision</h4>
-              <p className="govuk-body-s" style={{ marginTop: '0.25rem' }}>
-                Approving this docket will authorize the Accounts Office to adjust the student tuition ledger and issue a verified award letter.
+            {/* Decision Action Form with SAP Fiori Buttons */}
+            <div style={{ backgroundColor: '#f8fafd', padding: '1.25rem', borderRadius: 'var(--sap-radius-sm)', border: '1px solid var(--sap-border-hairline)' }}>
+              <h4 className="govuk-heading-s" style={{ margin: 0, fontSize: '14px', color: 'var(--sap-text-primary)' }}>
+                Cast Committee Determination
+              </h4>
+              <p className="govuk-body-s" style={{ marginTop: '0.25rem', color: 'var(--sap-text-secondary)' }}>
+                Approving this docket will authorize the Accounts Office to adjust the student tuition ledger and issue a verified award certificate.
               </p>
 
               <form method="GET" action="/committee">
                 <input type="hidden" name="action_taken" value={`approved_${docket.id}`} />
-                <div className="govuk-button-group" style={{ margin: 0, marginTop: '0.75rem' }}>
-                  <button type="submit" className="govuk-button">
-                    Approve Award (INR {docket.proposed_amount.toLocaleString('en-IN')})
+                <div className="govuk-button-group" style={{ margin: 0, marginTop: '0.85rem' }}>
+                  <button type="submit" className="sap-btn sap-btn--accept">
+                    ✓ Approve Award (INR {docket.proposed_amount.toLocaleString('en-IN')})
                   </button>
-                  <button type="submit" className="govuk-button govuk-button--warning">
-                    Reject Application
+                  <button type="submit" className="sap-btn sap-btn--reject">
+                    ✕ Reject Application
                   </button>
-                  <a href={`/chat?q=Draft+detailed+justification+for+docket+${docket.id}`} className="govuk-button govuk-button--secondary">
+                  <a href={`/chat?q=Draft+detailed+justification+for+docket+${docket.id}`} className="sap-btn sap-btn--default">
                     Request Analysis Note
                   </a>
                 </div>

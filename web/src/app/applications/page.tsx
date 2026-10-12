@@ -89,61 +89,82 @@ export default async function ApplicationsPage() {
 
   return (
     <div>
-      <a href="/" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to Home
-      </a>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Launchpad
+        </a>
+      </div>
 
-      <h1 className="govuk-heading-xl">My Applications Status Tracker</h1>
-      <p className="govuk-body-lead">
-        Track the progress of your submitted financial aid, scholarship, and waiver applications.
-      </p>
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+          <div>
+            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+              Student Self-Service Portal
+            </span>
+            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+              Financial Aid Applications Tracker
+            </h1>
+          </div>
+          <span className="sap-badge sap-badge--info">
+            Applicant: {user.name} ({user.programme || 'PGP'})
+          </span>
+        </div>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Track the formal progress of your submitted tuition fee waivers, need-based assistance, and merit scholarships.
+        </p>
+      </div>
 
       {apps.length === 0 ? (
-        <div style={{ backgroundColor: '#f3f2f1', padding: '1.5rem', marginBottom: '2rem' }}>
-          <p className="govuk-body">You do not currently have any active financial aid applications on file.</p>
-          <a href="/check-eligibility" className="govuk-button">
-            Apply for Assistance
+        <div className="sap-card" style={{ padding: '2rem', textAlign: 'center', backgroundColor: '#ffffff' }}>
+          <p className="govuk-body" style={{ color: 'var(--sap-text-secondary)', marginBottom: '1.25rem' }}>
+            You do not currently have any active financial aid applications on file.
+          </p>
+          <a href="/check-eligibility" className="sap-btn sap-btn--emphasized">
+            Evaluate Scheme Eligibility & Apply
           </a>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
           {apps.map((app) => {
-            const tagClass = STATUS_TAG_CLASSES[app.status] || 'govuk-tag--grey';
+            const tagClass = STATUS_TAG_CLASSES[app.status] || 'sap-badge--neutral';
             const schemeName = SCHEME_LABELS[app.scheme_id] || app.scheme_id;
 
             return (
               <div
                 key={app.id}
+                className="sap-card"
                 style={{
-                  border: '1px solid #b1b4b6',
-                  padding: '1.5rem',
-                  backgroundColor: '#ffffff',
-                  borderTop: '4px solid #00703c',
+                  padding: '1.35rem 1.5rem',
+                  borderLeft: app.status === 'approved' ? '4px solid var(--sap-positive-text)' : '4px solid var(--sap-brand-blue)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
                   <div>
-                    <span className="govuk-body-s" style={{ textTransform: 'uppercase', color: '#505a5f' }}>
-                      Application Ref: <strong>{app.id}</strong> | Submitted: {app.submitted_at}
+                    <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+                      Application Ref: <strong>{app.id}</strong> &nbsp;|&nbsp; Submitted: {app.submitted_at}
                     </span>
-                    <h2 className="govuk-heading-m" style={{ margin: '0.25rem 0' }}>{schemeName}</h2>
+                    <h2 className="govuk-heading-m" style={{ margin: '0.25rem 0', fontSize: '1.2rem' }}>{schemeName}</h2>
                   </div>
-                  <span className={`govuk-tag ${tagClass}`}>
+                  <span className={`sap-badge ${tagClass}`}>
                     {app.status.replace(/_/g, ' ').toUpperCase()}
                   </span>
                 </div>
 
-                <table className="govuk-summary-list" style={{ marginBottom: '1rem' }}>
+                <table className="govuk-summary-list" style={{ marginBottom: '1.25rem' }}>
                   <tbody>
                     <tr className="govuk-summary-list__row">
                       <th className="govuk-summary-list__key">Requested Amount</th>
-                      <td className="govuk-summary-list__value">INR {app.requested_amount.toLocaleString('en-IN')}</td>
+                      <td className="govuk-summary-list__value">
+                        <strong style={{ fontVariantNumeric: 'tabular-nums', color: 'var(--sap-text-primary)' }}>
+                          INR {app.requested_amount.toLocaleString('en-IN')}
+                        </strong>
+                      </td>
                       <td className="govuk-summary-list__actions"></td>
                     </tr>
                     <tr className="govuk-summary-list__row">
-                      <th className="govuk-summary-list__key">Accounts Verification</th>
+                      <th className="govuk-summary-list__key">Accounts Audit Stage</th>
                       <td className="govuk-summary-list__value">
-                        <span className="govuk-tag govuk-tag--grey">
+                        <span className="sap-badge sap-badge--neutral">
                           {app.verification_status.replace(/_/g, ' ').toUpperCase()}
                         </span>
                       </td>
@@ -151,25 +172,27 @@ export default async function ApplicationsPage() {
                     </tr>
                     <tr className="govuk-summary-list__row">
                       <th className="govuk-summary-list__key">Committee Review Status</th>
-                      <td className="govuk-summary-list__value">
+                      <td className="govuk-summary-list__value" style={{ fontWeight: 600 }}>
                         {app.committee_decision.toUpperCase()}
                       </td>
                       <td className="govuk-summary-list__actions"></td>
                     </tr>
                     <tr className="govuk-summary-list__row">
                       <th className="govuk-summary-list__key">Status Notes</th>
-                      <td className="govuk-summary-list__value">{app.decision_rationale}</td>
+                      <td className="govuk-summary-list__value" style={{ color: 'var(--sap-text-secondary)' }}>
+                        {app.decision_rationale}
+                      </td>
                       <td className="govuk-summary-list__actions"></td>
                     </tr>
                   </tbody>
                 </table>
 
                 <div className="govuk-button-group" style={{ margin: 0 }}>
-                  <a href="/upload" className="govuk-button govuk-button--secondary">
+                  <a href="/upload" className="sap-btn sap-btn--default">
                     Upload Additional Documents
                   </a>
-                  <a href="/chat?q=What+is+the+status+of+application+app_101%3F" className="govuk-button govuk-button--secondary">
-                    Enquire on Application
+                  <a href={`/chat?q=What+is+the+status+of+application+${app.id}%3F`} className="sap-btn sap-btn--ghost">
+                    Enquire on Application →
                   </a>
                 </div>
               </div>

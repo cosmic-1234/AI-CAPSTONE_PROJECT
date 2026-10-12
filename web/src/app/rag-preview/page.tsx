@@ -53,57 +53,75 @@ export default async function RagPreviewPage({
 
   return (
     <div>
-      <a href="/" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to Home
-      </a>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Launchpad
+        </a>
+      </div>
 
-      <h1 className="govuk-heading-xl">Knowledge Base & Policy Retrieval</h1>
-      <p className="govuk-body-lead">
-        Test hybrid retrieval (MiniSearch BM25 + dense semantic vectors with Reciprocal Rank Fusion)
-        with role-based access control and low-confidence fallback.
-      </p>
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+          <div>
+            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+              Information Retrieval Diagnostics
+            </span>
+            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+              Knowledge Base & Hybrid Retrieval Inspector
+            </h1>
+          </div>
+          <span className="sap-badge sap-badge--info">
+            Auditor Role: {searchRole.toUpperCase()}
+          </span>
+        </div>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Test hybrid retrieval (MiniSearch BM25 + dense semantic vectors with Reciprocal Rank Fusion k=60)
+          with role-based access control and low-confidence fallback.
+        </p>
+      </div>
 
       {/* Search Form (Pure HTML GET form - works without JS) */}
-      <form method="GET" action="/rag-preview" style={{ marginBottom: '2rem' }}>
-        <div className="govuk-form-group">
-          <label className="govuk-label" htmlFor="q">
-            Enter Policy Query (English or Hinglish)
-          </label>
-          <div className="govuk-hint">
-            Try: &quot;tuition fee waiver criteria&quot;, &quot;income certificate validity&quot;, &quot;merit scholarship CGPA&quot;, or &quot;fees maaf hoti hai kya?&quot;
+      <div className="sap-card" style={{ padding: '1.5rem', marginBottom: '2rem' }}>
+        <form method="GET" action="/rag-preview">
+          <div className="govuk-form-group">
+            <label className="govuk-label" htmlFor="q">
+              Enter Policy Query (English or Hinglish)
+            </label>
+            <div className="govuk-hint">
+              Try: &quot;tuition fee waiver criteria&quot;, &quot;income certificate validity&quot;, &quot;merit scholarship CGPA&quot;, or &quot;fees maaf hoti hai kya?&quot;
+            </div>
+            <input
+              id="q"
+              name="q"
+              className="govuk-input"
+              defaultValue={query}
+              placeholder="Search financial aid policies..."
+              style={{ maxWidth: '640px' }}
+            />
           </div>
-          <input
-            id="q"
-            name="q"
-            className="govuk-input"
-            defaultValue={query}
-            placeholder="Search financial aid policies..."
-            style={{ maxWidth: '640px' }}
-          />
-        </div>
 
-        <div className="govuk-form-group" style={{ maxWidth: '320px' }}>
-          <label className="govuk-label" htmlFor="role">
-            Query Role Perspective
-          </label>
-          <select id="role" name="role" className="govuk-select" defaultValue={searchRole}>
-            <option value="student">Student (Public policies only)</option>
-            <option value="staff">Staff / Accounts Officer (Includes SOPs)</option>
-            <option value="committee">Aid Committee (Includes Charters)</option>
-            <option value="admin">Administrator (All documents)</option>
-          </select>
-        </div>
+          <div className="govuk-form-group" style={{ maxWidth: '320px' }}>
+            <label className="govuk-label" htmlFor="role">
+              Query Role Perspective
+            </label>
+            <select id="role" name="role" className="govuk-select" defaultValue={searchRole}>
+              <option value="student">Student (Public policies only)</option>
+              <option value="staff">Staff / Accounts Officer (Includes SOPs)</option>
+              <option value="committee">Aid Committee (Includes Charters)</option>
+              <option value="admin">Administrator (All documents)</option>
+            </select>
+          </div>
 
-        <button type="submit" className="govuk-button">
-          Search Policies
-        </button>
-      </form>
+          <button type="submit" className="sap-btn sap-btn--emphasized">
+            Execute Retrieval Search
+          </button>
+        </form>
+      </div>
 
       {/* Results Display */}
       {result && (
         <section aria-label="Search Results">
-          <h2 className="govuk-heading-l">
-            Results for: &ldquo;{result.query}&rdquo;
+          <h2 className="govuk-heading-l" style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
+            Retrieved Passages for: &ldquo;{result.query}&rdquo;
           </h2>
 
           {result.error && (
@@ -118,7 +136,7 @@ export default async function RagPreviewPage({
               <span className="govuk-warning-text__icon" aria-hidden="true">!</span>
               <div>
                 <strong>Low Retrieval Confidence Guard Triggered:</strong>
-                <p className="govuk-body" style={{ margin: '0.25rem 0 0 0' }}>
+                <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
                   {result.fallbackMessage || 'I could not find this in the current documents. Please contact the Accounts Office (accounts@example.ac.in).'}
                 </p>
               </div>
@@ -126,59 +144,64 @@ export default async function RagPreviewPage({
           )}
 
           {result.chunks.length === 0 && !result.error && (
-            <p className="govuk-body">No matching document chunks found under current ACL permissions.</p>
+            <div className="sap-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
+              <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+                No matching document chunks found under current ACL permissions.
+              </p>
+            </div>
           )}
 
           {result.chunks.length > 0 && (
             <div>
-              <p className="govuk-body-s">
+              <p className="govuk-body-s" style={{ marginBottom: '1rem', color: 'var(--sap-text-secondary)' }}>
                 Showing top {result.chunks.length} chunks fused via Reciprocal Rank Fusion (RRF k=60):
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
                 {result.chunks.map((chunk, idx) => (
                   <div
                     key={chunk.id}
+                    className="sap-card"
                     style={{
-                      border: '1px solid #b1b4b6',
-                      padding: '1.25rem',
-                      backgroundColor: '#ffffff',
-                      borderLeft: '4px solid #00703c',
+                      padding: '1.35rem 1.5rem',
+                      borderLeft: '4px solid var(--sap-positive-text)',
                     }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
-                      <span className="govuk-tag govuk-tag--green">Rank #{idx + 1} (Score: {chunk.score.toFixed(4)})</span>
-                      <div style={{ display: 'flex', gap: '0.35rem' }}>
-                        <span className="govuk-tag govuk-tag--grey">{chunk.accessLevel.toUpperCase()}</span>
-                        <span className={`govuk-tag ${chunk.status === 'superseded' ? 'govuk-tag--red' : 'govuk-tag--green'}`}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <span className="sap-badge sap-badge--success">
+                        Rank #{idx + 1} &nbsp;|&nbsp; RRF Score: {chunk.score.toFixed(4)}
+                      </span>
+                      <div style={{ display: 'flex', gap: '0.4rem' }}>
+                        <span className="sap-badge sap-badge--neutral">{chunk.accessLevel.toUpperCase()}</span>
+                        <span className={`sap-badge ${chunk.status === 'superseded' ? 'sap-badge--error' : 'sap-badge--success'}`}>
                           {chunk.status.toUpperCase()}
                         </span>
                       </div>
                     </div>
 
-                    <h3 className="govuk-heading-m" style={{ marginTop: '0.5rem', marginBottom: '0.35rem' }}>
+                    <h3 className="govuk-heading-m" style={{ marginTop: '0.5rem', marginBottom: '0.35rem', fontSize: '1.2rem' }}>
                       {chunk.title}
                     </h3>
                     
-                    <p className="govuk-body-s" style={{ color: '#005a30', fontWeight: 'bold' }}>
+                    <p className="govuk-body-s" style={{ color: 'var(--sap-positive-text)', fontWeight: 600 }}>
                       Official Citation: &ldquo;{chunk.citation}&rdquo;
                     </p>
 
-                    <div className="govuk-body" style={{ marginTop: '0.75rem', whiteSpace: 'pre-line' }}>
+                    <div className="govuk-body" style={{ marginTop: '0.75rem', whiteSpace: 'pre-line', fontSize: '14px', lineHeight: '1.6', color: 'var(--sap-text-primary)' }}>
                       {chunk.content}
                     </div>
 
-                    <details className="govuk-details" style={{ marginTop: '0.75rem' }}>
+                    <details className="govuk-details" style={{ marginTop: '0.75rem', backgroundColor: '#f8fafd' }}>
                       <summary className="govuk-details__summary">
                         <span>Where this comes from (Metadata Details)</span>
                       </summary>
                       <div className="govuk-details__text">
-                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                        <ul style={{ listStyle: 'none', padding: 0, fontSize: '13px', lineHeight: '1.7' }}>
                           <li><strong>Document ID:</strong> {chunk.docId}</li>
                           <li><strong>Section:</strong> {chunk.section}</li>
                           <li><strong>Hierarchy:</strong> {chunk.headingHierarchy}</li>
                           <li><strong>Version:</strong> {chunk.version}</li>
-                          <li><strong>Chunk ID:</strong> {chunk.id}</li>
+                          <li><strong>Chunk ID:</strong> <code>{chunk.id}</code></li>
                         </ul>
                       </div>
                     </details>

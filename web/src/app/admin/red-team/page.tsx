@@ -185,56 +185,65 @@ export default function RedTeamSwitchboardPage() {
 
   return (
     <div>
-      <a href="/admin" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to Admin Hub
-      </a>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
-        <h1 className="govuk-heading-xl" style={{ margin: 0 }}>
-          Red-Team Switchboard & Failure Analysis
-        </h1>
-        <a href="http://localhost:4000/api/traces/export/csv" className="govuk-button govuk-button--secondary" style={{ margin: 0 }}>
-          Export Failure Report (CSV)
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/admin" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Admin Hub
         </a>
       </div>
 
-      <p className="govuk-body-lead">
-        Interactive test matrix for failures F1 through F15. Toggle hardening switches to reproduce
-        vulnerabilities, execute prepared inputs, and verify engineering remediation fixes.
-      </p>
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+          <div>
+            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+              Adversarial Engineering & Vulnerability Matrix
+            </span>
+            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+              Red-Team Switchboard & Failure Analysis
+            </h1>
+          </div>
+          <a href="http://localhost:4000/api/traces/export/csv" className="sap-btn sap-btn--default" style={{ margin: 0 }}>
+            📥 Export Failure Matrix (CSV)
+          </a>
+        </div>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Interactive test matrix for failures F1 through F15. Toggle hardening switches to reproduce
+          vulnerabilities, execute prepared attack prompts, and verify engineering remediation fixes.
+        </p>
+      </div>
 
       {/* Switchboard Cards */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '3rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
         {FAILURES.map((f) => {
           const isHardened = (currentHardening as any)[f.flagName] ?? true;
 
           return (
             <div
               key={f.id}
+              className="sap-card"
               style={{
-                border: '2px solid #0b0c0c',
-                padding: '1.5rem',
-                backgroundColor: '#ffffff',
-                borderLeft: isHardened ? '6px solid #00703c' : '6px solid #d4351c',
+                padding: '1.35rem 1.5rem',
+                borderLeft: isHardened ? '4px solid var(--sap-positive-text)' : '4px solid var(--sap-negative-text)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
                 <div>
-                  <span className="govuk-tag govuk-tag--grey" style={{ marginRight: '0.5rem' }}>
-                    CASE {f.id}
-                  </span>
-                  <span className={`govuk-tag ${f.severity === 'CRITICAL' ? 'govuk-tag--red' : f.severity === 'HIGH' ? 'govuk-tag--yellow' : 'govuk-tag--grey'}`}>
-                    SEVERITY: {f.severity}
-                  </span>
-                  <h2 className="govuk-heading-m" style={{ margin: '0.35rem 0' }}>{f.name}</h2>
+                  <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', marginBottom: '0.35rem' }}>
+                    <span className="sap-badge sap-badge--neutral">
+                      CASE {f.id}
+                    </span>
+                    <span className={`sap-badge ${f.severity === 'CRITICAL' ? 'sap-badge--error' : f.severity === 'HIGH' ? 'sap-badge--warning' : 'sap-badge--neutral'}`}>
+                      SEVERITY: {f.severity}
+                    </span>
+                  </div>
+                  <h2 className="govuk-heading-m" style={{ margin: '0.2rem 0', fontSize: '1.2rem' }}>{f.name}</h2>
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
-                  <span className={`govuk-tag ${isHardened ? 'govuk-tag--green' : 'govuk-tag--red'}`}>
+                  <span className={`sap-badge ${isHardened ? 'sap-badge--success' : 'sap-badge--error'}`}>
                     {isHardened ? 'HARDENED (FIX ON)' : 'VULNERABLE (FIX OFF)'}
                   </span>
                   <div className="govuk-body-s" style={{ marginTop: '0.25rem' }}>
-                    Config Flag: <code>{f.flagName}</code>
+                    Config Flag: <code style={{ backgroundColor: '#f0f4f8', padding: '2px 6px', borderRadius: '4px' }}>{f.flagName}</code>
                   </div>
                 </div>
               </div>
@@ -244,11 +253,11 @@ export default function RedTeamSwitchboardPage() {
                   <tr className="govuk-summary-list__row">
                     <th className="govuk-summary-list__key">Prepared Test Query</th>
                     <td className="govuk-summary-list__value">
-                      <code>&ldquo;{f.input}&rdquo;</code>
+                      <code style={{ color: 'var(--sap-brand-blue)', fontSize: '13px' }}>&ldquo;{f.input}&rdquo;</code>
                     </td>
                     <td className="govuk-summary-list__actions">
-                      <a href={`/chat?q=${encodeURIComponent(f.input)}`} className="govuk-link">
-                        Run in Chat →
+                      <a href={`/chat?q=${encodeURIComponent(f.input)}`} className="sap-btn--ghost" style={{ fontSize: '13px', padding: '0.25rem 0.5rem' }}>
+                        Run in CoPilot →
                       </a>
                     </td>
                   </tr>
@@ -264,7 +273,7 @@ export default function RedTeamSwitchboardPage() {
                   </tr>
                   <tr className="govuk-summary-list__row">
                     <th className="govuk-summary-list__key">Engineering Fix</th>
-                    <td className="govuk-summary-list__value" style={{ color: '#005a30', fontWeight: 'bold' }}>
+                    <td className="govuk-summary-list__value" style={{ color: 'var(--sap-positive-text)', fontWeight: 600 }}>
                       {f.fix}
                     </td>
                     <td className="govuk-summary-list__actions"></td>
@@ -277,12 +286,12 @@ export default function RedTeamSwitchboardPage() {
                 <form method="POST" action="http://localhost:4000/api/hardening/toggle">
                   <input type="hidden" name="flag" value={f.flagName} />
                   <input type="hidden" name="value" value={(!isHardened).toString()} />
-                  <button type="submit" className={`govuk-button ${isHardened ? 'govuk-button--secondary' : 'govuk-button'}`} style={{ margin: 0 }}>
-                    {isHardened ? `Turn OFF ${f.id} Guard (Reproduce Failure)` : `Turn ON ${f.id} Guard (Fix Failure)`}
+                  <button type="submit" className={`sap-btn ${isHardened ? 'sap-btn--warning' : 'sap-btn--accept'}`} style={{ margin: 0 }}>
+                    {isHardened ? `Turn OFF ${f.id} Guard (Reproduce Vulnerability)` : `✓ Turn ON ${f.id} Guard (Fix Vulnerability)`}
                   </button>
                 </form>
 
-                <a href={`/admin/traces?guard=${f.flagName}`} className="govuk-button govuk-button--secondary" style={{ margin: 0 }}>
+                <a href={`/admin/traces?guard=${f.flagName}`} className="sap-btn sap-btn--default" style={{ margin: 0 }}>
                   View Traces for {f.id}
                 </a>
               </div>

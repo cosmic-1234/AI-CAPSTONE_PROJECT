@@ -1,42 +1,66 @@
-/* GOV.UK Inspired Modern Clean Design System (Custom CSS - No Tailwind, No UI Kits) */
+/* ==========================================================================
+   SAP FIORI 3 / HORIZON ENTERPRISE DESIGN SYSTEM
+   "Sahayata – Financial Aid Desk" (IIM Bodh Gaya)
+   Vanilla CSS (No Tailwind, No External UI Kits, Zero Client JS Required)
+   ========================================================================== */
 
 :root {
-  --color-text: #0b0c0c;
-  --color-secondary-text: #505a5f;
-  --color-bg: #ffffff;
-  --color-border: #b1b4b6;
-  --color-light-bg: #f3f2f1;
-  --color-link: #1d70b8;
-  --color-link-hover: #003078;
-  
-  /* Institute Branding */
-  --color-brand-accent: #9C2720;
-  --color-brand-accent-light: #fbeae8;
+  /* SAP Horizon Colors */
+  --sap-shell-bg: #1c2d42;
+  --sap-shell-accent: #9C2720;
+  --sap-shell-text: #ffffff;
+  --sap-shell-subtext: #a8b8c8;
 
-  /* State colors */
-  --color-button-primary: #00703c;
-  --color-button-primary-hover: #005a30;
-  --color-button-primary-shadow: #002d18;
-  --color-button-secondary: #f3f2f1;
-  --color-button-secondary-hover: #dbdad9;
-  --color-error: #d4351c;
-  --color-focus: #ffdd00;
-  --color-focus-text: #0b0c0c;
+  --sap-canvas-bg: #f2f4f8;
+  --sap-surface-bg: #ffffff;
+  --sap-surface-subtle: #f8fafd;
+  --sap-border-color: #d9dcdf;
+  --sap-border-hairline: #e8ebef;
 
-  /* Tag colors */
-  --tag-green-bg: #cce2d8;
-  --tag-green-text: #005a30;
-  --tag-yellow-bg: #fff7bf;
-  --tag-yellow-text: #594d00;
-  --tag-red-bg: #f9d6d3;
-  --tag-red-text: #942514;
-  --tag-grey-bg: #e5e6e7;
-  --tag-grey-text: #383f43;
+  /* Typography Colors */
+  --sap-text-primary: #1c2d42;
+  --sap-text-secondary: #556b82;
+  --sap-text-tertiary: #8493a3;
+  --sap-link-color: #0070f2;
+  --sap-link-hover: #0057b8;
 
-  /* Spacing */
-  --govuk-width: 960px;
+  /* SAP Action Colors */
+  --sap-brand-blue: #0070f2;
+  --sap-brand-blue-hover: #0057b8;
+  --sap-brand-blue-active: #004593;
+
+  /* SAP Semantic Colors */
+  --sap-positive-bg: #e8f5e9;
+  --sap-positive-text: #107e3e;
+  --sap-positive-border: #a5d6a7;
+
+  --sap-negative-bg: #ffebee;
+  --sap-negative-text: #bb0000;
+  --sap-negative-border: #ef9a9a;
+
+  --sap-attention-bg: #fff8e1;
+  --sap-attention-text: #b78103;
+  --sap-attention-border: #ffe082;
+
+  --sap-info-bg: #e3f2fd;
+  --sap-info-text: #0d47a1;
+  --sap-info-border: #90caf9;
+
+  --sap-neutral-bg: #eceff1;
+  --sap-neutral-text: #37474f;
+  --sap-neutral-border: #cfd8dc;
+
+  /* Grid & Geometry */
+  --sap-max-width: 1080px;
+  --sap-radius-sm: 4px;
+  --sap-radius-md: 6px;
+  --sap-radius-lg: 8px;
+  --sap-radius-pill: 14px;
+  --sap-shadow-card: 0 1px 3px rgba(28, 45, 66, 0.08), 0 1px 2px rgba(28, 45, 66, 0.04);
+  --sap-shadow-popover: 0 4px 12px rgba(28, 45, 66, 0.12);
 }
 
+/* Reset & Global Base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -44,56 +68,55 @@
 }
 
 body {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 19px;
-  line-height: 1.5;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--sap-text-primary);
+  background-color: var(--sap-canvas-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Accessibility Focus States */
-:focus {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 0;
-  background-color: var(--color-focus) !important;
-  color: var(--color-focus-text) !important;
-  box-shadow: 0 -2px var(--color-focus), 0 4px var(--color-text) !important;
-  text-decoration: none !important;
+/* Accessibility Focus Ring (SAP Standard) */
+:focus-visible {
+  outline: 2px solid var(--sap-brand-blue);
+  outline-offset: 2px;
 }
 
 /* Links */
 a {
-  color: var(--color-link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: var(--sap-link-color);
+  text-decoration: none;
 }
 
 a:hover {
-  color: var(--color-link-hover);
+  color: var(--sap-link-hover);
+  text-decoration: underline;
 }
 
-/* Layout */
+/* Layout Containers */
 .govuk-width-container {
-  max-width: var(--govuk-width);
+  max-width: var(--sap-max-width);
   margin-right: auto;
   margin-left: auto;
-  padding: 0 1.25rem;
+  padding: 0 1.5rem;
 }
 
 .govuk-main-wrapper {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
-  min-height: 60vh;
+  padding-top: 1.75rem;
+  padding-bottom: 3.5rem;
+  min-height: 72vh;
 }
 
-/* Header */
+/* ==========================================================================
+   SAP FIORI SHELL HEADER & NAVIGATION
+   ========================================================================== */
 .govuk-header {
-  border-bottom: 4px solid var(--color-brand-accent);
-  background-color: #ffffff;
-  padding: 1rem 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: var(--sap-shell-bg);
+  border-bottom: 3px solid var(--sap-shell-accent);
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: var(--sap-shell-text);
 }
 
 .govuk-header__container {
@@ -109,7 +132,7 @@ a:hover {
   align-items: center;
   gap: 0.85rem;
   text-decoration: none;
-  color: inherit;
+  color: var(--sap-shell-text);
 }
 
 .govuk-header__brand:hover {
@@ -118,6 +141,7 @@ a:hover {
 
 .govuk-header__logo-img {
   display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
 .govuk-header__titles {
@@ -126,153 +150,241 @@ a:hover {
 }
 
 .govuk-header__institute {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--color-text);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
 }
 
 .govuk-header__portal {
-  font-size: 0.95rem;
-  color: var(--color-secondary-text);
+  font-size: 0.825rem;
+  color: var(--sap-shell-subtext);
+  font-weight: 400;
 }
 
 .govuk-header__nav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  font-size: 16px;
+  gap: 1rem;
+  font-size: 14px;
 }
 
 .govuk-header__role-badge {
-  display: inline-block;
-  padding: 0.25rem 0.65rem;
-  background-color: var(--color-light-bg);
-  border: 1px solid var(--color-border);
-  font-size: 14px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--sap-radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-/* Typography */
+.govuk-header__nav a {
+  color: var(--sap-shell-subtext);
+  font-weight: 500;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--sap-radius-sm);
+  transition: all 0.15s ease-in-out;
+}
+
+.govuk-header__nav a:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   SAP TYPOGRAPHY
+   ========================================================================== */
 h1, .govuk-heading-xl {
-  font-size: 2.5rem;
-  line-height: 1.2;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-}
-
-h2, .govuk-heading-l {
   font-size: 1.85rem;
   line-height: 1.25;
   font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1.25rem;
+  color: var(--sap-text-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.2px;
+}
+
+h2, .govuk-heading-l {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+  margin-top: 1.75rem;
+  margin-bottom: 1rem;
 }
 
 h3, .govuk-heading-m {
-  font-size: 1.35rem;
-  line-height: 1.3;
-  font-weight: 700;
-  margin-top: 1.5rem;
-  margin-bottom: 0.85rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--sap-text-primary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 p, .govuk-body {
-  font-size: 19px;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-}
-
-.govuk-body-s {
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--color-secondary-text);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--sap-text-primary);
+  margin-bottom: 1rem;
 }
 
 .govuk-body-lead {
-  font-size: 23px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--sap-text-secondary);
   margin-bottom: 1.5rem;
 }
 
-.govuk-hint {
-  font-size: 16px;
-  color: var(--color-secondary-text);
-  margin-bottom: 0.65rem;
+.govuk-body-s {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--sap-text-secondary);
 }
 
-/* Modern Buttons (GOV.UK Pattern) */
-.govuk-button {
-  display: inline-block;
+.govuk-hint {
+  font-size: 13px;
+  color: var(--sap-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   SAP FIORI BUTTON MATRIX (4px radius, 14px font, bold 600, enterprise look)
+   ========================================================================== */
+.govuk-button, .sap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: inherit;
-  font-size: 19px;
-  line-height: 1.2;
+  font-size: 14px;
   font-weight: 600;
+  line-height: 1.3;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  padding: 0.65rem 1.25rem;
-  border: 2px solid transparent;
-  border-radius: 0;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--sap-radius-sm);
+  border: 1px solid var(--sap-brand-blue);
   color: #ffffff;
-  background-color: var(--color-button-primary);
-  box-shadow: 0 2px 0 var(--color-button-primary-shadow);
+  background-color: var(--sap-brand-blue);
+  box-shadow: 0 1px 2px rgba(0, 112, 242, 0.2);
+  transition: all 0.15s ease-in-out;
   vertical-align: middle;
 }
 
-.govuk-button:hover {
-  background-color: var(--color-button-primary-hover);
+.govuk-button:hover, .sap-btn:hover {
+  background-color: var(--sap-brand-blue-hover);
+  border-color: var(--sap-brand-blue-hover);
   color: #ffffff;
+  text-decoration: none;
 }
 
-.govuk-button:active {
-  top: 2px;
+.govuk-button:active, .sap-btn:active {
+  background-color: var(--sap-brand-blue-active);
+  transform: translateY(1px);
+}
+
+/* Default / Secondary Button (Clean White + SAP Outline) */
+.govuk-button--secondary, .sap-btn--default {
+  background-color: #ffffff;
+  color: #0a6ed1;
+  border: 1px solid #89919a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.govuk-button--secondary:hover, .sap-btn--default:hover {
+  background-color: #f0f4f8;
+  border-color: #0a6ed1;
+  color: var(--sap-link-hover);
+}
+
+/* Emphasized Button */
+.sap-btn--emphasized {
+  background-color: #0070f2;
+  color: #ffffff;
+  border: 1px solid #0070f2;
+}
+
+.sap-btn--emphasized:hover {
+  background-color: #0057b8;
+  border-color: #0057b8;
+}
+
+/* Positive / Accept Button (Approve Docket) */
+.sap-btn--accept, .sap-btn--positive {
+  background-color: var(--sap-positive-bg);
+  color: var(--sap-positive-text);
+  border: 1px solid var(--sap-positive-border);
+}
+
+.sap-btn--accept:hover, .sap-btn--positive:hover {
+  background-color: #c8e6c9;
+  color: #0b5e2d;
+}
+
+/* Negative / Reject Button (Warning / Reject) */
+.govuk-button--warning, .sap-btn--reject, .sap-btn--negative {
+  background-color: var(--sap-negative-bg);
+  color: var(--sap-negative-text);
+  border: 1px solid var(--sap-negative-border);
   box-shadow: none;
 }
 
-.govuk-button--secondary {
-  background-color: var(--color-button-secondary);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 2px 0 #929597;
+.govuk-button--warning:hover, .sap-btn--reject:hover, .sap-btn--negative:hover {
+  background-color: #ffcdd2;
+  color: #900000;
 }
 
-.govuk-button--secondary:hover {
-  background-color: var(--color-button-secondary-hover);
-  color: var(--color-text);
+/* Ghost / Transparent Toolbar Button */
+.sap-btn--ghost {
+  background-color: transparent;
+  color: #0a6ed1;
+  border: 1px solid transparent;
+  box-shadow: none;
 }
 
-.govuk-button--warning {
-  background-color: var(--color-error);
-  box-shadow: 0 2px 0 #6e1a0b;
+.sap-btn--ghost:hover {
+  background-color: #e5edf8;
+  color: #0057b8;
 }
 
-.govuk-button--warning:hover {
-  background-color: #a82310;
+/* Attention / Warning Button */
+.sap-btn--warning, .sap-btn--attention {
+  background-color: #fff3e0;
+  color: #e9730c;
+  border: 1px solid #e9730c;
+  box-shadow: none;
+}
+
+.sap-btn--warning:hover, .sap-btn--attention:hover {
+  background-color: #ffe0b2;
+  color: #c75c00;
 }
 
 .govuk-button-group {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
 
-/* Forms */
+/* ==========================================================================
+   SAP FORMS & INPUTS (Crisp 1px borders, 4px radius)
+   ========================================================================== */
 .govuk-form-group {
-  margin-bottom: 1.75rem;
-}
-
-.govuk-form-group--error {
-  border-left: 4px solid var(--color-error);
-  padding-left: 1rem;
+  margin-bottom: 1.35rem;
 }
 
 .govuk-label {
   display: block;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sap-text-primary);
   margin-bottom: 0.35rem;
 }
 
@@ -280,88 +392,151 @@ p, .govuk-body {
   display: block;
   width: 100%;
   font-family: inherit;
-  font-size: 19px;
-  line-height: 1.4;
-  padding: 0.45rem 0.65rem;
-  border: 2px solid var(--color-text);
+  font-size: 14px;
+  line-height: 1.45;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sap-border-color);
+  border-radius: var(--sap-radius-sm);
   background-color: #ffffff;
-  color: var(--color-text);
-  border-radius: 0;
+  color: var(--sap-text-primary);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.govuk-input:focus, .govuk-select:focus, .govuk-textarea:focus {
+  border-color: var(--sap-brand-blue);
+  box-shadow: 0 0 0 1px var(--sap-brand-blue);
+  outline: none !important;
+  background-color: #ffffff !important;
+  color: var(--sap-text-primary) !important;
 }
 
 .govuk-textarea {
-  min-height: 120px;
+  min-height: 110px;
   resize: vertical;
 }
 
-.govuk-error-message {
-  display: block;
-  color: var(--color-error);
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 0.5rem;
-}
-
-/* Status Tags */
-.govuk-tag {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
-  font-size: 14px;
-  font-weight: 700;
+/* ==========================================================================
+   SAP VALUE STATE PILL BADGES (Object Status)
+   ========================================================================== */
+.govuk-tag, .sap-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  border-radius: var(--sap-radius-pill);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  line-height: 1;
-  background-color: var(--color-brand-accent-light);
-  color: var(--color-brand-accent);
-  border: 1px solid transparent;
+  letter-spacing: 0.3px;
+  background-color: var(--sap-neutral-bg);
+  color: var(--sap-neutral-text);
+  border: 1px solid var(--sap-neutral-border);
 }
 
-.govuk-tag--green {
-  background-color: var(--tag-green-bg);
-  color: var(--tag-green-text);
+.govuk-tag--green, .sap-badge--success {
+  background-color: var(--sap-positive-bg);
+  color: var(--sap-positive-text);
+  border-color: var(--sap-positive-border);
 }
 
-.govuk-tag--yellow {
-  background-color: var(--tag-yellow-bg);
-  color: var(--tag-yellow-text);
+.govuk-tag--yellow, .sap-badge--warning {
+  background-color: var(--sap-attention-bg);
+  color: var(--sap-attention-text);
+  border-color: var(--sap-attention-border);
 }
 
-.govuk-tag--red {
-  background-color: var(--tag-red-bg);
-  color: var(--tag-red-text);
+.govuk-tag--red, .sap-badge--error {
+  background-color: var(--sap-negative-bg);
+  color: var(--sap-negative-text);
+  border-color: var(--sap-negative-border);
 }
 
-.govuk-tag--grey {
-  background-color: var(--tag-grey-bg);
-  color: var(--tag-grey-text);
+.govuk-tag--grey, .sap-badge--neutral {
+  background-color: var(--sap-neutral-bg);
+  color: var(--sap-neutral-text);
+  border-color: var(--sap-neutral-border);
 }
 
-/* Summary List */
-.govuk-summary-list {
-  border-top: 1px solid var(--color-border);
+.govuk-tag--blue, .sap-badge--info {
+  background-color: var(--sap-info-bg);
+  color: var(--sap-info-text);
+  border-color: var(--sap-info-border);
+}
+
+/* ==========================================================================
+   SAP CARDS & TILES (Fiori Launchpad Elevation)
+   ========================================================================== */
+.govuk-grid-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
   margin-bottom: 2rem;
+}
+
+.govuk-card, .sap-card {
+  background-color: var(--sap-surface-bg);
+  border: 1px solid var(--sap-border-color);
+  border-radius: var(--sap-radius-md);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--sap-shadow-card);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.govuk-card:hover, .sap-card:hover {
+  box-shadow: 0 4px 10px rgba(28, 45, 66, 0.1);
+}
+
+.govuk-card--highlight {
+  border-top: 4px solid var(--sap-brand-blue);
+}
+
+/* ==========================================================================
+   SAP SUMMARY LIST & RESPONSIVE DATA TABLE
+   ========================================================================== */
+.govuk-summary-list {
   width: 100%;
   border-collapse: collapse;
+  background-color: var(--sap-surface-bg);
+  border: 1px solid var(--sap-border-color);
+  border-radius: var(--sap-radius-md);
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  box-shadow: var(--sap-shadow-card);
 }
 
 .govuk-summary-list__row {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--sap-border-hairline);
+  transition: background-color 0.15s ease-in-out;
+}
+
+.govuk-summary-list__row:last-child {
+  border-bottom: none;
+}
+
+.govuk-summary-list__row:hover {
+  background-color: var(--sap-surface-subtle);
 }
 
 .govuk-summary-list__key,
 .govuk-summary-list__value,
 .govuk-summary-list__actions {
-  padding: 0.85rem 0.65rem 0.85rem 0;
-  vertical-align: top;
-  font-size: 19px;
+  padding: 0.85rem 1.25rem;
+  font-size: 14px;
+  vertical-align: middle;
 }
 
 .govuk-summary-list__key {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--sap-text-secondary);
   width: 32%;
 }
 
 .govuk-summary-list__value {
+  color: var(--sap-text-primary);
   width: 53%;
 }
 
@@ -370,122 +545,154 @@ p, .govuk-body {
   text-align: right;
 }
 
-/* Details Accordion */
-.govuk-details {
-  margin-top: 1.25rem;
+/* SAP Responsive Data Table */
+.sap-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--sap-surface-bg);
+  border: 1px solid var(--sap-border-color);
+  border-radius: var(--sap-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--sap-shadow-card);
   margin-bottom: 1.5rem;
 }
 
-.govuk-details__summary {
-  cursor: pointer;
-  color: var(--color-link);
-  font-size: 18px;
-  font-weight: 600;
-  user-select: none;
+.sap-table th {
+  background-color: #f5f6f7;
+  color: var(--sap-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e4e8;
+  text-align: left;
 }
 
-.govuk-details__summary:hover {
-  color: var(--color-link-hover);
-}
-
-.govuk-details__text {
+.sap-table td {
   padding: 0.85rem 1rem;
-  border-left: 4px solid var(--color-border);
-  background-color: var(--color-light-bg);
-  margin-top: 0.5rem;
-  font-size: 16px;
+  border-bottom: 1px solid #e2e4e8;
+  font-size: 14px;
+  color: var(--sap-text-primary);
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
 }
 
-/* Warning Text */
-.govuk-warning-text {
-  position: relative;
+.sap-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sap-table tr:hover td {
+  background-color: #f8fafd;
+}
+
+/* ==========================================================================
+   SAP MESSAGE STRIP (Alerts & Contextual Info)
+   ========================================================================== */
+.govuk-warning-text, .sap-message-strip {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-left: 4px solid var(--color-text);
-  background-color: #fff9d6;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--sap-radius-sm);
+  background-color: var(--sap-attention-bg);
+  border: 1px solid var(--sap-attention-border);
+  border-left: 4px solid var(--sap-attention-text);
+  color: var(--sap-text-primary);
   margin-bottom: 1.5rem;
+  font-size: 14px;
 }
 
 .govuk-warning-text__icon {
+  font-size: 16px;
   font-weight: bold;
-  font-size: 22px;
+  color: var(--sap-attention-text);
   line-height: 1;
 }
 
-/* Error Summary */
 .govuk-error-summary {
-  padding: 1.25rem;
-  border: 4px solid var(--color-error);
-  margin-bottom: 2rem;
-  background-color: #ffffff;
+  background-color: var(--sap-negative-bg);
+  border: 1px solid var(--sap-negative-border);
+  border-left: 4px solid var(--sap-negative-text);
+  border-radius: var(--sap-radius-sm);
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.75rem;
 }
 
 .govuk-error-summary__title {
-  font-size: 21px;
-  color: var(--color-error);
-  margin-bottom: 0.75rem;
+  color: var(--sap-negative-text);
+  font-size: 16px;
+  margin-bottom: 0.5rem;
 }
 
-.govuk-error-summary__list {
-  list-style: disc;
-  margin-left: 1.5rem;
-}
-
-.govuk-error-summary__list a {
-  color: var(--color-error);
-  font-weight: 700;
-}
-
-/* Task List */
+/* ==========================================================================
+   SAP TASK LIST & ACCORDIONS
+   ========================================================================== */
 .govuk-task-list {
   list-style: none;
-  margin: 1.5rem 0;
-  border-top: 1px solid var(--color-border);
+  background-color: var(--sap-surface-bg);
+  border: 1px solid var(--sap-border-color);
+  border-radius: var(--sap-radius-md);
+  margin: 1.25rem 0 2rem 0;
+  overflow: hidden;
+  box-shadow: var(--sap-shadow-card);
 }
 
 .govuk-task-list__item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.95rem 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--sap-border-hairline);
+  transition: background-color 0.15s ease-in-out;
 }
 
-.govuk-task-list__name-and-hint {
-  max-width: 75%;
+.govuk-task-list__item:last-child {
+  border-bottom: none;
 }
 
-/* Grid & Cards */
-.govuk-grid-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
+.govuk-task-list__item:hover {
+  background-color: var(--sap-surface-subtle);
 }
 
-.govuk-card {
-  flex: 1 1 280px;
-  padding: 1.25rem;
-  border: 1px solid var(--color-border);
-  background-color: #ffffff;
-  border-top: 4px solid var(--color-brand-accent);
+.govuk-details {
+  background-color: var(--sap-surface-bg);
+  border: 1px solid var(--sap-border-hairline);
+  border-radius: var(--sap-radius-sm);
+  padding: 0.65rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
 }
 
-.govuk-card--highlight {
-  border-top-color: var(--color-button-primary);
+.govuk-details__summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sap-link-color);
 }
 
-/* Footer */
+.govuk-details__summary:hover {
+  color: var(--sap-link-hover);
+}
+
+.govuk-details__text {
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--sap-border-hairline);
+  font-size: 13px;
+  color: var(--sap-text-secondary);
+}
+
+/* ==========================================================================
+   SAP ENTERPRISE FOOTER
+   ========================================================================== */
 .govuk-footer {
-  border-top: 1px solid var(--color-border);
-  background-color: var(--color-light-bg);
-  padding: 2.5rem 0 1.5rem 0;
-  margin-top: 3rem;
-  font-size: 16px;
-  color: var(--color-secondary-text);
+  border-top: 1px solid var(--sap-border-color);
+  background-color: #ffffff;
+  padding: 2.25rem 0 1.5rem 0;
+  margin-top: 3.5rem;
+  font-size: 13px;
+  color: var(--sap-text-secondary);
 }
 
 .govuk-footer__meta {

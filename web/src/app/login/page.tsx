@@ -97,64 +97,83 @@ export default async function LoginPage() {
 
   return (
     <div>
-      <h1 className="govuk-heading-xl">Select User Role</h1>
-      <p className="govuk-body-lead">
-        Choose a role to test permissions, access control lists (ACL), and personalized aid recommendations.
-      </p>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to Launchpad
+        </a>
+      </div>
 
-      <form action={handleLogin} method="POST">
-        <fieldset className="govuk-form-group">
-          <legend className="govuk-label" style={{ fontSize: '21px', marginBottom: '1rem' }}>
-            Available Personas
-          </legend>
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+          Identity & Access Management (Mock Switchboard)
+        </span>
+        <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+          Select Active Enterprise Persona
+        </h1>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Switch between verified campus personas to inspect role-based access control (RBAC), retrieval ACL boundaries, and permission-scoped workflows.
+        </p>
+      </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-            {MOCK_PROFILES.map((profile) => {
-              const isSelected = profile.id === currentUser.id;
-              return (
-                <label
-                  key={profile.id}
-                  style={{
-                    display: 'block',
-                    padding: '1rem',
-                    border: isSelected ? '2px solid #0b0c0c' : '1px solid #b1b4b6',
-                    backgroundColor: isSelected ? '#f3f2f1' : '#ffffff',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <input
-                      type="radio"
-                      name="userId"
-                      value={profile.id}
-                      defaultChecked={isSelected}
-                      style={{ width: '22px', height: '22px' }}
-                    />
-                    <div>
-                      <strong>{profile.name}</strong>{' '}
-                      <span className="govuk-tag" style={{ marginLeft: '0.5rem' }}>
-                        {profile.role.toUpperCase()}
-                      </span>
-                      <div className="govuk-body-s" style={{ marginTop: '0.25rem' }}>
-                        {profile.description}
+      <div className="sap-card" style={{ padding: '1.5rem', marginBottom: '2.5rem' }}>
+        <form action={handleLogin} method="POST">
+          <fieldset className="govuk-form-group" style={{ border: 'none', padding: 0 }}>
+            <legend className="govuk-label" style={{ fontSize: '15px', fontWeight: 700, marginBottom: '1rem', color: 'var(--sap-text-primary)' }}>
+              Available Test Profiles
+            </legend>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {MOCK_PROFILES.map((profile) => {
+                const isSelected = profile.id === currentUser.id;
+                return (
+                  <label
+                    key={profile.id}
+                    style={{
+                      display: 'block',
+                      padding: '1rem 1.25rem',
+                      borderRadius: 'var(--sap-radius-sm)',
+                      border: isSelected ? '2px solid var(--sap-brand-blue)' : '1px solid var(--sap-border-color)',
+                      backgroundColor: isSelected ? '#f0f4f8' : '#ffffff',
+                      cursor: 'pointer',
+                      transition: 'border-color 0.15s ease-in-out, background-color 0.15s ease-in-out',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                      <input
+                        type="radio"
+                        name="userId"
+                        value={profile.id}
+                        defaultChecked={isSelected}
+                        style={{ width: '18px', height: '18px', accentColor: 'var(--sap-brand-blue)' }}
+                      />
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          <strong style={{ fontSize: '15px', color: 'var(--sap-text-primary)' }}>{profile.name}</strong>
+                          <span className="sap-badge sap-badge--info">
+                            {profile.role.toUpperCase()}
+                          </span>
+                        </div>
+                        <div className="govuk-body-s" style={{ marginTop: '0.25rem', color: 'var(--sap-text-secondary)' }}>
+                          {profile.description}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </label>
-              );
-            })}
-          </div>
-        </fieldset>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
 
-        <div className="govuk-button-group">
-          <button type="submit" className="govuk-button">
-            Confirm and Switch Role
-          </button>
-          <a href="/" className="govuk-button govuk-button--secondary">
-            Cancel
-          </a>
-        </div>
-      </form>
+          <div className="govuk-button-group" style={{ marginTop: '1.5rem', marginBottom: 0 }}>
+            <button type="submit" className="sap-btn sap-btn--emphasized">
+              Confirm and Switch Persona
+            </button>
+            <a href="/" className="sap-btn sap-btn--default">
+              Cancel
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

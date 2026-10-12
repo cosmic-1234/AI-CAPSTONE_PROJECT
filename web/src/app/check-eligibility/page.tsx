@@ -315,60 +315,70 @@ export default async function CheckEligibilityPage({
 
   return (
     <div>
-      <a href="/check-eligibility?step=check" className="govuk-link" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-        ← Back to answers
-      </a>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <a href="/check-eligibility?step=check" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
+          ← Back to questionnaire answers
+        </a>
+      </div>
 
-      <h1 className="govuk-heading-xl">Your Financial Aid Eligibility Result</h1>
+      <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
+        <h1 className="govuk-heading-xl" style={{ margin: '0 0 0.5rem 0', fontSize: '1.65rem' }}>
+          Financial Aid Eligibility Determination
+        </h1>
+        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+          Preliminary evaluation computed against active IIM Bodh Gaya policy guidelines for Programme: <strong>{programme}</strong>, Declared Income: <strong>INR {incNum.toLocaleString('en-IN')}</strong>, and CGPA: <strong>{cgpaNum}</strong>.
+        </p>
+      </div>
 
       {eligibleSchemes.length > 0 ? (
-        <div style={{ backgroundColor: '#cce2d8', borderLeft: '4px solid #00703c', padding: '1.25rem', marginBottom: '2rem' }}>
-          <h2 className="govuk-heading-m" style={{ color: '#005a30', marginTop: 0 }}>
-            You may be eligible for {eligibleSchemes.length} aid scheme{eligibleSchemes.length > 1 ? 's' : ''}!
+        <div className="sap-card" style={{ backgroundColor: 'var(--sap-positive-bg)', border: '1px solid var(--sap-positive-border)', borderLeft: '4px solid var(--sap-positive-text)', padding: '1.25rem', marginBottom: '2rem' }}>
+          <h2 className="govuk-heading-m" style={{ color: 'var(--sap-positive-text)', marginTop: 0, fontSize: '1.2rem' }}>
+            ✓ Potential Qualification for {eligibleSchemes.length} Scheme{eligibleSchemes.length > 1 ? 's' : ''}
           </h2>
-          <p className="govuk-body" style={{ margin: 0 }}>
-            Based on the details provided, your profile satisfies the preliminary criteria under current IIM Bodh Gaya policy.
+          <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-positive-text)' }}>
+            Based on your self-declared academic and income standing, your profile satisfies preliminary requirements. Formal grant remains contingent on Accounts office cross-audit and Committee approval.
           </p>
         </div>
       ) : (
-        <div style={{ backgroundColor: '#fff7bf', borderLeft: '4px solid #594d00', padding: '1.25rem', marginBottom: '2rem' }}>
-          <h2 className="govuk-heading-m" style={{ color: '#594d00', marginTop: 0 }}>
-            No Standard Schemes Matched
+        <div className="sap-card" style={{ backgroundColor: 'var(--sap-attention-bg)', border: '1px solid var(--sap-attention-border)', borderLeft: '4px solid var(--sap-attention-text)', padding: '1.25rem', marginBottom: '2rem' }}>
+          <h2 className="govuk-heading-m" style={{ color: 'var(--sap-attention-text)', marginTop: 0, fontSize: '1.2rem' }}>
+            No Automatic Aid Schemes Matched
           </h2>
-          <p className="govuk-body" style={{ margin: 0 }}>
-            Your declared income or CGPA falls outside standard automatic thresholds. If you are experiencing sudden family bereavement or medical crisis, you may still apply for the Emergency Hardship Fund.
+          <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-primary)' }}>
+            Your declared income or CGPA falls outside standard automatic thresholds. If experiencing sudden family crisis or bereavement, you may apply under the Emergency Hardship Fund.
           </p>
         </div>
       )}
 
       {/* Scheme Breakdown */}
-      <h2 className="govuk-heading-l">Evaluated Schemes</h2>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
+      <h2 className="govuk-heading-l" style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
+        Evaluated Assistance Schemes
+      </h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
         {evaluations.map((sch) => {
           const isEligible = sch.decision === 'eligible';
           return (
             <div
               key={sch.scheme_id}
+              className="sap-card"
               style={{
-                border: '1px solid #b1b4b6',
-                borderLeft: isEligible ? '4px solid #00703c' : '4px solid #b1b4b6',
-                padding: '1.25rem',
-                backgroundColor: '#ffffff',
+                borderLeft: isEligible ? '4px solid var(--sap-positive-text)' : '4px solid var(--sap-border-color)',
+                padding: '1.35rem 1.5rem',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <h3 className="govuk-heading-m" style={{ margin: 0 }}>{sch.scheme_name}</h3>
-                <span className={`govuk-tag ${isEligible ? 'govuk-tag--green' : 'govuk-tag--grey'}`}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <h3 className="govuk-heading-m" style={{ margin: 0, fontSize: '1.2rem' }}>{sch.scheme_name}</h3>
+                <span className={`sap-badge ${isEligible ? 'sap-badge--success' : 'sap-badge--neutral'}`}>
                   {isEligible ? 'PRELIMINARILY ELIGIBLE' : 'NOT ELIGIBLE'}
                 </span>
               </div>
 
-              <p className="govuk-body" style={{ fontWeight: 'bold', color: isEligible ? '#005a30' : '#505a5f' }}>
-                Potential Assistance: {sch.coverage}
+              <p className="govuk-body" style={{ fontWeight: 600, color: isEligible ? 'var(--sap-positive-text)' : 'var(--sap-text-secondary)', marginBottom: '0.75rem' }}>
+                Potential Waiver / Grant: {sch.coverage}
               </p>
 
               <div className="govuk-body-s">
-                <strong>Evaluation Notes:</strong>
+                <strong>Policy Evaluation Notes:</strong>
                 <ul style={{ paddingLeft: '1.25rem', marginTop: '0.25rem' }}>
                   {sch.reasons.map((r, idx) => (
                     <li key={idx}>{r}</li>
@@ -377,11 +387,11 @@ export default async function CheckEligibilityPage({
               </div>
 
               <div className="govuk-body-s" style={{ marginTop: '0.5rem' }}>
-                <strong>Required Documents:</strong> {sch.required_documents.join(', ')}
+                <strong>Required Verification Documents:</strong> {sch.required_documents.join(', ')}
               </div>
 
-              <p className="govuk-body-s" style={{ marginTop: '0.5rem', color: '#505a5f' }}>
-                Official Rule Citation: <em>{sch.citation}</em>
+              <p className="govuk-body-s" style={{ marginTop: '0.5rem', color: 'var(--sap-text-secondary)' }}>
+                Official Statute Reference: <em>{sch.citation}</em>
               </p>
             </div>
           );
@@ -389,10 +399,10 @@ export default async function CheckEligibilityPage({
       </div>
 
       <div className="govuk-button-group">
-        <a href="/upload" className="govuk-button">
+        <a href="/upload" className="sap-btn sap-btn--emphasized">
           Proceed to Document Submission
         </a>
-        <a href="/check-eligibility?step=1" className="govuk-button govuk-button--secondary">
+        <a href="/check-eligibility?step=1" className="sap-btn sap-btn--default">
           Re-Check With Different Figures
         </a>
       </div>
