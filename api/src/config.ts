@@ -7,8 +7,18 @@ dotenv.config();
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 dotenv.config({ path: path.resolve(process.cwd(), 'api', '.env') });
 
-// Find the project root relative to api directory
-const ROOT_DIR = path.resolve(process.cwd(), '..');
+// Find the project root whether run from repo root or api/ directory
+function resolveRootDir(): string {
+  if (fs.existsSync(path.join(process.cwd(), 'config'))) {
+    return process.cwd();
+  }
+  if (fs.existsSync(path.join(process.cwd(), '..', 'config'))) {
+    return path.resolve(process.cwd(), '..');
+  }
+  return process.cwd();
+}
+
+const ROOT_DIR = resolveRootDir();
 const CONFIG_DIR = path.join(ROOT_DIR, 'config');
 
 function readYamlSafe<T>(filePath: string, fallback: T): T {

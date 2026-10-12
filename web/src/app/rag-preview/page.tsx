@@ -1,4 +1,5 @@
 import { getCurrentUser } from '@/lib/session';
+import { API_BASE_URL } from '@/lib/api';
 
 interface RetrievedChunk {
   id: string;
@@ -25,7 +26,7 @@ interface SearchResponse {
 async function searchKnowledgeBase(query: string, role: string): Promise<SearchResponse | null> {
   if (!query) return null;
   try {
-    const res = await fetch('http://localhost:4000/api/rag/search', {
+    const res = await fetch(`${API_BASE_URL}/api/rag/search`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, role, topK: 5 }),

@@ -1,4 +1,5 @@
 import { getCurrentUser } from '@/lib/session';
+import { API_BASE_URL } from '@/lib/api';
 
 interface ApplicationRow {
   id: string;
@@ -34,7 +35,7 @@ const STATUS_TAG_CLASSES: Record<string, string> = {
 
 async function getApplications(studentId: string): Promise<ApplicationRow[]> {
   try {
-    const res = await fetch(`http://localhost:4000/api/auth/user/${studentId}`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE_URL}/api/auth/user/${studentId}`, { cache: 'no-store' });
   } catch {}
 
   // Fallback / mock database applications for user

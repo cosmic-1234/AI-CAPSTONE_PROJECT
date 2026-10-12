@@ -1,4 +1,5 @@
 import { getCurrentUser } from '@/lib/session';
+import { API_BASE_URL } from '@/lib/api';
 
 interface SchemeEvaluation {
   scheme_id: string;
@@ -12,7 +13,7 @@ interface SchemeEvaluation {
 
 async function evaluateSchemes(programme: string, income: number, cgpa: number): Promise<SchemeEvaluation[]> {
   try {
-    const res = await fetch('http://localhost:4000/api/brand', { cache: 'no-store' });
+    const res = await fetch(`${API_BASE_URL}/api/brand`, { cache: 'no-store' });
   } catch {}
 
   // Run deterministic rules matching schemes.yaml

@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '@/lib/api';
+
 interface TraceItem {
   run_id: string;
   timestamp: string;
@@ -35,7 +37,7 @@ async function fetchTraces(filters: {
     if (filters.failureId) queryParams.set('failureId', filters.failureId);
     queryParams.set('limit', '50');
 
-    const res = await fetch(`http://localhost:4000/api/traces?${queryParams.toString()}`, {
+    const res = await fetch(`${API_BASE_URL}/api/traces?${queryParams.toString()}`, {
       cache: 'no-store',
     });
     if (res.ok) {
@@ -122,7 +124,7 @@ export default async function TraceViewerPage({
               Execution Trace Monitor
             </h1>
           </div>
-          <a href="http://localhost:4000/api/traces/export/csv" download className="sap-btn sap-btn--default" style={{ margin: 0 }}>
+          <a href={`${API_BASE_URL}/api/traces/export/csv`} download className="sap-btn sap-btn--default" style={{ margin: 0 }}>
             📥 Export All Traces (CSV)
           </a>
         </div>

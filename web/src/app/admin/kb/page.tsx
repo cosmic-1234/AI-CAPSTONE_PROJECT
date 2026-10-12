@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '@/lib/api';
+
 interface ManifestDoc {
   doc_id: string;
   title: string;
@@ -161,7 +163,7 @@ export default function KnowledgeBaseManagerPage() {
               Policy Manifest Registry
             </h1>
           </div>
-          <form method="POST" action="http://localhost:4000/api/rag/ingest">
+          <form method="POST" action={`${API_BASE_URL}/api/rag/ingest`}>
             <button type="submit" className="sap-btn sap-btn--emphasized" style={{ margin: 0 }}>
               ↻ Trigger Embedding Pipeline
             </button>

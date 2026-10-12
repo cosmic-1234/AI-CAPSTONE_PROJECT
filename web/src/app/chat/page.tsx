@@ -1,4 +1,5 @@
 import { getCurrentUser } from '@/lib/session';
+import { API_BASE_URL } from '@/lib/api';
 import ChatInterface from './ChatInterface';
 
 interface AgentResponse {
@@ -23,7 +24,7 @@ interface AgentResponse {
 async function sendQuery(query: string, userRole: string, studentId: string): Promise<AgentResponse | null> {
   if (!query) return null;
   try {
-    const res = await fetch('http://localhost:4000/api/agent/chat', {
+    const res = await fetch(`${API_BASE_URL}/api/agent/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

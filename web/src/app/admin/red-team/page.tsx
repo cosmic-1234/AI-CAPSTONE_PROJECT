@@ -1,4 +1,5 @@
 import { getHardeningConfig } from '../../../../../api/src/config';
+import { API_BASE_URL } from '@/lib/api';
 
 interface FailureItem {
   id: string;
@@ -201,7 +202,7 @@ export default function RedTeamSwitchboardPage() {
               Red-Team Switchboard & Failure Analysis
             </h1>
           </div>
-          <a href="http://localhost:4000/api/traces/export/csv" className="sap-btn sap-btn--default" style={{ margin: 0 }}>
+          <a href={`${API_BASE_URL}/api/traces/export/csv`} className="sap-btn sap-btn--default" style={{ margin: 0 }}>
             📥 Export Failure Matrix (CSV)
           </a>
         </div>
@@ -283,7 +284,7 @@ export default function RedTeamSwitchboardPage() {
 
               {/* Action Buttons to Toggle and Reproduce */}
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <form method="POST" action="http://localhost:4000/api/hardening/toggle">
+                <form method="POST" action={`${API_BASE_URL}/api/hardening/toggle`}>
                   <input type="hidden" name="flag" value={f.flagName} />
                   <input type="hidden" name="value" value={(!isHardened).toString()} />
                   <button type="submit" className={`sap-btn ${isHardened ? 'sap-btn--warning' : 'sap-btn--accept'}`} style={{ margin: 0 }}>

@@ -1,0 +1,41 @@
+services:
+  # -------------------------------------------------------------
+  # 1. Sahayata Backend API (Node.js / Express / LangGraph / RAG)
+  # -------------------------------------------------------------
+  - type: web
+    name: sahayata-api
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build --workspace=api
+    startCommand: npm run start --workspace=api
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false # Set in Render Dashboard -> Environment
+
+  # -------------------------------------------------------------
+  # 2. Sahayata Frontend Portal (Next.js 14)
+  # -------------------------------------------------------------
+  - type: web
+    name: sahayata-web
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build --workspace=web
+    startCommand: npm run start --workspace=web
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: INTERNAL_API_URL
+        fromService:
+          type: web
+          name: sahayata-api
+          property: host
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: sahayata-api
+          property: host

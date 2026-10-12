@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getCurrentUser } from '@/lib/session';
+import { API_BASE_URL } from '@/lib/api';
 
 export async function POST(req: Request) {
   try {
@@ -14,7 +15,7 @@ export async function POST(req: Request) {
     // Realistic AI thinking delay (1.2 seconds) so the user experiences the AI reasoning process
     await new Promise((resolve) => setTimeout(resolve, 1200));
 
-    const res = await fetch('http://localhost:4000/api/agent/chat', {
+    const res = await fetch(`${API_BASE_URL}/api/agent/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
