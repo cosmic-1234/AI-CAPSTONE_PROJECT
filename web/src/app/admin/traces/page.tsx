@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/lib/api';
+import { API_BASE_URL } from '@/lib/apiConfig';
 
 interface TraceItem {
   run_id: string;

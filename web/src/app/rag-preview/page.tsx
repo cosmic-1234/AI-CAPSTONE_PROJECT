@@ -1,5 +1,5 @@
 import { getCurrentUser } from '@/lib/session';
-import { API_BASE_URL } from '@/lib/api';
+import { API_BASE_URL } from '@/lib/apiConfig';
 
 interface RetrievedChunk {
   id: string;
