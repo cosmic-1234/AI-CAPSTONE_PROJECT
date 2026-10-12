@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/lib/apiConfig';
+import { API_BASE_URL } from '@/lib/session';
 
 interface FailureItem {
   id: string;

@@ -1,5 +1,4 @@
-import { getCurrentUser } from '@/lib/session';
-import { API_BASE_URL } from '@/lib/apiConfig';
+import { getCurrentUser, API_BASE_URL } from '@/lib/session';
 
 interface ApplicationRow {
   id: string;
