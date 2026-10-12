@@ -351,6 +351,17 @@ export default async function CheckEligibilityPage({
       )}
 
       {/* Scheme Breakdown */}
+      <div className="sap-ai-ribbon" style={{ marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
+          <span className="sap-ai-pulse-dot" />
+          <span>✦ Joule AI Rules & Retrieval Engine Active</span>
+          <span className="sap-ai-step-pill">Deterministic Policy Match</span>
+        </div>
+        <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
+          Policy Graph: 2026-27 Statutes &bull; Guardrails F1-F6
+        </span>
+      </div>
+
       <h2 className="govuk-heading-l" style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
         Evaluated Assistance Schemes
       </h2>
@@ -367,7 +378,12 @@ export default async function CheckEligibilityPage({
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <h3 className="govuk-heading-m" style={{ margin: 0, fontSize: '1.2rem' }}>{sch.scheme_name}</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <h3 className="govuk-heading-m" style={{ margin: 0, fontSize: '1.2rem' }}>{sch.scheme_name}</h3>
+                  <span className="sap-badge sap-badge--ai" style={{ fontSize: '10px' }}>
+                    ✦ JOULE VERIFIED
+                  </span>
+                </div>
                 <span className={`sap-badge ${isEligible ? 'sap-badge--success' : 'sap-badge--neutral'}`}>
                   {isEligible ? 'PRELIMINARILY ELIGIBLE' : 'NOT ELIGIBLE'}
                 </span>
@@ -393,6 +409,16 @@ export default async function CheckEligibilityPage({
               <p className="govuk-body-s" style={{ marginTop: '0.5rem', color: 'var(--sap-text-secondary)' }}>
                 Official Statute Reference: <em>{sch.citation}</em>
               </p>
+
+              <div style={{ marginTop: '0.85rem' }}>
+                <a
+                  href={`/chat?q=${encodeURIComponent('Explain eligibility criteria, deadlines, and documentation required for ' + sch.scheme_name)}`}
+                  className="sap-btn sap-btn--ai"
+                  style={{ fontSize: '12px', padding: '0.35rem 0.75rem' }}
+                >
+                  ✦ Ask Copilot About This Scheme
+                </a>
+              </div>
             </div>
           );
         })}

@@ -115,15 +115,16 @@ export default async function AccountsQueuePage() {
         </div>
       </div>
 
-      {/* Cross-Verification Hardening Callout */}
-      <div className="govuk-warning-text" style={{ marginBottom: '1.75rem' }}>
-        <span className="govuk-warning-text__icon">!</span>
-        <div>
-          <strong>Automated Consistency Engine (Guardrail F15 Active):</strong>
-          <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
-            The system cross-checks Income Certificate figures against ITR-V Gross Total Income. Any variance exceeding INR 1,00,000 is automatically flagged to prevent inaccurate waiver disbursements.
-          </p>
+      {/* Cross-Verification Hardening Callout with AI Ribbon */}
+      <div className="sap-ai-ribbon">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
+          <span className="sap-ai-pulse-dot" />
+          <span>✦ Automated OCR Cross-Audit Engine (Guardrail F15 Active)</span>
+          <span className="sap-ai-step-pill">100% Deterministic</span>
         </div>
+        <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
+          Threshold: INR 1,00,000 variance automatically flags disciplinary review
+        </span>
       </div>
 
       {/* Worklist Items */}
@@ -178,19 +179,24 @@ export default async function AccountsQueuePage() {
               </tbody>
             </table>
 
-            {/* SAP Fiori Button Matrix Actions */}
+            {/* SAP Fiori Button Matrix Actions with AI Copilot buttons */}
             <div className="govuk-button-group" style={{ margin: 0 }}>
               {item.is_consistent ? (
-                <button type="button" className="sap-btn sap-btn--accept">
-                  ✓ Approve Verification & Forward to Committee
-                </button>
+                <>
+                  <button type="button" className="sap-btn sap-btn--accept">
+                    ✓ Approve Verification & Forward to Committee
+                  </button>
+                  <a href={`/chat?q=${encodeURIComponent('Explain document consistency audit for student ' + item.student_name)}`} className="sap-btn sap-btn--ai">
+                    ✦ Audit with Copilot
+                  </a>
+                </>
               ) : (
                 <>
                   <button type="button" className="sap-btn sap-btn--reject">
                     ✕ Place on Disciplinary Hold (Flagged)
                   </button>
-                  <a href={`/chat?q=Why+was+application+${item.id}+flagged+for+income+inconsistency%3F`} className="sap-btn sap-btn--default">
-                    Run Verification Audit
+                  <a href={`/chat?q=${encodeURIComponent('Why was application ' + item.id + ' flagged for income inconsistency? Provide policy clause.')}`} className="sap-btn sap-btn--ai-emphasized">
+                    ✦ Analyze Variance with Copilot
                   </a>
                 </>
               )}

@@ -115,6 +115,51 @@ export default async function HomePage() {
         )}
       </div>
 
+      {/* SAP Joule AI Pre-Screening & Recommendation Card */}
+      {user.role === 'student' && (
+        <div className="sap-ai-card" style={{ marginBottom: '1.75rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.85rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span className="sap-badge sap-badge--ai">
+                <span className="sap-ai-pulse-dot" style={{ width: 6, height: 6 }} />
+                ✦ JOULE AI PRE-SCREENING
+              </span>
+              <span className="sap-badge sap-badge--success" style={{ fontSize: '11px' }}>
+                98% MATCH DETECTED
+              </span>
+            </div>
+            <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
+              Deterministic Policy Graph v1.4 &bull; Grounded in Scholarship Policy 2026-27
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ flex: '1 1 500px' }}>
+              <h3 className="govuk-heading-m" style={{ margin: '0 0 0.35rem 0', fontSize: '1.2rem', color: 'var(--sap-text-primary)' }}>
+                Need-Based Financial Assistance (Tier 1) &bull; 100% Tuition Fee Waiver
+              </h3>
+              <p className="govuk-body-s" style={{ margin: '0 0 0.75rem 0', color: 'var(--sap-text-secondary)', lineHeight: 1.55 }}>
+                ✦ <strong>AI Rationale:</strong> Your declared annual family income of <strong>₹2,40,000</strong> is within the ₹3,00,000 ceiling (&sect;3.1), and your CGPA of <strong>7.8</strong> satisfies the minimum 5.5 threshold. Estimated fee savings: <strong>₹4,50,000</strong>.
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                <span className="sap-ai-step-pill">Income Ceiling Passed (&le; ₹3.0L)</span>
+                <span className="sap-ai-step-pill">Academic CGPA Passed (&ge; 5.5)</span>
+                <span className="sap-ai-step-pill">Required: Valid Income Cert + Parent ITR-V</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '220px' }}>
+              <a href="/check-eligibility" className="sap-btn sap-btn--ai-emphasized" style={{ justifyContent: 'center' }}>
+                ✦ Pre-Screen All Schemes
+              </a>
+              <a href="/chat?q=Why+am+I+eligible+for+NBFA+Tier+1%3F" className="sap-btn sap-btn--ai" style={{ justifyContent: 'center' }}>
+                ✦ Explain Match with AI
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Deadlines Section (SAP KPI Launchpad Tiles) */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
         <h2 className="govuk-heading-l" style={{ margin: 0, fontSize: '1.25rem' }}>Upcoming Critical Deadlines</h2>

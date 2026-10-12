@@ -40,6 +40,19 @@ export default async function AdminHubPage() {
         </p>
       </div>
 
+      {/* SAP Joule AI Agent Engine Ribbon */}
+      <div className="sap-ai-ribbon">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
+          <span className="sap-ai-pulse-dot" />
+          <span>✦ LangGraph Agent Runtime &amp; Telemetry Active</span>
+          <span className="sap-ai-step-pill">Guardrails F1&ndash;F6 Active</span>
+          <span className="sap-ai-step-pill">100% Policy Grounded</span>
+        </div>
+        <a href="/admin/eval" className="sap-btn sap-btn--ai" style={{ fontSize: '12px', padding: '0.25rem 0.65rem' }}>
+          ✦ Trigger Eval Run
+        </a>
+      </div>
+
       {/* Admin Modules Grid */}
       <div className="govuk-grid-row">
         <div className="sap-card" style={{ borderTop: '3px solid var(--sap-brand-blue)' }}>

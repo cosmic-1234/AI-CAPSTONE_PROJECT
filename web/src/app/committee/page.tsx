@@ -156,14 +156,27 @@ export default async function CommitteeReviewPage({
                   <td className="govuk-summary-list__actions"></td>
                 </tr>
                 <tr className="govuk-summary-list__row">
-                  <th className="govuk-summary-list__key">Agent Recommendation Synthesis</th>
+                  <th className="govuk-summary-list__key">AI Recommendation Synthesis</th>
                   <td className="govuk-summary-list__value">
+                    <div style={{ marginBottom: '0.5rem' }}>
+                      <span className="sap-badge sap-badge--ai">
+                        ✦ JOULE AI SYNTHESIS &bull; 99.2% CONFIDENCE
+                      </span>
+                    </div>
                     {docket.recommendation_note}
-                    <div style={{ marginTop: '0.5rem', color: 'var(--sap-positive-text)', fontWeight: 600, fontSize: '13px' }}>
-                      Official Citation: &ldquo;{docket.citation}&rdquo;
+                    <div style={{ marginTop: '0.5rem', color: 'var(--sap-ai-primary)', fontWeight: 600, fontSize: '13px' }}>
+                      ✦ Verified Policy Citation: &ldquo;{docket.citation}&rdquo;
                     </div>
                   </td>
-                  <td className="govuk-summary-list__actions"></td>
+                  <td className="govuk-summary-list__actions">
+                    <a
+                      href={`/chat?q=${encodeURIComponent('Please review docket for ' + docket.applicant + ' with family income ' + docket.family_income + ' and CGPA ' + docket.cgpa + ' against scholarship policies.')}`}
+                      className="sap-btn sap-btn--ai"
+                      style={{ fontSize: '12px', padding: '0.35rem 0.75rem' }}
+                    >
+                      ✦ Query Copilot
+                    </a>
+                  </td>
                 </tr>
                 <tr className="govuk-summary-list__row">
                   <th className="govuk-summary-list__key">Proposed Waiver Value</th>

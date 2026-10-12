@@ -56,8 +56,19 @@
   --sap-radius-md: 6px;
   --sap-radius-lg: 8px;
   --sap-radius-pill: 14px;
-  --sap-shadow-card: 0 1px 3px rgba(28, 45, 66, 0.08), 0 1px 2px rgba(28, 45, 66, 0.04);
-  --sap-shadow-popover: 0 4px 12px rgba(28, 45, 66, 0.12);
+  /* SAP Joule & Generative AI Design System Tokens */
+  --sap-ai-primary: #5d36ff;
+  --sap-ai-secondary: #7c3aed;
+  --sap-ai-accent: #0284c7;
+  --sap-ai-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #0284c7 100%);
+  --sap-ai-gradient-subtle: linear-gradient(135deg, rgba(79, 70, 229, 0.07) 0%, rgba(124, 58, 237, 0.05) 50%, rgba(2, 132, 199, 0.07) 100%);
+  --sap-ai-border-gradient: linear-gradient(90deg, #4f46e5, #7c3aed, #0284c7);
+  --sap-ai-card-bg: #faf9ff;
+  --sap-ai-card-border: #e2d9fc;
+  --sap-ai-badge-bg: #f5f0ff;
+  --sap-ai-badge-text: #581c87;
+  --sap-ai-badge-border: #d8b4fe;
+  --sap-ai-glow: 0 4px 18px rgba(124, 58, 237, 0.2);
 }
 
 /* Reset & Global Base */
@@ -721,4 +732,279 @@ p, .govuk-body {
 
 .govuk-footer__contact li {
   margin-bottom: 0.35rem;
+}
+
+/* ==========================================================================
+   SAP JOULE ENTERPRISE AI COMPONENT SYSTEM
+   ========================================================================== */
+
+/* 1. SAP AI Buttons (Leading Star Icon, Fiori Guidelines) */
+.sap-btn--ai {
+  background-color: #ffffff;
+  color: var(--sap-ai-primary);
+  border: 1px solid var(--sap-ai-secondary);
+  box-shadow: 0 1px 3px rgba(93, 54, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sap-btn--ai:hover {
+  background-color: var(--sap-ai-badge-bg);
+  color: var(--sap-ai-badge-text);
+  border-color: var(--sap-ai-primary);
+  box-shadow: 0 2px 8px rgba(93, 54, 255, 0.22);
+}
+
+.sap-btn--ai-emphasized {
+  background: var(--sap-ai-gradient);
+  color: #ffffff !important;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sap-btn--ai-emphasized:hover {
+  background: var(--sap-ai-gradient);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.45);
+  text-decoration: none;
+}
+
+.sap-btn--ai-ghost {
+  background: transparent;
+  color: var(--sap-ai-primary);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sap-btn--ai-ghost:hover {
+  background-color: var(--sap-ai-badge-bg);
+  color: var(--sap-ai-badge-text);
+}
+
+/* 2. SAP AI Badges & Status */
+.sap-badge--ai {
+  background-color: var(--sap-ai-badge-bg);
+  color: var(--sap-ai-badge-text);
+  border: 1px solid var(--sap-ai-badge-border);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.sap-ai-pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #8b5cf6;
+  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+  animation: sap-ai-pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes sap-ai-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+  }
+}
+
+/* 3. SAP AI Cards & Surface Containers */
+.sap-ai-card {
+  position: relative;
+  background: var(--sap-ai-card-bg);
+  border: 1px solid var(--sap-ai-card-border);
+  border-radius: var(--sap-radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(93, 54, 255, 0.08);
+  overflow: hidden;
+}
+
+.sap-ai-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--sap-ai-border-gradient);
+}
+
+/* 4. SAP AI Execution / Working Ribbon */
+.sap-ai-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--sap-ai-gradient-subtle);
+  border: 1px solid var(--sap-ai-card-border);
+  border-radius: var(--sap-radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+.sap-ai-reasoning-strip {
+  background-color: #ffffff;
+  border: 1px solid var(--sap-ai-card-border);
+  border-radius: var(--sap-radius-sm);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.sap-ai-step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  background-color: var(--sap-ai-badge-bg);
+  border: 1px solid var(--sap-ai-badge-border);
+  border-radius: var(--sap-radius-pill);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--sap-ai-badge-text);
+}
+
+/* 5. Header Shell Joule Assistant Trigger */
+.sap-header-joule-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: linear-gradient(135deg, rgba(93, 54, 255, 0.28) 0%, rgba(2, 132, 199, 0.28) 100%);
+  border: 1px solid rgba(196, 181, 253, 0.75);
+  border-radius: var(--sap-radius-pill);
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.sap-header-joule-btn:hover {
+  background: linear-gradient(135deg, rgba(93, 54, 255, 0.5) 0%, rgba(2, 132, 199, 0.5) 100%);
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.6);
+  border-color: #ffffff;
+  text-decoration: none;
+}
+
+/* 6. Persistent Floating SAP Joule AI Copilot Dock */
+.sap-joule-floating-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+}
+
+.sap-joule-floating-widget details {
+  position: relative;
+}
+
+.sap-joule-floating-widget summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.sap-joule-floating-widget summary::-webkit-details-marker {
+  display: none;
+}
+
+.sap-joule-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 1.25rem;
+  background: var(--sap-ai-gradient);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--sap-radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.4);
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+.sap-joule-trigger-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.5);
+  filter: brightness(1.08);
+}
+
+.sap-joule-popover {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  right: 0;
+  width: 390px;
+  max-width: calc(100vw - 32px);
+  background-color: #ffffff;
+  border: 1px solid var(--sap-ai-card-border);
+  border-radius: var(--sap-radius-lg);
+  box-shadow: 0 12px 36px rgba(28, 45, 66, 0.22);
+  overflow: hidden;
+  animation: sap-popover-in 0.2s ease-out;
+}
+
+@keyframes sap-popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sap-joule-popover-header {
+  background: var(--sap-shell-bg);
+  border-bottom: 2px solid var(--sap-ai-secondary);
+  padding: 0.9rem 1.15rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sap-joule-popover-body {
+  padding: 1.15rem;
+  background-color: #faf9ff;
+}
+
+.sap-joule-quick-chip {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.85rem;
+  margin-bottom: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e2d9fc;
+  border-radius: var(--sap-radius-sm);
+  color: var(--sap-text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.sap-joule-quick-chip:hover {
+  background-color: #f3e8ff;
+  border-color: #c4b5fd;
+  color: #581c87;
+  text-decoration: none;
 }
