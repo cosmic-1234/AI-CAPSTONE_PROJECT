@@ -62,9 +62,6 @@ export default async function RootLayout({
               <a href="/rag-preview" className="govuk-link">
                 Knowledge Base
               </a>
-              <a href="/agent-diagram" className="govuk-link">
-                Agent Workflow
-              </a>
             </nav>
           </div>
         </header>

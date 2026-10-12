@@ -114,21 +114,6 @@ export default async function AdminHubPage() {
             Open Evaluation Suite →
           </a>
         </div>
-
-        <div className="sap-card" style={{ borderTop: '3px solid var(--sap-brand-blue)' }}>
-          <div>
-            <span className="sap-badge sap-badge--neutral" style={{ marginBottom: '0.5rem' }}>ARCHITECTURE</span>
-            <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.2rem' }}>
-              Agent Workflow Diagram
-            </h2>
-            <p className="govuk-body-s" style={{ color: 'var(--sap-text-secondary)', marginBottom: '1.25rem' }}>
-              View the compiled LangGraph.js state machine diagram, loop bounds, and architectural decision nodes.
-            </p>
-          </div>
-          <a href="/agent-diagram" className="sap-btn sap-btn--default">
-            View Graph Topology →
-          </a>
-        </div>
       </div>
 
       <h2 className="govuk-heading-l" style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
