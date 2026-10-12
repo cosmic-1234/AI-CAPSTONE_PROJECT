@@ -5,6 +5,11 @@ let pipelineInstance: any = null;
 let pipelineLoading: Promise<any> | null = null;
 
 async function getLocalPipeline() {
+  // On memory-constrained cloud environments (like Render free tier 512MB RAM),
+  // skip heavy ONNX transformer loading to prevent OOM process termination.
+  if (process.env.NODE_ENV === 'production' && !process.env.FORCE_LOCAL_TRANSFORMERS) {
+    return null;
+  }
   if (pipelineInstance) return pipelineInstance;
   if (!pipelineLoading) {
     pipelineLoading = (async () => {

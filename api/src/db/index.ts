@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { env } from '../config.js';
+import { runIngestion } from '../scripts/ingest.js';
 
 let dbInstance: Database.Database | null = null;
 
@@ -198,5 +199,16 @@ function seedInitialData(db: Database.Database) {
       insertMany(records);
       console.log(`[DB] Seeded ${records.length} applications from applications.csv`);
     }
+  }
+
+  // Auto-ingest Knowledge Base if empty (guarantees fresh database on ephemeral cloud deploys)
+  try {
+    const chunkCount = db.prepare('SELECT COUNT(*) as count FROM kb_chunks').get() as { count: number };
+    if (chunkCount.count === 0) {
+      console.log('[DB] No KB chunks found. Triggering automatic background ingestion...');
+      runIngestion().catch((err) => console.error('[DB] Auto-ingestion error:', err));
+    }
+  } catch (err) {
+    console.warn('[DB] Could not check kb_chunks table:', err);
   }
 }

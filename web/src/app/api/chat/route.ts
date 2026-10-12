@@ -26,12 +26,18 @@ export async function POST(req: Request) {
     });
 
     if (!res.ok) {
-      return NextResponse.json({ error: 'Failed to contact AI agent' }, { status: 502 });
+      const errorText = await res.text().catch(() => '');
+      console.error(`[Chat API Proxy] Backend returned ${res.status}:`, errorText);
+      return NextResponse.json(
+        { error: `The assistant server returned an error (${res.status}). Please try again in a moment.` },
+        { status: 502 }
+      );
     }
 
     const data = await res.json();
     return NextResponse.json(data);
   } catch (err: any) {
+    console.error('[Chat API Proxy] Fetch exception:', err);
     return NextResponse.json({ error: err.message || 'Internal server error' }, { status: 500 });
   }
 }

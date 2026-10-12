@@ -29,7 +29,18 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: [env.WEB_URL, 'http://localhost:3000'],
+    origin: (origin, callback) => {
+      // Allow server-to-server or curl calls (no origin)
+      if (!origin) return callback(null, true);
+      if (
+        origin.endsWith('.onrender.com') ||
+        origin.includes('localhost') ||
+        origin === env.WEB_URL
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
   })
 );
@@ -88,7 +99,7 @@ getDb();
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(env.PORT, () => {
+  app.listen(env.PORT, '0.0.0.0', () => {
     logger.info(`[Sahayata API] Server running on port ${env.PORT} (${env.NODE_ENV})`);
     logger.info(`[Sahayata API] Institute: ${brandConfig.institute.short_name}`);
   });
