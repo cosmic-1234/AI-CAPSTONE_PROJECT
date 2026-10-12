@@ -97,8 +97,8 @@ export default async function CommitteeReviewPage({
       {/* Decision confirmation message */}
       {actionTaken && (
         <div className="sap-card" style={{ backgroundColor: 'var(--sap-positive-bg)', borderLeft: '4px solid var(--sap-positive-text)', border: '1px solid var(--sap-positive-border)', padding: '1rem 1.25rem', marginBottom: '1.75rem' }}>
-          <strong style={{ color: 'var(--sap-positive-text)' }}>✓ Decision Recorded:</strong>{' '}
-          <span style={{ color: 'var(--sap-positive-text)' }}>Application action has been signed with digital cryptographic audit hash and logged to the official ledger.</span>
+          <strong style={{ color: 'var(--sap-positive-text)' }}>Decision Recorded:</strong>{' '}
+          <span style={{ color: 'var(--sap-positive-text)' }}>Application action has been officially recorded and logged to the register.</span>
         </div>
       )}
 
@@ -106,9 +106,9 @@ export default async function CommitteeReviewPage({
       <div className="govuk-warning-text" style={{ marginBottom: '1.75rem' }}>
         <span className="govuk-warning-text__icon">!</span>
         <div>
-          <strong>Constitutional Authority Guard (Guard F6 Enforced):</strong>
+          <strong>Committee Approval Authority:</strong>
           <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
-            The AI agent is constitutionally restricted to advisory recommendations only. Binding legal commitments and disbursement mandates require the quorum approval of this Committee under Aid Committee Charter §3.2.
+            Automated recommendations are advisory only. Official financial aid approval and disbursements require formal quorum approval from the Financial Aid Committee under Charter §3.2.
           </p>
         </div>
       </div>
@@ -156,16 +156,16 @@ export default async function CommitteeReviewPage({
                   <td className="govuk-summary-list__actions"></td>
                 </tr>
                 <tr className="govuk-summary-list__row">
-                  <th className="govuk-summary-list__key">AI Recommendation Synthesis</th>
+                  <th className="govuk-summary-list__key">Recommendation Summary</th>
                   <td className="govuk-summary-list__value">
                     <div style={{ marginBottom: '0.5rem' }}>
                       <span className="sap-badge sap-badge--ai">
-                        ✦ JOULE AI SYNTHESIS &bull; 99.2% CONFIDENCE
+                        RECOMMENDATION SUMMARY
                       </span>
                     </div>
                     {docket.recommendation_note}
                     <div style={{ marginTop: '0.5rem', color: 'var(--sap-ai-primary)', fontWeight: 600, fontSize: '13px' }}>
-                      ✦ Verified Policy Citation: &ldquo;{docket.citation}&rdquo;
+                      Policy Reference: &ldquo;{docket.citation}&rdquo;
                     </div>
                   </td>
                   <td className="govuk-summary-list__actions">
@@ -174,7 +174,7 @@ export default async function CommitteeReviewPage({
                       className="sap-btn sap-btn--ai"
                       style={{ fontSize: '12px', padding: '0.35rem 0.75rem' }}
                     >
-                      ✦ Query Copilot
+                      Review Policy Details
                     </a>
                   </td>
                 </tr>
@@ -204,10 +204,10 @@ export default async function CommitteeReviewPage({
                 <input type="hidden" name="action_taken" value={`approved_${docket.id}`} />
                 <div className="govuk-button-group" style={{ margin: 0, marginTop: '0.85rem' }}>
                   <button type="submit" className="sap-btn sap-btn--accept">
-                    ✓ Approve Award (INR {docket.proposed_amount.toLocaleString('en-IN')})
+                    Approve Award (INR {docket.proposed_amount.toLocaleString('en-IN')})
                   </button>
                   <button type="submit" className="sap-btn sap-btn--reject">
-                    ✕ Reject Application
+                    Reject Application
                   </button>
                   <a href={`/chat?q=Draft+detailed+justification+for+docket+${docket.id}`} className="sap-btn sap-btn--default">
                     Request Analysis Note

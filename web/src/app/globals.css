@@ -56,7 +56,7 @@
   --sap-radius-md: 6px;
   --sap-radius-lg: 8px;
   --sap-radius-pill: 14px;
-  /* SAP Joule & Generative AI Design System Tokens */
+  /* Enterprise Assistant Design System Tokens */
   --sap-ai-primary: #5d36ff;
   --sap-ai-secondary: #7c3aed;
   --sap-ai-accent: #0284c7;
@@ -735,10 +735,10 @@ p, .govuk-body {
 }
 
 /* ==========================================================================
-   SAP JOULE ENTERPRISE AI COMPONENT SYSTEM
+   SAHAYATA ENTERPRISE ASSISTANT COMPONENT SYSTEM
    ========================================================================== */
 
-/* 1. SAP AI Buttons (Leading Star Icon, Fiori Guidelines) */
+/* 1. SAP AI Buttons (Enterprise Guidelines) */
 .sap-btn--ai {
   background-color: #ffffff;
   color: var(--sap-ai-primary);
@@ -880,7 +880,8 @@ p, .govuk-body {
   color: var(--sap-ai-badge-text);
 }
 
-/* 5. Header Shell Joule Assistant Trigger */
+/* 5. Header Shell Assistant Trigger */
+.sap-header-assistant-btn,
 .sap-header-joule-btn {
   display: inline-flex;
   align-items: center;
@@ -896,6 +897,7 @@ p, .govuk-body {
   transition: all 0.2s ease-in-out;
 }
 
+.sap-header-assistant-btn:hover,
 .sap-header-joule-btn:hover {
   background: linear-gradient(135deg, rgba(93, 54, 255, 0.5) 0%, rgba(2, 132, 199, 0.5) 100%);
   box-shadow: 0 0 14px rgba(167, 139, 250, 0.6);
@@ -903,7 +905,8 @@ p, .govuk-body {
   text-decoration: none;
 }
 
-/* 6. Persistent Floating SAP Joule AI Copilot Dock */
+/* 6. Persistent Floating Enterprise Assistant Dock */
+.sap-assistant-floating-widget,
 .sap-joule-floating-widget {
   position: fixed;
   bottom: 24px;
@@ -911,19 +914,23 @@ p, .govuk-body {
   z-index: 9999;
 }
 
+.sap-assistant-floating-widget details,
 .sap-joule-floating-widget details {
   position: relative;
 }
 
+.sap-assistant-floating-widget summary,
 .sap-joule-floating-widget summary {
   list-style: none;
   cursor: pointer;
 }
 
+.sap-assistant-floating-widget summary::-webkit-details-marker,
 .sap-joule-floating-widget summary::-webkit-details-marker {
   display: none;
 }
 
+.sap-assistant-trigger-btn,
 .sap-joule-trigger-btn {
   display: inline-flex;
   align-items: center;
@@ -940,12 +947,14 @@ p, .govuk-body {
   user-select: none;
 }
 
+.sap-assistant-trigger-btn:hover,
 .sap-joule-trigger-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(124, 58, 237, 0.5);
   filter: brightness(1.08);
 }
 
+.sap-assistant-popover,
 .sap-joule-popover {
   position: absolute;
   bottom: calc(100% + 14px);
@@ -971,6 +980,7 @@ p, .govuk-body {
   }
 }
 
+.sap-assistant-popover-header,
 .sap-joule-popover-header {
   background: var(--sap-shell-bg);
   border-bottom: 2px solid var(--sap-ai-secondary);
@@ -981,11 +991,13 @@ p, .govuk-body {
   justify-content: space-between;
 }
 
+.sap-assistant-popover-body,
 .sap-joule-popover-body {
   padding: 1.15rem;
   background-color: #faf9ff;
 }
 
+.sap-assistant-quick-chip,
 .sap-joule-quick-chip {
   display: block;
   width: 100%;
@@ -1002,6 +1014,7 @@ p, .govuk-body {
   transition: all 0.15s ease-in-out;
 }
 
+.sap-assistant-quick-chip:hover,
 .sap-joule-quick-chip:hover {
   background-color: #f3e8ff;
   border-color: #c4b5fd;
@@ -1010,7 +1023,7 @@ p, .govuk-body {
 }
 
 /* ==========================================================================
-   SAP JOULE CONVERSATIONAL CHATBOT WINDOW (Real Chat Interface)
+   ENTERPRISE CONVERSATIONAL CHATBOT WINDOW (Real Chat Interface)
    ========================================================================== */
 
 .sap-chat-window {
@@ -1243,7 +1256,8 @@ p, .govuk-body {
   gap: 0.4rem;
 }
 
-/* Hide floating copilot button when on the dedicated chat page */
+/* Hide floating assistant button when on the dedicated chat page */
+body:has(.sap-chat-window) .sap-assistant-floating-widget,
 body:has(.sap-chat-window) .sap-joule-floating-widget {
   display: none !important;
 }

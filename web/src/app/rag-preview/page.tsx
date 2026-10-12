@@ -63,19 +63,19 @@ export default async function RagPreviewPage({
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
           <div>
             <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
-              Information Retrieval Diagnostics
+              Policy Knowledge Base
             </span>
             <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
-              Knowledge Base & Hybrid Retrieval Inspector
+              Policy Documents &amp; Guidelines Search
             </h1>
           </div>
           <span className="sap-badge sap-badge--info">
-            Auditor Role: {searchRole.toUpperCase()}
+            Access Role: {searchRole.toUpperCase()}
           </span>
         </div>
         <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
-          Test hybrid retrieval (MiniSearch BM25 + dense semantic vectors with Reciprocal Rank Fusion k=60)
-          with role-based access control and low-confidence fallback.
+          Search institutional scholarship policies, procedural guidelines, and financial assistance rules
+          according to authorized role access.
         </p>
       </div>
 
@@ -84,10 +84,10 @@ export default async function RagPreviewPage({
         <form method="GET" action="/rag-preview">
           <div className="govuk-form-group">
             <label className="govuk-label" htmlFor="q">
-              Enter Policy Query (English or Hinglish)
+              Enter Policy Query
             </label>
             <div className="govuk-hint">
-              Try: &quot;tuition fee waiver criteria&quot;, &quot;income certificate validity&quot;, &quot;merit scholarship CGPA&quot;, or &quot;fees maaf hoti hai kya?&quot;
+              Examples: &quot;tuition fee waiver criteria&quot;, &quot;income certificate validity&quot;, or &quot;merit scholarship CGPA&quot;
             </div>
             <input
               id="q"
@@ -112,7 +112,7 @@ export default async function RagPreviewPage({
           </div>
 
           <button type="submit" className="sap-btn sap-btn--emphasized">
-            Execute Retrieval Search
+            Search Policy Documents
           </button>
         </form>
       </div>
@@ -121,12 +121,12 @@ export default async function RagPreviewPage({
       {result && (
         <section aria-label="Search Results">
           <h2 className="govuk-heading-l" style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
-            Retrieved Passages for: &ldquo;{result.query}&rdquo;
+            Relevant Policy Sections for: &ldquo;{result.query}&rdquo;
           </h2>
 
           {result.error && (
             <div className="govuk-error-summary" role="alert">
-              <h3 className="govuk-error-summary__title">Retrieval Notice</h3>
+              <h3 className="govuk-error-summary__title">Notice</h3>
               <p className="govuk-body">{result.error}</p>
             </div>
           )}
@@ -135,7 +135,7 @@ export default async function RagPreviewPage({
             <div className="govuk-warning-text" role="region" aria-label="Low confidence result">
               <span className="govuk-warning-text__icon" aria-hidden="true">!</span>
               <div>
-                <strong>Low Retrieval Confidence Guard Triggered:</strong>
+                <strong>Policy Notice:</strong>
                 <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
                   {result.fallbackMessage || 'I could not find this in the current documents. Please contact the Accounts Office (accounts@example.ac.in).'}
                 </p>
@@ -146,7 +146,7 @@ export default async function RagPreviewPage({
           {result.chunks.length === 0 && !result.error && (
             <div className="sap-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
               <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
-                No matching document chunks found under current ACL permissions.
+                No matching policy documents found under current permissions.
               </p>
             </div>
           )}
@@ -154,7 +154,7 @@ export default async function RagPreviewPage({
           {result.chunks.length > 0 && (
             <div>
               <p className="govuk-body-s" style={{ marginBottom: '1rem', color: 'var(--sap-text-secondary)' }}>
-                Showing top {result.chunks.length} chunks fused via Reciprocal Rank Fusion (RRF k=60):
+                Showing top {result.chunks.length} matching sections:
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
@@ -169,7 +169,7 @@ export default async function RagPreviewPage({
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
                       <span className="sap-badge sap-badge--success">
-                        Rank #{idx + 1} &nbsp;|&nbsp; RRF Score: {chunk.score.toFixed(4)}
+                        Result #{idx + 1}
                       </span>
                       <div style={{ display: 'flex', gap: '0.4rem' }}>
                         <span className="sap-badge sap-badge--neutral">{chunk.accessLevel.toUpperCase()}</span>

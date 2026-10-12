@@ -35,21 +35,21 @@ export default async function AdminHubPage() {
           </span>
         </div>
         <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
-          Comprehensive management desk for knowledge base manifests, trace observability,
-          guardrail hardening toggles, and system evaluation runs.
+          Comprehensive management desk for institutional policy documents, audit activity,
+          system compliance controls, and evaluation benchmarks.
         </p>
       </div>
 
-      {/* SAP Joule AI Agent Engine Ribbon */}
+      {/* System Governance Ribbon */}
       <div className="sap-ai-ribbon">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
           <span className="sap-ai-pulse-dot" />
-          <span>✦ LangGraph Agent Runtime &amp; Telemetry Active</span>
-          <span className="sap-ai-step-pill">Guardrails F1&ndash;F6 Active</span>
-          <span className="sap-ai-step-pill">100% Policy Grounded</span>
+          <span>System Governance &amp; Policy Service Active</span>
+          <span className="sap-ai-step-pill">Policy Rules Enforced</span>
+          <span className="sap-ai-step-pill">Statute Grounded</span>
         </div>
         <a href="/admin/eval" className="sap-btn sap-btn--ai" style={{ fontSize: '12px', padding: '0.25rem 0.65rem' }}>
-          ✦ Trigger Eval Run
+          Run Evaluation Suite
         </a>
       </div>
 
@@ -57,46 +57,46 @@ export default async function AdminHubPage() {
       <div className="govuk-grid-row">
         <div className="sap-card" style={{ borderTop: '3px solid var(--sap-brand-blue)' }}>
           <div>
-            <span className="sap-badge sap-badge--neutral" style={{ marginBottom: '0.5rem' }}>CORPUS AUDIT</span>
+            <span className="sap-badge sap-badge--neutral" style={{ marginBottom: '0.5rem' }}>DOCUMENTS</span>
             <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.2rem' }}>
-              Knowledge Base Manager
+              Policy Documents Registry
             </h2>
             <p className="govuk-body-s" style={{ color: 'var(--sap-text-secondary)', marginBottom: '1.25rem' }}>
-              Audit indexed policy versions, access levels (public vs staff), manifest metadata, and trigger embedding re-ingestion.
+              Audit indexed scholarship circulars, access categories, document versions, and synchronize policy updates.
             </p>
           </div>
           <a href="/admin/kb" className="sap-btn sap-btn--default">
-            Open KB Registry →
+            Open Policy Registry →
           </a>
         </div>
 
         <div className="sap-card" style={{ borderTop: '3px solid #107e3e' }}>
           <div>
-            <span className="sap-badge sap-badge--success" style={{ marginBottom: '0.5rem' }}>TELEMETRY</span>
+            <span className="sap-badge sap-badge--success" style={{ marginBottom: '0.5rem' }}>AUDIT LOGS</span>
             <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.2rem' }}>
-              Trace Observability
+              Audit & Activity Logs
             </h2>
             <p className="govuk-body-s" style={{ color: 'var(--sap-text-secondary)', marginBottom: '1.25rem' }}>
-              Inspect per-run execution logs, node latencies, INR token costs, fired guardrails, and export audit traces as CSV.
+              Inspect inquiry activity, response latency, compliance checks, and download official audit reports as CSV.
             </p>
           </div>
           <a href="/admin/traces" className="sap-btn sap-btn--default">
-            Open Trace Monitor →
+            Open Activity Monitor →
           </a>
         </div>
 
         <div className="sap-card" style={{ borderTop: '3px solid #bb0000' }}>
           <div>
-            <span className="sap-badge sap-badge--error" style={{ marginBottom: '0.5rem' }}>SECURITY & RED-TEAM</span>
+            <span className="sap-badge sap-badge--error" style={{ marginBottom: '0.5rem' }}>COMPLIANCE</span>
             <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.2rem' }}>
-              Red-Team Switchboard
+              Compliance & Security Desk
             </h2>
             <p className="govuk-body-s" style={{ color: 'var(--sap-text-secondary)', marginBottom: '1.25rem' }}>
-              Switchboard for failures F1–F15: toggle hardening flags, run attack inputs, and generate failure remediation reports.
+              Review compliance rules, inspect policy enforcement flags, and generate governance remediation reports.
             </p>
           </div>
           <a href="/admin/red-team" className="sap-btn sap-btn--default">
-            Open Red-Team →
+            Open Compliance Desk →
           </a>
         </div>
 
@@ -104,10 +104,10 @@ export default async function AdminHubPage() {
           <div>
             <span className="sap-badge sap-badge--warning" style={{ marginBottom: '0.5rem' }}>BENCHMARKING</span>
             <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.2rem' }}>
-              Evaluation & Benchmarks
+              Quality & Evaluation Benchmarks
             </h2>
             <p className="govuk-body-s" style={{ color: 'var(--sap-text-secondary)', marginBottom: '1.25rem' }}>
-              Run automated evaluation suites, view target vs actual metrics, and download HTML & CSV evaluation reports.
+              Run automated benchmark suites, view target vs actual metrics, and download verification reports.
             </p>
           </div>
           <a href="/admin/eval" className="sap-btn sap-btn--default">
@@ -122,27 +122,27 @@ export default async function AdminHubPage() {
       <table className="govuk-summary-list" style={{ marginBottom: '2.5rem' }}>
         <tbody>
           <tr className="govuk-summary-list__row">
-            <th className="govuk-summary-list__key">Synthetic Data Integrity</th>
+            <th className="govuk-summary-list__key">Data Privacy Safeguards</th>
             <td className="govuk-summary-list__value">
-              Strictly verify that zero real student records or Aadhaar numbers enter external model requests.
+              Strictly verify that student records and personal identity details remain protected and confidential.
             </td>
             <td className="govuk-summary-list__actions">
               <span className="sap-badge sap-badge--success">ENFORCED</span>
             </td>
           </tr>
           <tr className="govuk-summary-list__row">
-            <th className="govuk-summary-list__key">Superseded Policy Guard</th>
+            <th className="govuk-summary-list__key">Policy Currency Control</th>
             <td className="govuk-summary-list__value">
-              2025-26 superseded scholarship circulars are blocked by default to prevent outdated aid calculations.
+              Outdated circulars and superseded scholarship guidelines are archived to prevent discrepancies.
             </td>
             <td className="govuk-summary-list__actions">
               <span className="sap-badge sap-badge--success">ACTIVE</span>
             </td>
           </tr>
           <tr className="govuk-summary-list__row">
-            <th className="govuk-summary-list__key">Zero-Cost LLM Caching</th>
+            <th className="govuk-summary-list__key">Performance Caching</th>
             <td className="govuk-summary-list__value">
-              All repeated evaluation prompts are cached by SHA-256 hash in SQLite, preventing unnecessary cloud spend.
+              Frequently requested policy guidance is securely cached to ensure fast and consistent responses.
             </td>
             <td className="govuk-summary-list__actions">
               <span className="sap-badge sap-badge--success">ENABLED</span>

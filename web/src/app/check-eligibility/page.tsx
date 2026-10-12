@@ -333,7 +333,7 @@ export default async function CheckEligibilityPage({
       {eligibleSchemes.length > 0 ? (
         <div className="sap-card" style={{ backgroundColor: 'var(--sap-positive-bg)', border: '1px solid var(--sap-positive-border)', borderLeft: '4px solid var(--sap-positive-text)', padding: '1.25rem', marginBottom: '2rem' }}>
           <h2 className="govuk-heading-m" style={{ color: 'var(--sap-positive-text)', marginTop: 0, fontSize: '1.2rem' }}>
-            ✓ Potential Qualification for {eligibleSchemes.length} Scheme{eligibleSchemes.length > 1 ? 's' : ''}
+            Potential Qualification for {eligibleSchemes.length} Scheme{eligibleSchemes.length > 1 ? 's' : ''}
           </h2>
           <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-positive-text)' }}>
             Based on your self-declared academic and income standing, your profile satisfies preliminary requirements. Formal grant remains contingent on Accounts office cross-audit and Committee approval.
@@ -354,11 +354,11 @@ export default async function CheckEligibilityPage({
       <div className="sap-ai-ribbon" style={{ marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
           <span className="sap-ai-pulse-dot" />
-          <span>✦ Joule AI Rules & Retrieval Engine Active</span>
-          <span className="sap-ai-step-pill">Deterministic Policy Match</span>
+          <span>Automated Eligibility Evaluation Active</span>
+          <span className="sap-ai-step-pill">Policy Verified</span>
         </div>
         <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
-          Policy Graph: 2026-27 Statutes &bull; Guardrails F1-F6
+          Evaluated against 2026-27 Academic Year Guidelines
         </span>
       </div>
 
@@ -381,7 +381,7 @@ export default async function CheckEligibilityPage({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <h3 className="govuk-heading-m" style={{ margin: 0, fontSize: '1.2rem' }}>{sch.scheme_name}</h3>
                   <span className="sap-badge sap-badge--ai" style={{ fontSize: '10px' }}>
-                    ✦ JOULE VERIFIED
+                    VERIFIED SCHEME
                   </span>
                 </div>
                 <span className={`sap-badge ${isEligible ? 'sap-badge--success' : 'sap-badge--neutral'}`}>
@@ -416,7 +416,7 @@ export default async function CheckEligibilityPage({
                   className="sap-btn sap-btn--ai"
                   style={{ fontSize: '12px', padding: '0.35rem 0.75rem' }}
                 >
-                  ✦ Ask Copilot About This Scheme
+                  Ask Assistant About This Scheme
                 </a>
               </div>
             </div>

@@ -62,7 +62,7 @@ export default async function ChatPage({
         </span>
       </div>
 
-      {/* Interactive SAP Joule Conversational Chatbot */}
+      {/* Interactive Sahayata Conversational Assistant */}
       <ChatInterface
         user={{
           id: user.id,

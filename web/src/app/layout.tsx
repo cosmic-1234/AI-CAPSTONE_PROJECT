@@ -49,9 +49,8 @@ export default async function RootLayout({
             </a>
 
             <nav className="govuk-header__nav" aria-label="Account navigation">
-              <a href="/chat" className="sap-header-joule-btn">
-                <span>✦ Sahayata Copilot</span>
-                <span className="sap-ai-pulse-dot" style={{ width: 6, height: 6 }} />
+              <a href="/chat" className="sap-header-assistant-btn">
+                <span>Sahayata Assistant</span>
               </a>
               <span className="govuk-header__role-badge">
                 {roleLabelMap[user.role] || user.role}: {user.name}
@@ -73,16 +72,14 @@ export default async function RootLayout({
           </main>
         </div>
 
-        {/* Persistent Floating SAP Joule AI Copilot Chatbot Dock */}
-        <aside className="sap-joule-floating-widget" aria-label="Sahayata AI Assistant">
+        {/* Persistent Floating AI Assistant Dock */}
+        <aside className="sap-assistant-floating-widget" aria-label="Sahayata AI Assistant">
           <details>
-            <summary className="sap-joule-trigger-btn">
-              <span style={{ fontSize: '16px' }}>✦</span>
-              <span>Ask Sahayata AI</span>
-              <span className="sap-ai-pulse-dot" style={{ backgroundColor: '#ffffff' }} />
+            <summary className="sap-assistant-trigger-btn">
+              <span>Ask Sahayata Assistant</span>
             </summary>
-            <div className="sap-joule-popover" role="dialog" aria-modal="false" aria-label="Sahayata AI Assistant Quick Chat">
-              <div className="sap-joule-popover-header">
+            <div className="sap-assistant-popover" role="dialog" aria-modal="false" aria-label="Sahayata AI Assistant Quick Chat">
+              <div className="sap-assistant-popover-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                   <img
                     src="/brand/iimbg-logo.png"
@@ -92,34 +89,34 @@ export default async function RootLayout({
                     style={{ objectFit: 'contain', backgroundColor: '#ffffff', padding: '2px', borderRadius: '2px' }}
                   />
                   <div>
-                    <strong style={{ fontSize: '13px', display: 'block', lineHeight: 1.2 }}>Sahayata AI Copilot</strong>
-                    <span style={{ fontSize: '11px', color: '#c4b5fd' }}>Powered by SAP Joule & Policy Graph</span>
+                    <strong style={{ fontSize: '13px', display: 'block', lineHeight: 1.2 }}>Sahayata Assistant</strong>
+                    <span style={{ fontSize: '11px', color: '#c4b5fd' }}>IIM Bodh Gaya Financial Aid Portal</span>
                   </div>
                 </div>
                 <span className="sap-badge sap-badge--ai" style={{ fontSize: '10px', padding: '0.15rem 0.45rem' }}>
-                  ✦ ACTIVE
+                  ONLINE
                 </span>
               </div>
-              <div className="sap-joule-popover-body">
+              <div className="sap-assistant-popover-body">
                 <div style={{ fontSize: '12px', color: 'var(--sap-text-secondary)', marginBottom: '0.75rem', lineHeight: 1.4 }}>
-                  Real-time policy intelligence grounded deterministically in approved IIM Bodh Gaya statutes.
+                  Instant answers based on approved IIM Bodh Gaya financial aid policies and guidelines.
                 </div>
 
                 <div style={{ marginBottom: '0.75rem' }}>
                   <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--sap-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.4rem' }}>
-                    Suggested Prompts
+                    Common Questions
                   </span>
-                  <a href="/chat?q=What%20are%20the%20eligibility%20criteria%20for%20Need%20Based%20Financial%20Assistance%3F" className="sap-joule-quick-chip">
-                    ✦ Check NBFA Fee Waiver Criteria
+                  <a href="/chat?q=What%20are%20the%20eligibility%20criteria%20for%20Need%20Based%20Financial%20Assistance%3F" className="sap-assistant-quick-chip">
+                    Need-Based Fee Waiver Criteria
                   </a>
-                  <a href="/chat?q=What%20documents%20are%20required%20for%20income%20verification%20and%20ITR%3F" className="sap-joule-quick-chip">
-                    ✦ What documents are needed for ITR?
+                  <a href="/chat?q=What%20documents%20are%20required%20for%20income%20verification%20and%20ITR%3F" className="sap-assistant-quick-chip">
+                    Required Documents &amp; Certificates
                   </a>
-                  <a href="/chat?q=How%20does%20SBI%20Scholar%20education%20loan%20work%20at%20IIM%20Bodh%20Gaya%3F" className="sap-joule-quick-chip">
-                    ✦ SBI Scholar Loan guidance & terms
+                  <a href="/chat?q=How%20does%20SBI%20Scholar%20education%20loan%20work%20at%20IIM%20Bodh%20Gaya%3F" className="sap-assistant-quick-chip">
+                    SBI Scholar Education Loan Guidelines
                   </a>
-                  <a href="/check-eligibility" className="sap-joule-quick-chip" style={{ backgroundColor: '#f0fdf4', borderColor: '#bbf7d0', color: '#166534' }}>
-                    ✦ Interactive 4-Step Eligibility Wizard →
+                  <a href="/check-eligibility" className="sap-assistant-quick-chip" style={{ backgroundColor: '#f0fdf4', borderColor: '#bbf7d0', color: '#166534' }}>
+                    Check Scheme Eligibility →
                   </a>
                 </div>
 
@@ -135,14 +132,14 @@ export default async function RootLayout({
                       required
                     />
                     <button type="submit" className="sap-btn sap-btn--ai-emphasized" style={{ padding: '0.45rem 0.85rem', fontSize: '13px', whiteSpace: 'nowrap' }}>
-                      ✦ Ask
+                      Ask
                     </button>
                   </div>
                 </form>
 
                 <div style={{ marginTop: '0.75rem', textAlign: 'center', borderTop: '1px solid #e2d9fc', paddingTop: '0.5rem' }}>
                   <a href="/chat" style={{ fontSize: '12px', color: 'var(--sap-ai-primary)', fontWeight: 600 }}>
-                    Open Full-Screen CoPilot Desk →
+                    Open Full Assistant Desk →
                   </a>
                 </div>
               </div>

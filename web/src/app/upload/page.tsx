@@ -94,15 +94,15 @@ export default async function UploadPage({
         </p>
       </div>
 
-      {/* Multimodal AI Ingestion Ribbon */}
+      {/* Document Ingestion Ribbon */}
       <div className="sap-ai-ribbon">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
           <span className="sap-ai-pulse-dot" />
-          <span>✦ Multimodal AI Ingestion &amp; OCR Pre-Verification Engine</span>
-          <span className="sap-ai-step-pill">Automated OCR Pre-Scan</span>
+          <span>Document Ingestion &amp; Verification Desk</span>
+          <span className="sap-ai-step-pill">Automated Pre-Check</span>
         </div>
         <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
-          Validates 12-month issuance date &amp; Tehsildar/SDM seal signature
+          Validates 12-month issuance date and official authority stamps
         </span>
       </div>
 
@@ -110,10 +110,10 @@ export default async function UploadPage({
       {isUploaded && (
         <div className="sap-card" style={{ backgroundColor: 'var(--sap-positive-bg)', border: '1px solid var(--sap-positive-border)', borderLeft: '4px solid var(--sap-positive-text)', padding: '1.25rem', marginBottom: '2rem' }}>
           <h2 className="govuk-heading-m" style={{ color: 'var(--sap-positive-text)', margin: 0, fontSize: '1.2rem' }}>
-            ✓ Document Ingested &amp; OCR Pre-Verified
+            Document Received &amp; Pre-Verified
           </h2>
           <p className="govuk-body-s" style={{ color: 'var(--sap-positive-text)', marginTop: '0.35rem', marginBottom: 0 }}>
-            Your document has been stored in the secure institutional archive and forwarded to the Accounts Office queue for cross-audit.
+            Your document has been stored in the institutional archive and forwarded to the Accounts Office for verification.
           </p>
         </div>
       )}
@@ -185,10 +185,10 @@ export default async function UploadPage({
 
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
             <button type="submit" className="sap-btn sap-btn--ai-emphasized">
-              ✦ Ingest &amp; OCR Pre-Verify
+              Upload Document
             </button>
             <a href="/chat?q=What%20format%20and%20validity%20period%20is%20required%20for%20Income%20Certificate%3F" className="sap-btn sap-btn--ai">
-              ✦ Ask Copilot About Document Rules
+              View Document Guidelines
             </a>
           </div>
         </form>
@@ -197,9 +197,9 @@ export default async function UploadPage({
       <div className="govuk-warning-text" style={{ marginBottom: '2.5rem' }}>
         <span className="govuk-warning-text__icon">!</span>
         <div>
-          <strong>Document Integrity Guardrail (Guard F15):</strong>
+          <strong>Document Integrity Notice:</strong>
           <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
-            Submission of inconsistent or tampered income figures (e.g., mismatch between declared income certificate and ITR return) will result in disciplinary hold and committee inquiry under Income Verification SOP §4.1.
+            Submission of inconsistent figures between declared income certificate and ITR return will result in verification hold and review under Income Verification Guidelines §4.1.
           </p>
         </div>
       </div>

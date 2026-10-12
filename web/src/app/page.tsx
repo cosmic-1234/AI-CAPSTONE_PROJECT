@@ -115,21 +115,20 @@ export default async function HomePage() {
         )}
       </div>
 
-      {/* SAP Joule AI Pre-Screening & Recommendation Card */}
+      {/* Eligibility Pre-Check & Recommendation Card */}
       {user.role === 'student' && (
         <div className="sap-ai-card" style={{ marginBottom: '1.75rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.85rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span className="sap-badge sap-badge--ai">
-                <span className="sap-ai-pulse-dot" style={{ width: 6, height: 6 }} />
-                ✦ JOULE AI PRE-SCREENING
+                ELIGIBILITY PRE-CHECK
               </span>
               <span className="sap-badge sap-badge--success" style={{ fontSize: '11px' }}>
-                98% MATCH DETECTED
+                MATCH FOUND
               </span>
             </div>
             <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
-              Deterministic Policy Graph v1.4 &bull; Grounded in Scholarship Policy 2026-27
+              Scholarship and Fee Waiver Policy 2026-27
             </span>
           </div>
 
@@ -139,21 +138,21 @@ export default async function HomePage() {
                 Need-Based Financial Assistance (Tier 1) &bull; 100% Tuition Fee Waiver
               </h3>
               <p className="govuk-body-s" style={{ margin: '0 0 0.75rem 0', color: 'var(--sap-text-secondary)', lineHeight: 1.55 }}>
-                ✦ <strong>AI Rationale:</strong> Your declared annual family income of <strong>₹2,40,000</strong> is within the ₹3,00,000 ceiling (&sect;3.1), and your CGPA of <strong>7.8</strong> satisfies the minimum 5.5 threshold. Estimated fee savings: <strong>₹4,50,000</strong>.
+                Your declared annual family income of <strong>₹2,40,000</strong> is within the ₹3,00,000 ceiling (&sect;3.1), and your CGPA of <strong>7.8</strong> satisfies the minimum 5.5 requirement. Estimated fee savings: <strong>₹4,50,000</strong>.
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                <span className="sap-ai-step-pill">Income Ceiling Passed (&le; ₹3.0L)</span>
-                <span className="sap-ai-step-pill">Academic CGPA Passed (&ge; 5.5)</span>
-                <span className="sap-ai-step-pill">Required: Valid Income Cert + Parent ITR-V</span>
+                <span className="sap-ai-step-pill">Income: Within Limit (&le; ₹3.0L)</span>
+                <span className="sap-ai-step-pill">Academic CGPA: Satisfies Minimum (&ge; 5.5)</span>
+                <span className="sap-ai-step-pill">Required: Income Certificate + Parent ITR-V</span>
               </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '220px' }}>
               <a href="/check-eligibility" className="sap-btn sap-btn--ai-emphasized" style={{ justifyContent: 'center' }}>
-                ✦ Pre-Screen All Schemes
+                Check All Schemes
               </a>
               <a href="/chat?q=Why+am+I+eligible+for+NBFA+Tier+1%3F" className="sap-btn sap-btn--ai" style={{ justifyContent: 'center' }}>
-                ✦ Explain Match with AI
+                Ask Assistant About This Scheme
               </a>
             </div>
           </div>
@@ -187,7 +186,7 @@ export default async function HomePage() {
       <div className="govuk-grid-row">
         <div className="sap-card">
           <div>
-            <span className="sap-badge sap-badge--neutral" style={{ fontSize: '11px' }}>EXPLORATION</span>
+            <span className="sap-badge sap-badge--neutral" style={{ fontSize: '11px' }}>POLICIES</span>
             <h3 className="govuk-heading-m" style={{ marginTop: '0.65rem', marginBottom: '0.35rem', fontSize: '1.15rem' }}>
               Policy & FAQ Search
             </h3>
@@ -204,7 +203,7 @@ export default async function HomePage() {
 
         <div className="sap-card">
           <div>
-            <span className="sap-badge sap-badge--neutral" style={{ fontSize: '11px' }}>RULES ENGINE</span>
+            <span className="sap-badge sap-badge--neutral" style={{ fontSize: '11px' }}>ELIGIBILITY</span>
             <h3 className="govuk-heading-m" style={{ marginTop: '0.65rem', marginBottom: '0.35rem', fontSize: '1.15rem' }}>
               Check Aid Eligibility
             </h3>
@@ -221,17 +220,17 @@ export default async function HomePage() {
 
         <div className="sap-card">
           <div>
-            <span className="sap-badge sap-badge--info" style={{ fontSize: '11px' }}>AI COPILOT</span>
+            <span className="sap-badge sap-badge--info" style={{ fontSize: '11px' }}>ASSISTANT</span>
             <h3 className="govuk-heading-m" style={{ marginTop: '0.65rem', marginBottom: '0.35rem', fontSize: '1.15rem' }}>
               Ask Sahayata Assistant
             </h3>
             <p className="govuk-body-s" style={{ color: 'var(--sap-text-secondary)' }}>
-              Ask queries in English or Hinglish with verified citations to official institute regulatory documents.
+              Ask questions in English or Hindi with verified references to official institute documents.
             </p>
           </div>
           <div style={{ marginTop: '1.25rem' }}>
             <a href="/chat" className="sap-btn sap-btn--emphasized" style={{ width: '100%' }}>
-              Launch CoPilot →
+              Open Assistant →
             </a>
           </div>
         </div>

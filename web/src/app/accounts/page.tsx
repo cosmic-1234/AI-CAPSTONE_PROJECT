@@ -107,7 +107,7 @@ export default async function AccountsQueuePage() {
             </strong>
           </div>
           <div style={{ padding: '0.5rem 0.75rem', backgroundColor: 'var(--sap-negative-bg)', borderRadius: 'var(--sap-radius-sm)', border: '1px solid var(--sap-negative-border)' }}>
-            <span className="govuk-body-s" style={{ color: 'var(--sap-negative-text)', display: 'block' }}>Variance Flagged (F15)</span>
+            <span className="govuk-body-s" style={{ color: 'var(--sap-negative-text)', display: 'block' }}>Discrepancy Flagged</span>
             <strong style={{ fontSize: '18px', color: 'var(--sap-negative-text)' }}>
               {QUEUE_ITEMS.filter((i) => !i.is_consistent).length} Dockets
             </strong>
@@ -115,15 +115,15 @@ export default async function AccountsQueuePage() {
         </div>
       </div>
 
-      {/* Cross-Verification Hardening Callout with AI Ribbon */}
+      {/* Cross-Verification Callout */}
       <div className="sap-ai-ribbon">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '13px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
           <span className="sap-ai-pulse-dot" />
-          <span>✦ Automated OCR Cross-Audit Engine (Guardrail F15 Active)</span>
-          <span className="sap-ai-step-pill">100% Deterministic</span>
+          <span>Automated Document Cross-Audit Verification</span>
+          <span className="sap-ai-step-pill">Cross-Audit Verified</span>
         </div>
         <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
-          Threshold: INR 1,00,000 variance automatically flags disciplinary review
+          Criteria: Income variances exceeding INR 1,00,000 are flagged for committee review
         </span>
       </div>
 
@@ -149,7 +149,7 @@ export default async function AccountsQueuePage() {
                 <h3 className="govuk-heading-m" style={{ margin: '0.25rem 0', fontSize: '1.15rem' }}>{item.scheme}</h3>
               </div>
               <span className={`sap-badge ${item.is_consistent ? 'sap-badge--success' : 'sap-badge--error'}`}>
-                {item.is_consistent ? 'DOCUMENTS CONSISTENT' : 'INCONSISTENCY FLAGGED (F15)'}
+                {item.is_consistent ? 'DOCUMENTS CONSISTENT' : 'DISCREPANCY FLAGGED'}
               </span>
             </div>
 
@@ -179,24 +179,24 @@ export default async function AccountsQueuePage() {
               </tbody>
             </table>
 
-            {/* SAP Fiori Button Matrix Actions with AI Copilot buttons */}
+            {/* Action buttons */}
             <div className="govuk-button-group" style={{ margin: 0 }}>
               {item.is_consistent ? (
                 <>
                   <button type="button" className="sap-btn sap-btn--accept">
-                    ✓ Approve Verification & Forward to Committee
+                    Approve Verification & Forward to Committee
                   </button>
                   <a href={`/chat?q=${encodeURIComponent('Explain document consistency audit for student ' + item.student_name)}`} className="sap-btn sap-btn--ai">
-                    ✦ Audit with Copilot
+                    Audit Verification Details
                   </a>
                 </>
               ) : (
                 <>
                   <button type="button" className="sap-btn sap-btn--reject">
-                    ✕ Place on Disciplinary Hold (Flagged)
+                    Place on Review Hold
                   </button>
                   <a href={`/chat?q=${encodeURIComponent('Why was application ' + item.id + ' flagged for income inconsistency? Provide policy clause.')}`} className="sap-btn sap-btn--ai-emphasized">
-                    ✦ Analyze Variance with Copilot
+                    Analyze Discrepancy
                   </a>
                 </>
               )}

@@ -49,18 +49,18 @@ interface UserProps {
 }
 
 const THINKING_STAGES = [
-  '✦ Querying IIM Bodh Gaya policy knowledge graph...',
-  '✦ Evaluating income ceilings and academic standing...',
-  '✦ Validating constitutional guardrails (F1–F6)...',
-  '✦ Synthesizing citation-grounded advisory...',
+  'Reviewing official institute policy guidelines...',
+  'Checking income criteria and academic requirements...',
+  'Verifying fee waiver slabs and eligibility rules...',
+  'Preparing official policy guidance...',
 ];
 
 const SUGGESTED_PROMPTS = [
-  { label: '✦ NBFA Eligibility Criteria', query: 'What are the eligibility criteria and income limits for Need Based Financial Assistance?' },
-  { label: '✦ fees maaf hoti hai kya? (Hinglish)', query: 'fees maaf hoti hai kya? What is the procedure in Hindi/Hinglish?' },
-  { label: '✦ Application Deadlines', query: 'When is the last date and deadline to submit documents for financial aid?' },
-  { label: '✦ Income Certificate & ITR Rules', query: 'What documents are required for income verification and ITR?' },
-  { label: '✦ SBI Scholar Loan guidance', query: 'How does SBI Scholar education loan work at IIM Bodh Gaya?' },
+  { label: 'Need-Based Fee Waiver Criteria', query: 'What are the eligibility criteria and income limits for Need Based Financial Assistance?' },
+  { label: 'Fee Waiver Query (Hindi/Hinglish)', query: 'fees maaf hoti hai kya? What is the procedure in Hindi/Hinglish?' },
+  { label: 'Application Deadlines', query: 'When is the last date and deadline to submit documents for financial aid?' },
+  { label: 'Income Certificate & ITR Rules', query: 'What documents are required for income verification and ITR?' },
+  { label: 'SBI Scholar Education Loans', query: 'How does SBI Scholar education loan work at IIM Bodh Gaya?' },
 ];
 
 export default function ChatInterface({
@@ -84,7 +84,7 @@ export default function ChatInterface({
         id: 'msg_welcome',
         sender: 'bot',
         isInitialGreeting: true,
-        text: `Namaste **${user.name}**! I am **Sahayata**, your official AI Financial Aid Assistant at IIM Bodh Gaya. I provide authoritative answers deterministically verified against approved institute statutes.\n\nHow can I help you today? You can ask about tuition fee waivers, Need-Based Financial Assistance (NBFA), Director's Merit Scholarship, or education loan guidance.`,
+        text: `Hello ${user.name}! I am Sahayata, your Financial Aid Assistant at IIM Bodh Gaya. I provide verified guidance based on approved institute policies.\n\nHow can I help you today? You can ask about tuition fee waivers, Need-Based Financial Assistance (NBFA), Director's Merit Scholarship, required documents, or education loan guidance.`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       },
     ];
@@ -163,7 +163,7 @@ export default function ChatInterface({
       });
 
       if (!res.ok) {
-        throw new Error('Failed to fetch AI response');
+        throw new Error('Failed to fetch response');
       }
 
       const data: AgentResponse = await res.json();
@@ -188,7 +188,7 @@ export default function ChatInterface({
       const errorMsg: MessageItem = {
         id: `bot_err_${Date.now()}`,
         sender: 'bot',
-        text: 'I encountered a brief connection delay reaching the IIM Bodh Gaya policy agent. Please try submitting your query again.',
+        text: 'The assistant could not reach the server. Please check your network connection and try again.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, errorMsg]);
@@ -208,14 +208,14 @@ export default function ChatInterface({
         id: 'msg_welcome_reset',
         sender: 'bot',
         isInitialGreeting: true,
-        text: `Chat reset. Hello **${user.name}**! How can I assist you with IIM Bodh Gaya financial aid, scholarships, or fee waivers today?`,
+        text: `Conversation cleared. Hello ${user.name}! How can I assist you with IIM Bodh Gaya financial aid, scholarships, or fee waivers today?`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       },
     ]);
   };
 
   return (
-    <div className="sap-chat-window" role="region" aria-label="Sahayata AI Chatbot">
+    <div className="sap-chat-window" role="region" aria-label="Sahayata AI Assistant">
       {/* Chatbot Header */}
       <div className="sap-chat-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
@@ -228,14 +228,13 @@ export default function ChatInterface({
           />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <strong style={{ fontSize: '15px', color: '#ffffff' }}>Sahayata Enterprise CoPilot</strong>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>Sahayata Financial Aid Assistant</strong>
               <span className="sap-badge sap-badge--ai" style={{ fontSize: '10px', padding: '0.15rem 0.45rem' }}>
-                <span className="sap-ai-pulse-dot" style={{ width: 5, height: 5 }} />
-                ✦ JOULE ACTIVE
+                ONLINE
               </span>
             </div>
             <span style={{ fontSize: '11.5px', color: '#c4b5fd' }}>
-              IIM Bodh Gaya Policy Intelligence &bull; Deterministic Guardrails F1&ndash;F6 Active
+              Indian Institute of Management Bodh Gaya &bull; Official Student Advisory Desk
             </span>
           </div>
         </div>
@@ -247,22 +246,18 @@ export default function ChatInterface({
             className="sap-btn--ghost"
             style={{ color: '#ffffff', fontSize: '12px', padding: '0.3rem 0.65rem', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '4px', cursor: 'pointer' }}
           >
-            ✦ New Chat
+            New Conversation
           </button>
         </div>
       </div>
 
-      {/* Operational Ribbon */}
+      {/* Clean Guidance Ribbon */}
       <div className="sap-ai-ribbon" style={{ margin: 0, borderRadius: 0, borderLeft: 'none', borderRight: 'none', borderTop: 'none', padding: '0.55rem 1.25rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '12px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
-          <span>✦ Active System Guardrails:</span>
-          <span className="sap-ai-step-pill">PII Redaction (F1)</span>
-          <span className="sap-ai-step-pill">Hinglish NLP (F2)</span>
-          <span className="sap-ai-step-pill">Policy Grounding (F3)</span>
-          <span className="sap-ai-step-pill">Triage Routing (F4)</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '12px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
+          <span>Official Institute Regulations &bull; Privacy Protected</span>
         </div>
         <span style={{ fontSize: '11.5px', color: 'var(--sap-text-secondary)' }}>
-          Retrieval: Cosine Sim &gt; 0.65 &bull; 100% Policy Grounded
+          Academic Year 2026-27
         </span>
       </div>
 
@@ -274,7 +269,7 @@ export default function ChatInterface({
               <div key={msg.id} className="sap-chat-msg--user">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.35rem' }}>
                   <span style={{ fontSize: '11.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
-                    👤 You ({user.name}) &bull; {msg.timestamp}
+                    {user.name} &bull; {msg.timestamp}
                   </span>
                 </div>
                 <div className="sap-chat-bubble">{msg.text}</div>
@@ -287,22 +282,21 @@ export default function ChatInterface({
             <div key={msg.id} className="sap-chat-msg--bot">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.35rem' }}>
                 <span className="sap-badge sap-badge--ai" style={{ fontSize: '11px', padding: '0.15rem 0.5rem' }}>
-                  ✦ Sahayata Joule Assistant
+                  Sahayata Assistant
                 </span>
                 {msg.telemetry && (
                   <span style={{ fontSize: '11.5px', color: 'var(--sap-positive-text)', fontWeight: 600 }}>
-                    ✓ Policy Grounded &bull; Route: {msg.telemetry.route} &bull; {msg.telemetry.latencyMs}ms &bull; ₹{msg.telemetry.inrCost.toFixed(4)}
+                    Official Policy Guidance
                   </span>
                 )}
               </div>
 
               <div className="sap-chat-bubble">
-                {/* Active Guard Interception Warning */}
+                {/* Privacy Interception Notice */}
                 {msg.telemetry?.guardsFired && msg.telemetry.guardsFired.length > 0 && (
                   <div className="govuk-warning-text" style={{ margin: '0 0 0.85rem 0', padding: '0.5rem 0.75rem', backgroundColor: '#fff8e1', border: '1px solid #ffe082', borderRadius: '4px' }}>
-                    <span className="govuk-warning-text__icon" style={{ fontSize: '14px', width: '22px', height: '22px', lineHeight: '20px' }}>!</span>
-                    <div style={{ fontSize: '12px' }}>
-                      <strong>Constitutional Guardrail Intercepted:</strong> {msg.telemetry.guardsFired.join(', ')}
+                    <div style={{ fontSize: '12px', color: '#854d0e' }}>
+                      <strong>Privacy Notice:</strong> Identity credentials (such as Aadhaar or PAN) are automatically masked to safeguard your privacy.
                     </div>
                   </div>
                 )}
@@ -312,18 +306,18 @@ export default function ChatInterface({
                   {msg.text}
                 </div>
 
-                {/* Citations Accordion */}
+                {/* Policy Citations Accordion */}
                 {msg.telemetry?.citations && msg.telemetry.citations.length > 0 && (
                   <details className="govuk-details" style={{ marginTop: '1.25rem', backgroundColor: '#faf9ff', border: '1px solid #e2d9fc', borderRadius: '4px' }}>
                     <summary className="govuk-details__summary" style={{ fontSize: '13px' }}>
-                      <span>✦ View Authoritative Policy Citations ({msg.telemetry.citations.length} sources)</span>
+                      <span>View Official Policy References ({msg.telemetry.citations.length} sources)</span>
                     </summary>
                     <div className="govuk-details__text" style={{ padding: '0.75rem 1rem' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         {msg.telemetry.citations.map((chunk, i) => (
                           <div key={chunk.id || i} style={{ borderBottom: '1px solid #e2d9fc', paddingBottom: '0.5rem' }}>
-                            <p className="govuk-body-s" style={{ fontWeight: 600, color: 'var(--sap-ai-primary)', margin: 0 }}>
-                              ✦ {chunk.citation}
+                            <p className="govuk-body-s" style={{ fontWeight: 600, color: 'var(--sap-brand-blue)', margin: 0 }}>
+                              {chunk.citation}
                             </p>
                             <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0', whiteSpace: 'pre-line', color: 'var(--sap-text-secondary)', fontSize: '12.5px' }}>
                               {chunk.content}
@@ -344,7 +338,7 @@ export default function ChatInterface({
                       className="sap-btn sap-btn--ai-emphasized"
                       style={{ fontSize: '12.5px', padding: '0.35rem 0.85rem', cursor: 'pointer' }}
                     >
-                      ✦ Pre-Screen Scheme Eligibility
+                      Pre-Screen My Eligibility
                     </button>
                     <button
                       type="button"
@@ -352,14 +346,14 @@ export default function ChatInterface({
                       className="sap-btn sap-btn--ai"
                       style={{ fontSize: '12.5px', padding: '0.35rem 0.85rem', cursor: 'pointer' }}
                     >
-                      ✦ Check Document Checklist
+                      View Document Checklist
                     </button>
                     <a
                       href="/check-eligibility"
                       className="sap-btn sap-btn--ghost"
                       style={{ fontSize: '12px', padding: '0.35rem 0.65rem' }}
                     >
-                      Open 4-Step Form ↗
+                      Open Application Form →
                     </a>
                   </div>
                 )}
@@ -373,10 +367,10 @@ export default function ChatInterface({
           <div className="sap-chat-msg--bot sap-chat-msg--thinking">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.35rem' }}>
               <span className="sap-badge sap-badge--ai" style={{ fontSize: '11px', padding: '0.15rem 0.5rem' }}>
-                ✦ Sahayata Joule
+                Sahayata Assistant
               </span>
-              <span style={{ fontSize: '11.5px', color: '#7c3aed', fontWeight: 600 }}>
-                Thinking &amp; Validating Policies...
+              <span style={{ fontSize: '11.5px', color: 'var(--sap-text-secondary)', fontWeight: 500 }}>
+                Checking policies...
               </span>
             </div>
 
@@ -397,7 +391,7 @@ export default function ChatInterface({
       </div>
 
       {/* Suggested Prompt Chips */}
-      <div className="sap-chat-chips-bar" aria-label="Suggested Prompts">
+      <div className="sap-chat-chips-bar" aria-label="Suggested Questions">
         <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--sap-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', flexShrink: 0 }}>
           Suggested:
         </span>
@@ -418,11 +412,10 @@ export default function ChatInterface({
       {/* Bottom Docked Input Form */}
       <div className="sap-chat-input-dock">
         <form onSubmit={handleFormSubmit} className="sap-chat-input-form">
-          <span style={{ color: 'var(--sap-ai-primary)', fontSize: '16px' }}>✦</span>
           <input
             type="text"
             className="sap-chat-input-field"
-            placeholder={isThinking ? 'Sahayata is thinking...' : "Ask Sahayata any policy question (e.g. 'fees maaf hoti hai kya?' or 'what are NBFA limits?')..."}
+            placeholder={isThinking ? 'Reviewing policy guidelines...' : "Ask a question about financial aid, scholarships, or fee waivers..."}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             disabled={isThinking}
@@ -434,7 +427,7 @@ export default function ChatInterface({
             className="sap-btn sap-btn--ai-emphasized sap-chat-send-btn"
             style={{ opacity: isThinking || !inputText.trim() ? 0.6 : 1 }}
           >
-            {isThinking ? '✦ Thinking...' : '✦ Send'}
+            {isThinking ? 'Checking...' : 'Send'}
           </button>
         </form>
       </div>
