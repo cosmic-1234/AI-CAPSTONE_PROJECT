@@ -49,271 +49,216 @@ export default async function ChatPage({
   const user = await getCurrentUser();
   const query = searchParams?.q || '';
   const response = query ? await sendQuery(query, user.role, user.id) : null;
+  const totalMs = Object.values(response?.latencyBreakdown || {}).reduce((a, b) => a + b, 0);
 
   return (
     <div>
-      <div style={{ marginBottom: '1.25rem' }}>
+      <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <a href="/" className="sap-btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem' }}>
           ← Back to Launchpad
         </a>
+        <span className="sap-badge sap-badge--info">
+          Session Persona: {user.name} ({user.role.toUpperCase()})
+        </span>
       </div>
 
-      {/* SAP Joule Dynamic Header */}
-      <div className="sap-ai-card" style={{ marginBottom: '1.75rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      {/* Main Conversational Chatbot Window */}
+      <div className="sap-chat-window" role="region" aria-label="Sahayata AI Chatbot">
+        {/* Chatbot Header */}
+        <div className="sap-chat-header">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             <img
               src="/brand/iimbg-logo.png"
               alt="IIM Bodh Gaya Logo"
-              width="60"
-              height="48"
-              style={{ objectFit: 'contain', backgroundColor: '#ffffff', padding: '3px', borderRadius: '4px', border: '1px solid #e2e4e8' }}
+              width="44"
+              height="34"
+              style={{ objectFit: 'contain', backgroundColor: '#ffffff', padding: '2px', borderRadius: '4px' }}
             />
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
-                <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-ai-primary)', fontWeight: 700 }}>
-                  Enterprise Generative AI
-                </span>
-                <span className="sap-badge sap-badge--ai">
-                  <span className="sap-ai-pulse-dot" style={{ width: 6, height: 6 }} />
-                  ✦ JOULE v2.4 ACTIVE
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <strong style={{ fontSize: '15px', color: '#ffffff' }}>Sahayata Enterprise CoPilot</strong>
+                <span className="sap-badge sap-badge--ai" style={{ fontSize: '10px', padding: '0.15rem 0.45rem' }}>
+                  <span className="sap-ai-pulse-dot" style={{ width: 5, height: 5 }} />
+                  ✦ JOULE ACTIVE
                 </span>
               </div>
-              <h1 className="govuk-heading-xl" style={{ margin: 0, fontSize: '1.65rem' }}>
-                Sahayata Enterprise CoPilot
-              </h1>
+              <span style={{ fontSize: '11.5px', color: '#c4b5fd' }}>
+                IIM Bodh Gaya Policy Intelligence &bull; Deterministic Guardrails F1&ndash;F6 Active
+              </span>
             </div>
           </div>
+
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <span className="sap-badge sap-badge--info">
-              Active Role: {user.role.toUpperCase()}
-            </span>
+            {query && (
+              <a href="/chat" className="sap-btn--ghost" style={{ color: '#ffffff', fontSize: '12px', padding: '0.3rem 0.65rem', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '4px' }}>
+                ✦ New Chat
+              </a>
+            )}
           </div>
         </div>
 
-        {/* AI Operational Ribbon */}
-        <div className="sap-ai-ribbon" style={{ margin: '0.75rem 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '12.5px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
+        {/* Guardrail Transparency Ribbon */}
+        <div className="sap-ai-ribbon" style={{ margin: 0, borderRadius: 0, borderLeft: 'none', borderRight: 'none', borderTop: 'none', padding: '0.55rem 1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '12px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
             <span>✦ Active System Guardrails:</span>
             <span className="sap-ai-step-pill">PII Redaction (F1)</span>
-            <span className="sap-ai-step-pill">Hinglish Translation (F2)</span>
+            <span className="sap-ai-step-pill">Hinglish NLP (F2)</span>
             <span className="sap-ai-step-pill">Policy Grounding (F3)</span>
             <span className="sap-ai-step-pill">Triage Routing (F4)</span>
           </div>
-          <span style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
-            Retrieval: Cosine Sim &gt; 0.65 • Zero Hallucination
+          <span style={{ fontSize: '11.5px', color: 'var(--sap-text-secondary)' }}>
+            Retrieval: Cosine Sim &gt; 0.65 &bull; 100% Policy Grounded
           </span>
         </div>
 
-        <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)', fontSize: '14px' }}>
-          Authoritative intelligence assistant for IIM Bodh Gaya financial aid policies, criteria, deadlines, and documentation audits.
-          Supports queries in English and colloquial Hinglish (e.g., <em>&quot;fees maaf hoti hai kya?&quot;</em>).
-        </p>
-      </div>
-
-      {/* Query Form (Pure HTML form - zero client JS required) */}
-      <div className="sap-card" style={{ marginBottom: '1.75rem' }}>
-        <form method="GET" action="/chat">
-          <div className="govuk-form-group">
-            <label className="govuk-label" htmlFor="q" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ color: 'var(--sap-ai-primary)' }}>✦</span>
-              <span>Ask Sahayata Policy Assistant or Enter Verification Prompt</span>
-            </label>
-            <div className="govuk-hint">
-              All responses are deterministically verified against approved IIM Bodh Gaya regulatory statutes with exact section citations.
+        {/* Chat Message Stream */}
+        <div className="sap-chat-messages" id="chat-messages">
+          {/* 1. Assistant Greeting / Welcome Bubble (Always Present) */}
+          <div className="sap-chat-msg--bot">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.35rem' }}>
+              <span className="sap-badge sap-badge--ai" style={{ fontSize: '11px', padding: '0.15rem 0.5rem' }}>
+                ✦ Sahayata Copilot
+              </span>
+              <span style={{ fontSize: '11.5px', color: 'var(--sap-text-secondary)' }}>
+                Official Institute Advisory Desk
+              </span>
             </div>
-            <textarea
-              id="q"
+            <div className="sap-chat-bubble">
+              <p style={{ margin: 0, lineHeight: 1.55 }}>
+                Namaste <strong>{user.name}</strong>! I am <strong>Sahayata</strong>, your AI Financial Aid Assistant at IIM Bodh Gaya.
+              </p>
+              <p style={{ margin: '0.5rem 0 0 0', lineHeight: 1.55, color: 'var(--sap-text-secondary)', fontSize: '14px' }}>
+                I provide authoritative answers deterministically verified against approved institute statutes. How can I help you today?
+              </p>
+              <ul style={{ margin: '0.5rem 0 0 1.25rem', padding: 0, fontSize: '13.5px', color: 'var(--sap-text-secondary)' }}>
+                <li><strong>Need-Based Financial Assistance (NBFA):</strong> Up to 100% tuition waiver for family income &le; ₹3.0L.</li>
+                <li><strong>Director&apos;s Merit Scholarship:</strong> Merit awards for top 10% academic standing.</li>
+                <li><strong>Document Compliance:</strong> 12-month validity for Income Certificates &amp; Parent ITR-V cross-audit rules.</li>
+                <li><strong>Education Loans:</strong> Pre-approved SBI Scholar Loan terms and interest subsidy schemes.</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* 2. User Message Bubble (Appears when query is submitted) */}
+          {query && (
+            <div className="sap-chat-msg--user">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.35rem' }}>
+                <span style={{ fontSize: '11.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+                  👤 You ({user.name})
+                </span>
+              </div>
+              <div className="sap-chat-bubble">
+                {query}
+              </div>
+            </div>
+          )}
+
+          {/* 3. Assistant Response Bubble (Appears right after user message) */}
+          {response && (
+            <div className="sap-chat-msg--bot">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.35rem' }}>
+                <span className="sap-badge sap-badge--ai" style={{ fontSize: '11px', padding: '0.15rem 0.5rem' }}>
+                  ✦ Sahayata Joule Assistant
+                </span>
+                <span style={{ fontSize: '11.5px', color: 'var(--sap-positive-text)', fontWeight: 600 }}>
+                  ✓ Policy Grounded &bull; Route: {response.route} &bull; {totalMs}ms &bull; ₹{response.inrCost.toFixed(4)}
+                </span>
+              </div>
+
+              <div className="sap-chat-bubble">
+                {/* Active Guard Interception Warning */}
+                {response.guardsFired.length > 0 && (
+                  <div className="govuk-warning-text" style={{ margin: '0 0 0.85rem 0', padding: '0.5rem 0.75rem', backgroundColor: '#fff8e1', border: '1px solid #ffe082', borderRadius: '4px' }}>
+                    <span className="govuk-warning-text__icon" style={{ fontSize: '14px', width: '22px', height: '22px', lineHeight: '20px' }}>!</span>
+                    <div style={{ fontSize: '12px' }}>
+                      <strong>Constitutional Guardrail Intercepted:</strong> {response.guardsFired.join(', ')}
+                    </div>
+                  </div>
+                )}
+
+                {/* Formatted Answer Output */}
+                <div style={{ whiteSpace: 'pre-line', fontSize: '15px', lineHeight: '1.65', color: 'var(--sap-text-primary)' }}>
+                  {response.finalOutput}
+                </div>
+
+                {/* Authoritative Policy Citations Accordion */}
+                {response.retrievedChunks && response.retrievedChunks.length > 0 && (
+                  <details className="govuk-details" style={{ marginTop: '1.25rem', backgroundColor: '#faf9ff', border: '1px solid #e2d9fc', borderRadius: '4px' }}>
+                    <summary className="govuk-details__summary" style={{ fontSize: '13px' }}>
+                      <span>✦ View Authoritative Policy Citations ({response.retrievedChunks.length} sources)</span>
+                    </summary>
+                    <div className="govuk-details__text" style={{ padding: '0.75rem 1rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {response.retrievedChunks.map((chunk, i) => (
+                          <div key={chunk.id || i} style={{ borderBottom: '1px solid #e2d9fc', paddingBottom: '0.5rem' }}>
+                            <p className="govuk-body-s" style={{ fontWeight: 600, color: 'var(--sap-ai-primary)', margin: 0 }}>
+                              ✦ {chunk.citation}
+                            </p>
+                            <p className="govuk-body-s" style={{ margin: '0.25rem 0 0 0', whiteSpace: 'pre-line', color: 'var(--sap-text-secondary)', fontSize: '12.5px' }}>
+                              {chunk.content}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </details>
+                )}
+
+                {/* Follow-up Action Buttons inside the bot message */}
+                <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.15rem', flexWrap: 'wrap' }}>
+                  <a href="/check-eligibility" className="sap-btn sap-btn--ai-emphasized" style={{ fontSize: '12.5px', padding: '0.35rem 0.85rem' }}>
+                    ✦ Pre-Screen Scheme Eligibility
+                  </a>
+                  <a href="/upload" className="sap-btn sap-btn--ai" style={{ fontSize: '12.5px', padding: '0.35rem 0.85rem' }}>
+                    ✦ Check Document Checklist
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Quick Suggestion Chips (Positioned right above the bottom input bar!) */}
+        <div className="sap-chat-chips-bar" aria-label="Suggested Prompts">
+          <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--sap-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', flexShrink: 0 }}>
+            Suggested:
+          </span>
+          <a href="/chat?q=What%20are%20the%20eligibility%20criteria%20and%20income%20limits%20for%20Need%20Based%20Financial%20Assistance%3F" className="sap-chat-chip-item">
+            ✦ NBFA Eligibility Criteria
+          </a>
+          <a href="/chat?q=fees%20maaf%20hoti%20hai%20kya%3F%20What%20is%20the%20procedure%20in%20Hindi%2FHinglish%3F" className="sap-chat-chip-item">
+            ✦ fees maaf hoti hai kya? (Hinglish)
+          </a>
+          <a href="/chat?q=When%20is%20the%20last%20date%20and%20deadline%20to%20submit%20documents%3F" className="sap-chat-chip-item">
+            ✦ Application Deadlines
+          </a>
+          <a href="/chat?q=What%20documents%20are%20required%20for%20income%20verification%20and%20ITR%3F" className="sap-chat-chip-item">
+            ✦ Income Certificate &amp; ITR Rules
+          </a>
+          <a href="/chat?q=How%20does%20SBI%20Scholar%20education%20loan%20work%20at%20IIM%20Bodh%20Gaya%3F" className="sap-chat-chip-item">
+            ✦ SBI Scholar Loan guidance
+          </a>
+        </div>
+
+        {/* Bottom Docked Chat Input Bar (Just like ChatGPT / SAP Joule!) */}
+        <div className="sap-chat-input-dock">
+          <form method="GET" action="/chat" className="sap-chat-input-form">
+            <span style={{ color: 'var(--sap-ai-primary)', fontSize: '16px' }}>✦</span>
+            <input
+              type="text"
               name="q"
-              className="govuk-textarea"
-              defaultValue={query}
-              placeholder="e.g. What are the income limits and eligibility thresholds for Tuition Fee Waiver?"
+              className="sap-chat-input-field"
+              placeholder="Ask Sahayata any policy question (e.g. 'fees maaf hoti hai kya?' or 'what are NBFA limits?')..."
+              defaultValue=""
+              autoFocus
               required
             />
-          </div>
-
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-            <button type="submit" className="sap-btn sap-btn--ai-emphasized">
-              ✦ Submit CoPilot Query
+            <button type="submit" className="sap-btn sap-btn--ai-emphasized sap-chat-send-btn">
+              ✦ Send
             </button>
-            {query && (
-              <a href="/chat" className="sap-btn sap-btn--default">
-                Clear
-              </a>
-            )}
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-
-      {/* Suggested Quick Prompts */}
-      {!response && (
-        <div className="sap-ai-card" style={{ marginBottom: '2rem' }}>
-          <h2 className="govuk-heading-m" style={{ marginTop: 0, fontSize: '1.1rem', color: 'var(--sap-ai-badge-text)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            <span>✦</span>
-            <span>Recommended Joule Prompts</span>
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {[
-              {
-                label: 'What are the eligibility criteria and income limits for Need Based Financial Assistance?',
-                type: 'Policy Inquiry',
-              },
-              {
-                label: 'fees maaf hoti hai kya? What is the procedure in Hindi/Hinglish?',
-                type: 'Hinglish NLP',
-              },
-              {
-                label: 'When is the last date and deadline to submit documents?',
-                type: 'Zero-Token FAQ',
-              },
-              {
-                label: 'My Aadhaar is 9876 5432 1098. Am I eligible for Director Merit Scholarship with CGPA 8.8?',
-                type: 'PII Redaction Guard',
-              },
-              {
-                label: 'I am in extreme distress and cannot survive the financial burden',
-                type: 'Psychological Hardship',
-              },
-            ].map((item, idx) => (
-              <a
-                key={idx}
-                href={`/chat?q=${encodeURIComponent(item.label)}`}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '0.75rem 1rem',
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2d9fc',
-                  borderRadius: 'var(--sap-radius-sm)',
-                  textDecoration: 'none',
-                  color: 'var(--sap-text-primary)',
-                  boxShadow: '0 1px 2px rgba(93, 54, 255, 0.04)',
-                  transition: 'all 0.15s ease-in-out',
-                }}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ color: 'var(--sap-ai-primary)' }}>✦</span>
-                  <span>{item.label}</span>
-                </span>
-                <span className="sap-badge sap-badge--ai" style={{ fontSize: '11px' }}>
-                  {item.type}
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Response Display with Chatbot UI and AI Reasoning Pipeline */}
-      {response && (
-        <div style={{ marginBottom: '2.5rem' }}>
-          {/* User Query Bubble */}
-          <div className="sap-card" style={{ marginBottom: '1rem', backgroundColor: '#f0f4f8', borderLeft: '4px solid var(--sap-brand-blue)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-              <span style={{ fontWeight: 700, fontSize: '13px', color: 'var(--sap-text-primary)' }}>👤 You (Student):</span>
-            </div>
-            <div style={{ fontSize: '15px', color: 'var(--sap-text-primary)' }}>
-              {query}
-            </div>
-          </div>
-
-          {/* AI Reasoning & Multi-Step Execution Pipeline */}
-          <div className="sap-ai-card" style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem', paddingBottom: '0.5rem', borderBottom: '1px solid #e2d9fc' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="sap-badge sap-badge--ai">
-                  ✦ JOULE REASONING PIPELINE
-                </span>
-                <span style={{ fontSize: '12px', color: 'var(--sap-ai-badge-text)', fontWeight: 600 }}>
-                  Deterministic Verification Complete
-                </span>
-              </div>
-              <div style={{ fontSize: '12px', color: 'var(--sap-text-secondary)' }}>
-                Route: <strong>{response.route}</strong> &nbsp;|&nbsp; Latency: <strong>{Object.values(response.latencyBreakdown || {}).reduce((a, b) => a + b, 0)}ms</strong> &nbsp;|&nbsp; Cost: <strong>₹{response.inrCost.toFixed(4)}</strong>
-              </div>
-            </div>
-
-            {/* Execution Steps */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <span className="sap-ai-step-pill">✓ 1. Query Normalization</span>
-              <span className="sap-ai-step-pill">✓ 2. PII Sanitization</span>
-              <span className="sap-ai-step-pill">✓ 3. Policy Retrieval ({response.retrievedChunks?.length || 0} chunks)</span>
-              <span className="sap-ai-step-pill">✓ 4. Guardrails F1-F6 Pass</span>
-              <span className="sap-ai-step-pill">✓ 5. Citation Grounding</span>
-            </div>
-
-            {/* Guard Warnings if any */}
-            {response.guardsFired.length > 0 && (
-              <div className="govuk-warning-text" style={{ margin: '0.75rem 0' }}>
-                <span className="govuk-warning-text__icon">!</span>
-                <div>
-                  <strong>Active Constitutional Guardrails Intercepted:</strong>
-                  <div className="govuk-body-s" style={{ margin: '0.25rem 0 0 0' }}>
-                    {response.guardsFired.join(', ')}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* AI Response Message Bubble */}
-          <div
-            className="sap-card"
-            style={{
-              borderLeft: '4px solid var(--sap-ai-primary)',
-              boxShadow: '0 4px 16px rgba(93, 54, 255, 0.08)',
-              padding: '1.5rem',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <span className="sap-badge sap-badge--ai" style={{ fontSize: '12px', padding: '0.25rem 0.65rem' }}>
-                ✦ Sahayata Joule Assistant
-              </span>
-              <span style={{ fontSize: '12px', color: 'var(--sap-positive-text)', fontWeight: 600 }}>
-                ✓ Official Policy Grounded
-              </span>
-            </div>
-
-            {/* Answer Text */}
-            <div className="govuk-body" style={{ whiteSpace: 'pre-line', fontSize: '15px', lineHeight: '1.65', color: 'var(--sap-text-primary)' }}>
-              {response.finalOutput}
-            </div>
-
-            {/* Official Citations Expander */}
-            {response.retrievedChunks && response.retrievedChunks.length > 0 && (
-              <details className="govuk-details" style={{ marginTop: '1.5rem', backgroundColor: '#faf9ff', border: '1px solid #e2d9fc' }}>
-                <summary className="govuk-details__summary">
-                  <span>✦ View Authoritative Policy Citations ({response.retrievedChunks.length} sources)</span>
-                </summary>
-                <div className="govuk-details__text">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    {response.retrievedChunks.map((chunk, i) => (
-                      <div key={chunk.id || i} style={{ borderBottom: '1px solid #e2d9fc', paddingBottom: '0.75rem' }}>
-                        <p className="govuk-body-s" style={{ fontWeight: 600, color: 'var(--sap-ai-primary)', margin: 0 }}>
-                          ✦ {chunk.citation}
-                        </p>
-                        <p className="govuk-body-s" style={{ margin: '0.35rem 0 0 0', whiteSpace: 'pre-line', color: 'var(--sap-text-secondary)' }}>
-                          {chunk.content}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </details>
-            )}
-
-            <div className="govuk-button-group" style={{ marginTop: '1.5rem', marginBottom: 0 }}>
-              <a href="/check-eligibility" className="sap-btn sap-btn--ai-emphasized">
-                ✦ Pre-Screen Scheme Eligibility
-              </a>
-              <a href="/chat" className="sap-btn sap-btn--ai">
-                ✦ Ask Another Question
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
