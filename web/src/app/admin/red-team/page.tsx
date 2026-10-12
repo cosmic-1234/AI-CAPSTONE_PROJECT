@@ -1,4 +1,3 @@
-import { getHardeningConfig } from '../../../../../api/src/config';
 import { API_BASE_URL } from '@/lib/api';
 
 interface FailureItem {
@@ -181,8 +180,37 @@ const FAILURES: FailureItem[] = [
   },
 ];
 
-export default function RedTeamSwitchboardPage() {
-  const currentHardening = getHardeningConfig().hardening;
+const DEFAULT_HARDENING: Record<string, boolean> = {
+  enforce_current_policy_only: true,
+  input_injection_guard: true,
+  pii_masking_guard: true,
+  retrieval_acl_enforcement: true,
+  output_grounding_guard: true,
+  prohibit_unauthorized_commitments: true,
+  tone_guard: true,
+  distress_router_guard: true,
+  off_topic_guard: true,
+  require_human_approval_for_actions: true,
+  tool_allowlist_guard: true,
+  enforce_loop_limits: true,
+  enforce_retrieval_threshold: true,
+  idempotency_enforcement: true,
+  document_cross_verification: true,
+};
+
+async function fetchHardening(): Promise<Record<string, boolean>> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/hardening`, { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      return data.hardening || DEFAULT_HARDENING;
+    }
+  } catch {}
+  return DEFAULT_HARDENING;
+}
+
+export default async function RedTeamSwitchboardPage() {
+  const currentHardening = await fetchHardening();
 
   return (
     <div>
