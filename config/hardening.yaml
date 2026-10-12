@@ -1,0 +1,19 @@
+hardening:
+  enforce_current_policy_only: true
+  input_injection_guard: true
+  pii_masking_guard: true
+  retrieval_acl_enforcement: true
+  output_grounding_guard: true
+  prohibit_unauthorized_commitments: true
+  tone_guard: true
+  distress_router_guard: true
+  off_topic_guard: true
+  require_human_approval_for_actions: true
+  tool_allowlist_guard: true
+  enforce_loop_limits: true
+  max_agent_steps: 6
+  max_tool_calls_per_session: 3
+  enforce_retrieval_threshold: true
+  min_relevance_threshold: 0.35
+  idempotency_enforcement: true
+  document_cross_verification: true

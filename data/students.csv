@@ -1,0 +1,9 @@
+id,name,email,role,programme,batch,annual_family_income,cgpa,category,phone
+std_01,Amit Kumar,amit.k25@example.ac.in,student,PGP,2025-27,240000,7.8,General,+91-9876543210
+std_02,Priya Sharma,priya.s25@example.ac.in,student,PGP,2025-27,520000,8.9,OBC,+91-9876543211
+std_03,Rahul Verma,rahul.v26@example.ac.in,student,IPM,2026-28,180000,6.4,SC,+91-9876543212
+std_04,Sneha Patel,sneha.p25@example.ac.in,student,PGP-DBM,2025-27,750000,8.7,General,+91-9876543213
+std_05,Vikram Singh,vikram.s25@example.ac.in,student,PGP,2025-27,950000,9.2,General,+91-9876543214
+staff_01,Sunita Verma,accounts.officer@example.ac.in,staff,STAFF,STAFF,0,0,Staff,+91-9876543220
+comm_01,Prof. R. K. Sharma,rk.sharma@example.ac.in,committee,FACULTY,FACULTY,0,0,Committee,+91-9876543230
+admin_01,System Admin,admin@example.ac.in,admin,ADMIN,ADMIN,0,0,Admin,+91-9876543240

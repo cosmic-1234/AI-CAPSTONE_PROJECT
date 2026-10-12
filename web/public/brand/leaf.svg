@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <!-- Subtle Bodhi leaf emblem for IIM Bodh Gaya -->
+  <path d="M24 4C24 4 11 14 11 27C11 34 16 40 24 42C32 40 37 34 37 27C37 14 24 4 24 4Z" fill="#9C2720" opacity="0.95"/>
+  <path d="M24 10V38M24 18L18 24M24 26L30 32M24 22L30 18M24 30L18 34" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round"/>
+</svg>

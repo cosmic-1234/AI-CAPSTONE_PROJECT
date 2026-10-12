@@ -1,0 +1,71 @@
+institute:
+  name: "Indian Institute of Management Bodh Gaya"
+  short_name: "IIM Bodh Gaya"
+  portal_name: "Sahayata – Financial Aid Desk"
+  tagline: "Student Financial Assistance & Scholarship Portal"
+  logo_path: "/brand/logo.svg"
+  leaf_icon_path: "/brand/leaf.svg"
+  accent_color: "#9C2720" # Primary Bodh Gaya burgundy/terracotta accent bar
+  bg_color: "#ffffff"
+
+offices:
+  accounts:
+    name: "Accounts & Finance Office"
+    email: "accounts@example.ac.in"
+    phone: "+91-631-2200234"
+    location: "Administrative Block, Ground Floor"
+  programme:
+    name: "Programme Office (PGP/IPM)"
+    email: "programme@example.ac.in"
+    phone: "+91-631-2200235"
+    location: "Academic Block, 1st Floor"
+  hostel:
+    name: "Hostel & Student Affairs Office"
+    email: "hostel@example.ac.in"
+    phone: "+91-631-2200236"
+    location: "Hostel Complex Office"
+  aid_committee:
+    name: "Financial Aid Committee"
+    email: "aid-committee@example.ac.in"
+    phone: "+91-631-2200237"
+    location: "Dean's Secretariat"
+  counselling:
+    name: "Student Wellbeing & Counselling Cell"
+    email: "wellbeing@example.ac.in"
+    phone: "+91-631-2200238"
+    location: "Health & Wellbeing Centre"
+
+programmes:
+  - code: "PGP"
+    name: "Post Graduate Programme in Management"
+    duration_years: 2
+  - code: "PGP-DBM"
+    name: "Post Graduate Programme in Digital Business Management"
+    duration_years: 2
+  - code: "IPM"
+    name: "Integrated Programme in Management"
+    duration_years: 5
+  - code: "PHD"
+    name: "Doctoral Programme in Management"
+    duration_years: 4
+
+batches:
+  - "2025-27"
+  - "2026-28"
+  - "2024-29"
+
+calendar:
+  academic_year: "2026-27"
+  deadlines:
+    - id: "dl_need_based"
+      scheme: "Need-Based Financial Assistance (NBFA)"
+      deadline_date: "2026-10-31"
+      description: "Submission of income certificates, ITRs, and parent declaration forms"
+    - id: "dl_merit"
+      scheme: "Director's Merit Scholarship (Term II)"
+      deadline_date: "2026-11-15"
+      description: "Submission of Term I CGPA transcripts and verified grade sheets"
+    - id: "dl_term_fee"
+      scheme: "Term-III Fee Waiver & Installment Adjustment"
+      deadline_date: "2026-12-05"
+      description: "Accounts office fee installment adjustment applications"

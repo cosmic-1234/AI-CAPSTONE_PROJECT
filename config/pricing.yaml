@@ -1,0 +1,39 @@
+# Token and execution pricing in INR for Observability & Cost Tracking
+currency: "INR"
+usd_to_inr: 86.50
+
+models:
+  gemini-1.5-flash:
+    provider: "google"
+    input_cost_per_million_usd: 0.075
+    output_cost_per_million_usd: 0.300
+    input_cost_per_thousand_inr: 0.0064875
+    output_cost_per_thousand_inr: 0.025950
+
+  gemini-1.5-pro:
+    provider: "google"
+    input_cost_per_million_usd: 1.25
+    output_cost_per_million_usd: 5.00
+    input_cost_per_thousand_inr: 0.108125
+    output_cost_per_thousand_inr: 0.432500
+
+  groq-llama-3.1-8b:
+    provider: "groq"
+    input_cost_per_million_usd: 0.05
+    output_cost_per_million_usd: 0.08
+    input_cost_per_thousand_inr: 0.004325
+    output_cost_per_thousand_inr: 0.006920
+
+  ollama-local:
+    provider: "ollama"
+    input_cost_per_million_usd: 0.0
+    output_cost_per_million_usd: 0.0
+    input_cost_per_thousand_inr: 0.0
+    output_cost_per_thousand_inr: 0.0
+
+  mock-llm:
+    provider: "mock"
+    input_cost_per_thousand_inr: 0.0
+    output_cost_per_thousand_inr: 0.0
+
+default_model: "gemini-1.5-flash"

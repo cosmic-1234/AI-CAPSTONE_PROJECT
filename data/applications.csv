@@ -1,0 +1,4 @@
+id,student_id,scheme_id,status,requested_amount,recommended_amount,approved_amount,submitted_at,verification_status,committee_decision,decision_rationale
+app_101,std_01,nbfa_tier1,under_verification,450000,450000,0,2026-10-01 10:30:00,pending_accounts,pending,"Documents submitted. Awaiting income certificate validity check."
+app_102,std_02,nbfa_tier2,committee_review,225000,225000,0,2026-09-28 14:15:00,verified,pending,"ITR and income certificate match. Recommended for 50% waiver."
+app_103,std_04,merit_director,submitted,100000,100000,0,2026-10-05 09:00:00,pending_programme,pending,"Term 1 CGPA 8.7 meets criteria."

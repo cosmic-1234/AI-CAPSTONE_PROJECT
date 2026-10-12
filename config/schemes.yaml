@@ -1,0 +1,78 @@
+# Financial Aid Schemes and Eligibility Rules Engine
+schemes:
+  - id: "nbfa_tier1"
+    name: "Need-Based Financial Assistance (Tier 1 - 100% Tuition Waiver)"
+    short_code: "NBFA-T1"
+    category: "need_based"
+    coverage: "100% Tuition Fee Waiver"
+    criteria:
+      max_family_income_inr: 300000
+      min_cgpa: 5.5
+      programmes: ["PGP", "PGP-DBM", "IPM"]
+      allowed_categories: ["ALL"]
+    required_documents:
+      - "Government Income Certificate (valid within 12 months)"
+      - "ITR-V / Form 16 of both parents for preceding FY"
+      - "Bank Account Statement (6 months)"
+      - "Affidavit of Family Income on Non-Judicial Stamp Paper"
+    citation: "Scholarship Policy 2026-27, §3.1"
+
+  - id: "nbfa_tier2"
+    name: "Need-Based Financial Assistance (Tier 2 - 50% Tuition Waiver)"
+    short_code: "NBFA-T2"
+    category: "need_based"
+    coverage: "50% Tuition Fee Waiver"
+    criteria:
+      max_family_income_inr: 600000
+      min_cgpa: 5.5
+      programmes: ["PGP", "PGP-DBM", "IPM"]
+      allowed_categories: ["ALL"]
+    required_documents:
+      - "Government Income Certificate (valid within 12 months)"
+      - "ITR-V / Form 16 of both parents for preceding FY"
+      - "Bank Account Statement (6 months)"
+    citation: "Scholarship Policy 2026-27, §3.2"
+
+  - id: "nbfa_tier3"
+    name: "Need-Based Financial Assistance (Tier 3 - 25% Tuition Waiver)"
+    short_code: "NBFA-T3"
+    category: "need_based"
+    coverage: "25% Tuition Fee Waiver"
+    criteria:
+      max_family_income_inr: 800000
+      min_cgpa: 5.5
+      programmes: ["PGP", "PGP-DBM", "IPM"]
+      allowed_categories: ["ALL"]
+    required_documents:
+      - "Government Income Certificate (valid within 12 months)"
+      - "ITR-V / Form 16 of parents for preceding FY"
+    citation: "Scholarship Policy 2026-27, §3.3"
+
+  - id: "merit_director"
+    name: "Director's Merit Scholarship"
+    short_code: "DMS"
+    category: "merit_based"
+    coverage: "INR 1,00,000 one-time merit award"
+    criteria:
+      max_family_income_inr: null # No income cap
+      min_cgpa: 8.5
+      programmes: ["PGP", "PGP-DBM"]
+      top_percentile: 5.0
+    required_documents:
+      - "Term I / Year I Official Grade Transcript"
+      - "No-Disciplinary Action Undertaking from Hostel Warden"
+    citation: "Merit Scholarship Rules, §2.1"
+
+  - id: "emergency_hardship"
+    name: "Emergency Student Hardship & Bereavement Fund"
+    short_code: "ESHF"
+    category: "emergency"
+    coverage: "Up to INR 75,000 emergency grant"
+    criteria:
+      max_family_income_inr: null
+      min_cgpa: null
+      sudden_distress_event: true
+    required_documents:
+      - "Medical emergency proof / death certificate of earning parent"
+      - "Application endorsed by Hostel Warden or Counselling Cell"
+    citation: "Hardship & Emergency Fund Policy, §4.2"

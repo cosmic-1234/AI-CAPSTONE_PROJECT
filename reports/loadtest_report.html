@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sahayata Load Test Report | IIM Bodh Gaya</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 960px; margin: 40px auto; color: #0b0c0c; line-height: 1.5; padding: 0 20px; }
+    h1 { border-bottom: 4px solid #9C2720; padding-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+    th, td { border: 1px solid #b1b4b6; padding: 10px; text-align: left; }
+    th { background: #f3f2f1; }
+    .badge-pass { background: #cce2d8; color: #005a30; font-weight: bold; padding: 3px 8px; }
+  </style>
+</head>
+<body>
+  <h1>IIM Bodh Gaya – Sahayata Load & Stress Test Report</h1>
+  <p><strong>Generated:</strong> 12/10/2026, 9:40:17 am</p>
+  <p><strong>Workload:</strong> 200 simulated concurrent student inquiries.</p>
+  
+  <h2>Performance Summary</h2>
+  <table>
+    <tr><th>Performance Metric</th><th>Result</th><th>Target SLA</th></tr>
+    <tr><td>Total Inquiries Processed</td><td><strong>200</strong></td><td>200</td></tr>
+    <tr><td>Overall Duration</td><td>3.23 seconds</td><td>&lt; 600s</td></tr>
+    <tr><td>System Throughput</td><td><strong>61.82 queries/second</strong></td><td>&gt; 5.0 QPS</td></tr>
+    <tr><td>Success Rate</td><td><span class="badge-pass">100%</span></td><td>&ge; 99%</td></tr>
+    <tr><td>Mean Latency</td><td>81ms</td><td>&lt; 1000ms</td></tr>
+    <tr><td>p50 Latency (Median)</td><td>70ms</td><td>&lt; 800ms</td></tr>
+    <tr><td>p90 Latency</td><td>91ms</td><td>&lt; 1200ms</td></tr>
+    <tr><td>p95 Latency</td><td><strong>100ms</strong></td><td>&lt; 1500ms</td></tr>
+    <tr><td>p99 Latency</td><td>756ms</td><td>&lt; 2000ms</td></tr>
+    <tr><td>Total Token Expenditure</td><td>&#8377;0.0196</td><td>&lt; &#8377;1.00</td></tr>
+  </table>
+</body>
+</html>
