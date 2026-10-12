@@ -1178,3 +1178,72 @@ p, .govuk-body {
   font-weight: 600 !important;
   cursor: pointer;
 }
+
+/* Thinking Indicator Animation */
+.sap-chat-msg--thinking {
+  animation: sap-popover-in 0.25s ease-out;
+}
+
+.sap-chat-bubble--thinking {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem !important;
+  background: #faf9ff !important;
+  border: 1px dashed #c4b5fd !important;
+}
+
+.sap-thinking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0;
+}
+
+.sap-thinking-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7c3aed;
+  display: inline-block;
+  animation: sap-bounce 1.4s infinite ease-in-out both;
+}
+
+.sap-thinking-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.sap-thinking-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.sap-thinking-dot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes sap-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.65);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1.15);
+    opacity: 1;
+    background: #5d36ff;
+  }
+}
+
+.sap-thinking-stage-text {
+  font-size: 13px;
+  color: #6b21a8;
+  font-weight: 500;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Hide floating copilot button when on the dedicated chat page */
+body:has(.sap-chat-window) .sap-joule-floating-widget {
+  display: none !important;
+}
