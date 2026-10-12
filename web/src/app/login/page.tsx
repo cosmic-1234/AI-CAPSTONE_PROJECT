@@ -104,12 +104,23 @@ export default async function LoginPage() {
       </div>
 
       <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
-        <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
-          Identity & Access Management (Mock Switchboard)
-        </span>
-        <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
-          Select Active Enterprise Persona
-        </h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '0.75rem' }}>
+          <img
+            src="/brand/iimbg-logo.png"
+            alt="IIM Bodh Gaya Logo"
+            width="68"
+            height="54"
+            style={{ objectFit: 'contain' }}
+          />
+          <div>
+            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+              Identity & Access Management (Mock Switchboard)
+            </span>
+            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+              Select Active Enterprise Persona
+            </h1>
+          </div>
+        </div>
         <p className="govuk-body" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
           Switch between verified campus personas to inspect role-based access control (RBAC), retrieval ACL boundaries, and permission-scoped workflows.
         </p>

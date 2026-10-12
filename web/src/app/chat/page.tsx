@@ -59,11 +59,25 @@ export default async function ChatPage({
       </div>
 
       <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-          <h1 className="govuk-heading-xl" style={{ margin: 0, fontSize: '1.65rem' }}>
-            Sahayata Enterprise CoPilot
-          </h1>
-          <span className="govuk-tag govuk-tag--blue">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <img
+              src="/brand/iimbg-logo.png"
+              alt="IIM Bodh Gaya Logo"
+              width="60"
+              height="48"
+              style={{ objectFit: 'contain' }}
+            />
+            <div>
+              <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+                Institutional Advisory Assistant
+              </span>
+              <h1 className="govuk-heading-xl" style={{ margin: 0, fontSize: '1.65rem' }}>
+                Sahayata Enterprise CoPilot
+              </h1>
+            </div>
+          </div>
+          <span className="sap-badge sap-badge--info">
             Session Role: {user.role.toUpperCase()}
           </span>
         </div>

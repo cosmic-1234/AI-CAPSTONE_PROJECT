@@ -12,14 +12,23 @@ export default async function AdminHubPage() {
       </div>
 
       <div className="sap-card" style={{ marginBottom: '1.75rem', borderLeft: '4px solid var(--sap-brand-blue)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-          <div>
-            <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
-              System Governance
-            </span>
-            <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
-              Administrator Operations Hub
-            </h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <img
+              src="/brand/iimbg-logo.png"
+              alt="IIM Bodh Gaya Emblem"
+              width="60"
+              height="48"
+              style={{ objectFit: 'contain', backgroundColor: '#ffffff', padding: '3px', borderRadius: '4px', border: '1px solid #e2e4e8' }}
+            />
+            <div>
+              <span className="govuk-body-s" style={{ textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--sap-text-secondary)', fontWeight: 600 }}>
+                System Governance
+              </span>
+              <h1 className="govuk-heading-xl" style={{ margin: '0.2rem 0', fontSize: '1.65rem' }}>
+                Administrator Operations Hub
+              </h1>
+            </div>
           </div>
           <span className="sap-badge sap-badge--info">
             Administrator: {user.name}

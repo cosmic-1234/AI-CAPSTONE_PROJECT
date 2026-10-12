@@ -44,22 +44,31 @@ export default async function HomePage() {
           boxShadow: '0 1px 3px rgba(28, 45, 66, 0.08)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.35rem' }}>
-              <h1 className="govuk-heading-xl" style={{ margin: 0, fontSize: '1.75rem' }}>
-                {user.name}
-              </h1>
-              <span className="govuk-tag govuk-tag--green">
-                {user.role.toUpperCase()}
-              </span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <img
+              src="/brand/iimbg-logo.png"
+              alt="IIM Bodh Gaya Logo"
+              width="68"
+              height="54"
+              style={{ objectFit: 'contain', backgroundColor: '#ffffff', padding: '2px' }}
+            />
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.35rem' }}>
+                <h1 className="govuk-heading-xl" style={{ margin: 0, fontSize: '1.75rem' }}>
+                  {user.name}
+                </h1>
+                <span className="sap-badge sap-badge--success">
+                  {user.role.toUpperCase()}
+                </span>
+              </div>
+              <p className="govuk-body-s" style={{ margin: 0, color: 'var(--sap-text-secondary)' }}>
+                {user.programme || 'Executive'} ({user.batch || 'Current Batch'}) &bull; {user.email}
+              </p>
             </div>
-            <p className="govuk-body-s" style={{ margin: 0 }}>
-              {user.programme || 'Executive'} ({user.batch || 'Current Batch'}) &bull; {user.email}
-            </p>
           </div>
 
-          <a href="/login" className="govuk-button govuk-button--secondary" style={{ padding: '0.45rem 0.95rem', fontSize: '13px' }}>
+          <a href="/login" className="sap-btn sap-btn--default" style={{ padding: '0.45rem 0.95rem', fontSize: '13px' }}>
             Switch Persona
           </a>
         </div>
