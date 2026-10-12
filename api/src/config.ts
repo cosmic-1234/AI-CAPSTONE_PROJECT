@@ -4,6 +4,8 @@ import yaml from 'yaml';
 import dotenv from 'dotenv';
 
 dotenv.config();
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+dotenv.config({ path: path.resolve(process.cwd(), 'api', '.env') });
 
 // Find the project root relative to api directory
 const ROOT_DIR = path.resolve(process.cwd(), '..');
